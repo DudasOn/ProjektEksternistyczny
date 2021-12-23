@@ -1,9 +1,14 @@
 package View;
 
+import ObserverInterface.Observable;
+import ObserverInterface.Observer;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class ChooseColorFrameRGB{
+public class ChooseColorFrameRGB implements Observable {
+
+    private ArrayList<Observer> observers;
 
     private final JFrame chooseColorFrame;
     private final JPanel chooseColorPanel;
@@ -16,29 +21,29 @@ public class ChooseColorFrameRGB{
     private final JLabel gLabel;
     private final JLabel bLabel;
 
-    private final int HEIGHT=300;
+    private final int HEIGHT = 300;
     private final int WIDTH = 250;
 
-
-    public ChooseColorFrameRGB(){
-
+    public ChooseColorFrameRGB() {
+        observers = new ArrayList<>();
         chooseColorFrame = new JFrame("Choose desired color");
         chooseColorFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         chooseColorFrame.setSize(new Dimension(WIDTH, HEIGHT));
         chooseColorFrame.setResizable(false);
         chooseColorPanel = new JPanel();
         okButton = new JButton("OK");
-        rSlider =new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
-        gSlider =new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
-        bSlider =new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        rSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        gSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        bSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
 
-        rLabel= new JLabel("Red: ");
-        gLabel= new JLabel("Green: ");
-        bLabel= new JLabel("Blue: ");
+        rLabel = new JLabel("Red: ");
+        gLabel = new JLabel("Green: ");
+        bLabel = new JLabel("Blue: ");
 
-        okButton.addActionListener(e->{
+        okButton.addActionListener(e -> {
             setColor();
             setVisibility();
+            notifyObservers();
         });
 
 
@@ -71,13 +76,45 @@ public class ChooseColorFrameRGB{
 
     }
 
-    public void setColor(){
-        System.out.println(rSlider.getValue()+" "+ gSlider.getValue()+" "+ bSlider.getValue());
+    public void setColor() {
+        System.out.println(rSlider.getValue() + " " + gSlider.getValue() + " " + bSlider.getValue());
     }
 
-    public void setVisibility(){
-        if(chooseColorFrame.isShowing()) chooseColorFrame.setVisible(false);
+    public void setVisibility() {
+        if (chooseColorFrame.isShowing()) chooseColorFrame.setVisible(false);
         else chooseColorFrame.setVisible(true);
     }
 
+    public int getRValue(){
+        return rSlider.getValue();
+    }
+
+    public int getGValue(){
+        return gSlider.getValue();
+    }
+
+    public int getBValue(){
+        return bSlider.getValue();
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        if (observers.contains(o)){
+            observers.remove(o);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (int i = 0; i < observers.size(); i++) {
+            observers.get(i).update();
+        }
+    }
 }

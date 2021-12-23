@@ -1,8 +1,9 @@
 package Model;
 
 import Model.DrawableShapes.Drawable;
-import Model.ObserverPattern.Observable;
-import Model.ObserverPattern.Observer;
+import ObserverInterface.Observable;
+import ObserverInterface.Observer;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class Painter implements Observable {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update();
+           // observers.get(i).update();
         }
     }
 }

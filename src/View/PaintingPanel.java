@@ -1,25 +1,30 @@
 package View;
 
+import Model.ColorConverter;
+import ObserverInterface.Observer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PaintingPanel extends JPanel implements MouseListener {
 
-    public PaintingPanel(int width, int height){
-        this.setPreferredSize(new Dimension(width,height));
+public class PaintingPanel extends JPanel implements MouseListener, Observer {
+
+    ChooseColorFrameRGB backgroundColor;
+
+    public PaintingPanel(int width, int height, ChooseColorFrameRGB backgroundColor) {
+        this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
-        this.setBackground(Color.BLACK);
         this.addMouseListener(this);
+        this.backgroundColor=backgroundColor;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.setBackground(Color.RED);
         this.repaint();
         System.out.println("X: " + MouseInfo.getPointerInfo().getLocation().getX());
-        System.out.println("Y: "+MouseInfo.getPointerInfo().getLocation().getY());
+        System.out.println("Y: " + MouseInfo.getPointerInfo().getLocation().getY());
     }
 
     @Override
@@ -41,4 +46,12 @@ public class PaintingPanel extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    @Override
+    public void update() {
+        this.setBackground(new ColorConverter(backgroundColor.getRValue(), backgroundColor.getGValue(), backgroundColor.getBValue()).getColor());
+        revalidate();
+        repaint();
+    }
+
 }
