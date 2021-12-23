@@ -27,7 +27,6 @@ public class MainFrame {
 
     public MainFrame() {
         //tworzenie glownej ramki
-
         toolColor = new ChooseColorFrameRGB();
         backgroundColor = new ChooseColorFrameRGB();
         paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor);

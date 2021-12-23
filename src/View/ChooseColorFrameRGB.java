@@ -6,11 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ChooseColorFrameRGB implements Observable {
+public class ChooseColorFrameRGB extends JFrame implements Observable {
 
     private ArrayList<Observer> observers;
 
-    private final JFrame chooseColorFrame;
     private final JPanel chooseColorPanel;
     private final JButton okButton;
     private final JSlider rSlider;
@@ -26,10 +25,10 @@ public class ChooseColorFrameRGB implements Observable {
 
     public ChooseColorFrameRGB() {
         observers = new ArrayList<>();
-        chooseColorFrame = new JFrame("Choose desired color");
-        chooseColorFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        chooseColorFrame.setSize(new Dimension(WIDTH, HEIGHT));
-        chooseColorFrame.setResizable(false);
+        this.setTitle("Choose a color");
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setSize(new Dimension(WIDTH, HEIGHT));
+        this.setResizable(false);
         chooseColorPanel = new JPanel();
         okButton = new JButton("OK");
         rSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
@@ -72,7 +71,7 @@ public class ChooseColorFrameRGB implements Observable {
         chooseColorPanel.add(bSlider);
 
         chooseColorPanel.add(okButton);
-        chooseColorFrame.add(chooseColorPanel);
+        this.add(chooseColorPanel);
 
     }
 
@@ -81,8 +80,8 @@ public class ChooseColorFrameRGB implements Observable {
     }
 
     public void setVisibility() {
-        if (chooseColorFrame.isShowing()) chooseColorFrame.setVisible(false);
-        else chooseColorFrame.setVisible(true);
+        if (this.isShowing()) this.setVisible(false);
+        else this.setVisible(true);
     }
 
     public int getRValue(){
