@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChooseColorFrame {
+public class ChooseColorFrameRGB{
 
     private final JFrame chooseColorFrame;
     private final JPanel chooseColorPanel;
@@ -17,10 +17,10 @@ public class ChooseColorFrame {
     private final JLabel bLabel;
 
     private final int HEIGHT=300;
-    private final int WIDTH = 350;
+    private final int WIDTH = 250;
 
 
-    public ChooseColorFrame(){
+    public ChooseColorFrameRGB(){
 
         chooseColorFrame = new JFrame("Choose desired color");
         chooseColorFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -68,6 +68,7 @@ public class ChooseColorFrame {
 
         chooseColorPanel.add(okButton);
         chooseColorFrame.add(chooseColorPanel);
+
     }
 
     public void setColor(){

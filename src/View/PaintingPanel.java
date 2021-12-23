@@ -18,8 +18,8 @@ public class PaintingPanel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         this.setBackground(Color.RED);
         this.repaint();
-        System.out.println("X: " + this.getY());
-        System.out.println("Y: "+this.getX());
+        System.out.println("X: " + MouseInfo.getPointerInfo().getLocation().getX());
+        System.out.println("Y: "+MouseInfo.getPointerInfo().getLocation().getY());
     }
 
     @Override

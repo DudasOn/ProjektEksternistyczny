@@ -6,45 +6,63 @@ import java.awt.*;
 
 public class MainFrame {
 
-    private JFrame mainFrame;
-    private JMenuBar mainMenu;
-    private JMenu changeTool;
-    private JMenu fileOperation;
-    private JMenuItem changeColor;
-    private JMenuItem serialize;
-    private JMenuItem deserialize;
-    private PaintingPanel paintingPanel;
-    private int HEIGHT = 600;
-    private int WIDTH=800;
-    private ChooseColorFrame colorChooser;
+    private final int HEIGHT = 600;
+    private final int WIDTH = 800;
+
+    private final JFrame mainFrame;
+    private final JMenuBar mainMenu;
+    private final JMenu changeTool;
+    private final JMenu fileOperation;
+    private final JMenuItem changeColor;
+    private final JMenuItem serialize;
+    private final JMenuItem deserialize;
+    private final JMenuItem draw;
+    private final JMenuItem cover;
+    private final JMenuItem delete;
+    private final PaintingPanel paintingPanel;
+    private final ChooseColorFrameRGB colorChooser;
 
 
     public MainFrame() {
-        colorChooser=new ChooseColorFrame();
+        //tworzenie glownej ramki
+        colorChooser = new ChooseColorFrameRGB();
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT);
         mainFrame = new JFrame("Painter");
         mainFrame.setSize(new Dimension(WIDTH, HEIGHT));
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT);
-        changeColor = new JMenuItem("Change color");
-        changeColor.addActionListener(e->colorChooser.setVisibility());
-
+        //tworzenie paska menu i glownych kategorii
         mainMenu = new JMenuBar();
-        changeTool = new JMenu("Change tool");
+        changeTool = new JMenu("Alter tool");
         fileOperation = new JMenu("File");
-        serialize = new JMenuItem("Serialize");
-        deserialize = new JMenuItem("Deserialize");
 
+        //tworzenie odpowiednich elementow do menu
+        changeColor = new JMenuItem("Change color");
+        changeColor.addActionListener(e -> colorChooser.setVisibility());
+
+        serialize = new JMenuItem("Serialize");
+        serialize.addActionListener(e -> FileOperations.chooseFile());
+
+        deserialize = new JMenuItem("Deserialize");
+        deserialize.addActionListener(e -> FileOperations.saveFile());
+
+        draw = new JMenuItem("Draw");
+        cover = new JMenuItem("Cover");
+        delete = new JMenuItem("Delete");
+
+        //dodawanie elementow do ramki glownej i odpowiednich menu
         mainFrame.setResizable(true);
         mainFrame.setJMenuBar(mainMenu);
         mainFrame.add(BorderLayout.CENTER, paintingPanel);
         fileOperation.add(serialize);
         fileOperation.add(deserialize);
+        changeTool.add(draw);
+        changeTool.add(cover);
+        changeTool.add(delete);
         changeTool.add(changeColor);
         mainMenu.add(changeTool);
         mainMenu.add(fileOperation);
         mainFrame.setVisible(true);
     }
-
 
 }
