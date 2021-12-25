@@ -1,6 +1,6 @@
-package model.DrawableShapes;
+package model.drawableShapes;
 
-import model.ColorConverter;
+import java.awt.*;
 
 public abstract class Shape extends Drawable {
 
@@ -15,7 +15,7 @@ public abstract class Shape extends Drawable {
         posY = 0;
     }
 
-    public Shape(int posX, int posY, ColorConverter color) {
+    public Shape(int posX, int posY, Color color) {
         super(color);
         this.posX = posX;
         this.posY = posY;

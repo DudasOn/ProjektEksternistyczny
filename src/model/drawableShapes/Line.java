@@ -1,6 +1,6 @@
-package model.DrawableShapes;
+package model.drawableShapes;
 
-import model.ColorConverter;
+import java.awt.*;
 
 public class Line extends Drawable {
     private static final long serialVersionUID = -5800083897933493382L;
@@ -17,7 +17,7 @@ public class Line extends Drawable {
         posYStop = 0;
     }
 
-    public Line(int posXStart, int posYStart, int posXStop, int posYStop, ColorConverter color) {
+    public Line(int posXStart, int posYStart, int posXStop, int posYStop, Color color) {
         super(color);
         this.posXStart = posXStart;
         this.posYStart = posYStart;

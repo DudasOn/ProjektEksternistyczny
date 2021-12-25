@@ -1,6 +1,6 @@
-package model.DrawableShapes;
+package model.drawableShapes;
 
-import model.ColorConverter;
+import java.awt.*;
 
 public class Triangle extends Shape {
 
@@ -12,7 +12,7 @@ public class Triangle extends Shape {
         distanceFromCenterToApex = 5;
     }
 
-    public Triangle(int posX, int posY, ColorConverter color, int distanceFromCenterToApex) {
+    public Triangle(int posX, int posY, Color color, int distanceFromCenterToApex) {
         super(posX, posY, color);
         this.distanceFromCenterToApex = distanceFromCenterToApex;
     }

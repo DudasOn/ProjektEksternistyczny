@@ -1,4 +1,4 @@
-package model.DrawableShapes.DrawInterface;
+package model.drawableShapes.drawInterface;
 
 public class DrawCircle implements DrawInterface{
 }

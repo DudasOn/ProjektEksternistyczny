@@ -1,5 +1,8 @@
 package view;
 
+import view.chooseColorFrame.ChooseColorHEX;
+import view.chooseColorFrame.ChooseColorRGB;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,16 +24,17 @@ public class MainFrame {
     private final JMenuItem cover;
     private final JMenuItem delete;
     private final PaintingPanel paintingPanel;
-    private final ChooseColorFrameRGB toolColor;
-    private final ChooseColorFrameRGB backgroundColor;
+    private final ChooseColorRGB toolColor;
+    private final ChooseColorHEX backgroundColor;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
-        toolColor = new ChooseColorFrameRGB();
-        backgroundColor = new ChooseColorFrameRGB();
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor);
-        backgroundColor.registerObserver(paintingPanel);
+        toolColor = new ChooseColorRGB();
+        backgroundColor = new ChooseColorHEX();
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor, toolColor);
+        backgroundColor.registerColorGatherer(paintingPanel);
+        toolColor.registerColorGatherer(paintingPanel);
         mainFrame = new JFrame("Painter");
         mainFrame.setSize(new Dimension(WIDTH, HEIGHT));
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -38,7 +42,7 @@ public class MainFrame {
 
         //tworzenie paska menu i glownych kategorii
         mainMenu = new JMenuBar();
-        changeTool = new JMenu("Alter tool");
+        changeTool = new JMenu("Painting options");
         fileOperation = new JMenu("File");
 
         //tworzenie odpowiednich elementow do menu

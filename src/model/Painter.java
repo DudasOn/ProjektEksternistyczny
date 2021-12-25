@@ -1,6 +1,6 @@
 package model;
 
-import model.DrawableShapes.Drawable;
+import model.drawableShapes.Drawable;
 import observerInterface.Observable;
 import observerInterface.Observer;
 

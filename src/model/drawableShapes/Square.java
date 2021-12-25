@@ -1,6 +1,6 @@
-package model.DrawableShapes;
+package model.drawableShapes;
 
-import model.ColorConverter;
+import java.awt.*;
 
 public class Square extends Shape {
 
@@ -12,7 +12,7 @@ public class Square extends Shape {
         sideLength = 5;
     }
 
-    public Square(int posX, int posY, ColorConverter color, int sideLength) {
+    public Square(int posX, int posY, Color color, int sideLength) {
         super(posX, posY, color);
         this.sideLength = sideLength;
     }

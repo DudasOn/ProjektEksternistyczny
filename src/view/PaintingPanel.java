@@ -1,19 +1,17 @@
 package view;
 
-import model.ColorConverter;
-import observerInterface.Observer;
-
+import view.chooseColorFrame.ChooseColorFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class PaintingPanel extends JPanel implements MouseListener, Observer {
+public class PaintingPanel extends JPanel implements MouseListener {
 
-    ChooseColorFrameRGB backgroundColor;
+    ChooseColorFrame backgroundColor;
 
-    public PaintingPanel(int width, int height, ChooseColorFrameRGB backgroundColor) {
+    public PaintingPanel(int width, int height, ChooseColorFrame backgroundColor, ChooseColorFrame objectsColor) {
         this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
         this.addMouseListener(this);
@@ -47,9 +45,8 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     }
 
-    @Override
-    public void update() {
-        this.setBackground(new ColorConverter(backgroundColor.getRValue(), backgroundColor.getGValue(), backgroundColor.getBValue()).getColor());
+    public void changeColor(Color color) {
+        this.setBackground(color);
         revalidate();
         repaint();
     }

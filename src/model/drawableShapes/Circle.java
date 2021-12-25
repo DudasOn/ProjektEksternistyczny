@@ -1,6 +1,6 @@
-package model.DrawableShapes;
+package model.drawableShapes;
 
-import model.ColorConverter;
+import java.awt.*;
 
 public class Circle extends Shape {
 
@@ -12,7 +12,7 @@ public class Circle extends Shape {
         radius = 5;
     }
 
-    public Circle(int posX, int posY, ColorConverter color, int radius) {
+    public Circle(int posX, int posY, Color color, int radius) {
         super(posX, posY, color);
         this.radius = radius;
     }
