@@ -1,9 +1,9 @@
-package view.chooseColorFrame;
+package view.choosers;
 
-import view.ColorConverter;
 import javax.swing.*;
+import java.awt.*;
 
-public class ChooseColorRGB extends ChooseColorFrame  {
+public class ColorChooserRGB extends ColorChooserFrame {
 
 
     private final JSlider rSlider;
@@ -14,12 +14,12 @@ public class ChooseColorRGB extends ChooseColorFrame  {
     private final JLabel gLabel;
     private final JLabel bLabel;
 
-    public ChooseColorRGB() {
+    public ColorChooserRGB() {
+        super();
 
-
-        rSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
-        gSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
-        bSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 0);
+        rSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
+        gSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
+        bSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
 
         rLabel = new JLabel("Red: ");
         gLabel = new JLabel("Green: ");
@@ -35,6 +35,7 @@ public class ChooseColorRGB extends ChooseColorFrame  {
         gSlider.setMinorTickSpacing(1);
         gSlider.setPaintTicks(true);
         gSlider.setPaintLabels(true);
+
 
         bSlider.setMajorTickSpacing(255);
         bSlider.setMinorTickSpacing(1);
@@ -56,8 +57,12 @@ public class ChooseColorRGB extends ChooseColorFrame  {
     }
 
     public void informOfColorChange(){
+        colorGatherer.changeColor();
+    }
 
-        colorGatherer.changeColor(ColorConverter.getColor(rSlider.getValue(),gSlider.getValue(),bSlider.getValue()));
+    @Override
+    public Color getColor() {
+        return new Color(rSlider.getValue(),gSlider.getValue(),bSlider.getValue());
     }
 
 }

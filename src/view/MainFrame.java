@@ -1,7 +1,8 @@
 package view;
 
-import view.chooseColorFrame.ChooseColorHEX;
-import view.chooseColorFrame.ChooseColorRGB;
+import view.choosers.ColorChooserHEX;
+import view.choosers.ColorChooserRGB;
+import view.choosers.ToolChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,25 +17,30 @@ public class MainFrame {
     private final JMenuBar mainMenu;
     private final JMenu changeTool;
     private final JMenu fileOperation;
+    private final JMenuItem changeToolType;
     private final JMenuItem changeToolColor;
     private final JMenuItem changeBackgroundColor;
     private final JMenuItem serialize;
     private final JMenuItem deserialize;
     private final JMenuItem draw;
     private final JMenuItem cover;
-    private final JMenuItem delete;
+    private final JMenuItem deleteAll;
+    private final JMenuItem deleteLast;
     private final PaintingPanel paintingPanel;
-    private final ChooseColorRGB toolColor;
-    private final ChooseColorHEX backgroundColor;
+    private final ColorChooserRGB toolColor;
+    private final ColorChooserHEX backgroundColor;
+    private final ToolChooser toolChooser;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
-        toolColor = new ChooseColorRGB();
-        backgroundColor = new ChooseColorHEX();
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor, toolColor);
+        toolColor = new ColorChooserRGB();
+        backgroundColor = new ColorChooserHEX();
+        toolChooser = new ToolChooser();
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor, toolColor, toolChooser);
         backgroundColor.registerColorGatherer(paintingPanel);
         toolColor.registerColorGatherer(paintingPanel);
+        toolChooser.registerToolGatherer(paintingPanel);
         mainFrame = new JFrame("Painter");
         mainFrame.setSize(new Dimension(WIDTH, HEIGHT));
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -49,6 +55,9 @@ public class MainFrame {
         changeToolColor = new JMenuItem("Change tool color");
         changeToolColor.addActionListener(e -> toolColor.setVisibility());
 
+        changeToolType = new JMenuItem("Change tool shape");
+        changeToolType.addActionListener(e->toolChooser.setVisibility());
+
         changeBackgroundColor = new JMenuItem("Change background color");
         changeBackgroundColor.addActionListener(e -> backgroundColor.setVisibility());
 
@@ -58,9 +67,11 @@ public class MainFrame {
         deserialize = new JMenuItem("Deserialize");
         deserialize.addActionListener(e -> FileOperations.saveFile());
 
-        draw = new JMenuItem("Draw");
-        cover = new JMenuItem("Cover");
-        delete = new JMenuItem("Delete");
+        draw = new JMenuItem("Draw"); // TODO: 25.12.2021 add a way to choose a tool
+        cover = new JMenuItem("Cover"); // TODO: 25.12.2021 painting in a background color
+        deleteLast = new JMenuItem("Delete last drawn shape"); // TODO: 25.12.2021 delete last drawn shape from board
+        deleteAll = new JMenuItem("Delete all drawn shapes"); // TODO: 25.12.2021 clear entire board
+
 
         //dodawanie elementow do ramki glownej i odpowiednich menu
         mainFrame.setResizable(true);
@@ -70,7 +81,9 @@ public class MainFrame {
         fileOperation.add(deserialize);
         changeTool.add(draw);
         changeTool.add(cover);
-        changeTool.add(delete);
+        changeTool.add(deleteLast);
+        changeTool.add(deleteAll);
+        changeTool.add(changeToolType);
         changeTool.add(changeToolColor);
         changeTool.add(changeBackgroundColor);
         mainMenu.add(changeTool);

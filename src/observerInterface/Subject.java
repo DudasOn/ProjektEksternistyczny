@@ -1,6 +1,6 @@
 package observerInterface;
 
-public interface Observable {
+public interface Subject {
     void registerObserver(Observer o);
     void removeObserver(Observer o);
     void notifyObservers();

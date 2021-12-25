@@ -1,13 +1,13 @@
 package model;
 
 import model.drawableShapes.Drawable;
-import observerInterface.Observable;
+import observerInterface.Subject;
 import observerInterface.Observer;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class Painter implements Observable {
+public class Painter implements Subject {
     private ArrayList<Observer> observers;
     private ArrayList<Drawable> drawables;
 

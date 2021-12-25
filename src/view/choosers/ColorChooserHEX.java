@@ -1,34 +1,33 @@
-package view.chooseColorFrame;
-
-import view.ColorConverter;
+package view.choosers;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ChooseColorHEX extends ChooseColorFrame{
+public class ColorChooserHEX extends ColorChooserFrame {
 
-    private final JTextField colorValueArea;
+    private final JTextField colorValueInput;
     private final JLabel initialInfo;
     private final JLabel adequateInfo;
     private final JButton checkButton;
     private final JPanel middlePanel;
     private final JPanel bottomPanel;
 
-    public ChooseColorHEX() {
+    public ColorChooserHEX() {
+        super();
 
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         bottomPanel = new JPanel();
         middlePanel = new JPanel();
-        colorValueArea = new JTextField(6);
-        colorValueArea.setFont(new Font("Arial",1,30));
+        colorValueInput = new JTextField("FFFFFF",6);
+        colorValueInput.setFont(new Font("Arial",1,30));
         initialInfo = new JLabel("Enter value of desired HEX color");
         adequateInfo = new JLabel();
         checkButton = new JButton("Check");
         okButton.setVisible(false);
         checkButton.addActionListener(e->{
 
-            if(colorValueArea.getText().length()==6) {
-                if(checkIfValueIsCorrect(colorValueArea.getText().toUpperCase())) {
+            if(colorValueInput.getText().length()==6) {
+                if(checkIfValueIsCorrect(colorValueInput.getText().toUpperCase())) {
                     okButton.setVisible(true);
                     adequateInfo.setText("<html>Value is correct!<br>Press OK to set the color<html>");
                 }
@@ -38,7 +37,7 @@ public class ChooseColorHEX extends ChooseColorFrame{
         });
 
         chooseColorPanel.add(initialInfo);
-        chooseColorPanel.add(colorValueArea);
+        chooseColorPanel.add(colorValueInput);
         chooseColorPanel.add(checkButton);
         middlePanel.add(adequateInfo);
         bottomPanel.add(okButton);
@@ -64,9 +63,13 @@ public class ChooseColorHEX extends ChooseColorFrame{
     }
 
     public void informOfColorChange(){
-        colorGatherer.changeColor(ColorConverter.getColor("#"+colorValueArea.getText().toUpperCase()));
         okButton.setVisible(false);
-        colorValueArea.setText("");
         adequateInfo.setText("");
+        colorGatherer.changeColor();
+    }
+
+    @Override
+    public Color getColor(){
+        return Color.decode("#"+ colorValueInput.getText().toUpperCase());
     }
 }
