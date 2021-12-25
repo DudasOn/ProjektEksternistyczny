@@ -67,9 +67,9 @@ public class MainFrame {
         deserialize.addActionListener(e -> FileOperations.saveFile());
 
         draw = new JMenuItem("Draw");
-        draw.addActionListener(e->paintingPanel.swapColorToForeground());
+        draw.addActionListener(e->paintingPanel.allowCovering());
         cover = new JMenuItem("Cover");
-        cover.addActionListener(e->paintingPanel.swapColorToBackground());
+        cover.addActionListener(e->paintingPanel.dissallowCovering());
         deleteLast = new JMenuItem("Delete last drawn shape"); // TODO: 25.12.2021 delete last drawn shape from board
         deleteAll = new JMenuItem("Delete all drawn shapes"); // TODO: 25.12.2021 clear entire board
 

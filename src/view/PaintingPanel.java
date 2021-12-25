@@ -32,7 +32,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         this.sizeOfChosenTool = toolShapeChooser.getTool()[0];
         this.typeOfChosenTool = toolShapeChooser.getTool()[1];
         this.ifCovering = false;
-        dataAboutCurrentObject = new Object[6];
+        dataAboutCurrentObject = new Object[7];
     }
 
 
@@ -52,13 +52,11 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
             System.out.println(toolShapeChooser.getTool()[i]);
     }
 
-    public void swapColorToBackground() {
-        this.toolColor = backgroundColorChanger.getColor();
+    public void dissallowCovering() {
         ifCovering = true;
     }
 
-    public void swapColorToForeground() {
-        this.toolColor = toolsColorChanger.getColor();
+    public void allowCovering() {
         ifCovering = false;
     }
 
@@ -66,13 +64,15 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     public void mouseClicked(MouseEvent e) {
         dataAboutCurrentObject[0] = MouseInfo.getPointerInfo().getLocation().x; //x location
         dataAboutCurrentObject[1] = MouseInfo.getPointerInfo().getLocation().y; //y location
-        dataAboutCurrentObject[2] = toolColor; //color
-        dataAboutCurrentObject[3] = sizeOfChosenTool; //tool atribute
-        dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
-        dataAboutCurrentObject[5] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
+        dataAboutCurrentObject[2] = toolColor; //tool color
+        dataAboutCurrentObject[3] = this.getBackground(); //background color todo: delete this variable after figuring out how to draw stuff (and replace with just redrawing stuff when chaning the background)
+        dataAboutCurrentObject[4] = sizeOfChosenTool; //tool atribute
+        dataAboutCurrentObject[5] = typeOfChosenTool; //tool shape
+        dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
         System.out.println("x:" + dataAboutCurrentObject[0] + " y: " + dataAboutCurrentObject[1] + " color: " + dataAboutCurrentObject[2] +
-                " size: " + dataAboutCurrentObject[3] + " type: " + dataAboutCurrentObject[4] + " ifCovering: " + dataAboutCurrentObject[5]);
+                " color of background: " + dataAboutCurrentObject[3] + " size: " + dataAboutCurrentObject[5] + " type: "
+                + dataAboutCurrentObject[5] + " ifCovering: " + dataAboutCurrentObject[6]);
 
         this.repaint();
     }
