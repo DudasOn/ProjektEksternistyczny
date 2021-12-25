@@ -1,6 +1,6 @@
-package Model.DrawableShapes;
+package model.DrawableShapes;
 
-import Model.ColorConverter;
+import model.ColorConverter;
 
 public class Square extends Shape {
 

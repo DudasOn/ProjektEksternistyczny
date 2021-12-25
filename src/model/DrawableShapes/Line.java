@@ -1,6 +1,6 @@
-package Model.DrawableShapes;
+package model.DrawableShapes;
 
-import Model.ColorConverter;
+import model.ColorConverter;
 
 public class Line extends Drawable {
     private static final long serialVersionUID = -5800083897933493382L;

@@ -1,7 +1,7 @@
-package View;
+package view;
 
-import Model.ColorConverter;
-import ObserverInterface.Observer;
+import model.ColorConverter;
+import observerInterface.Observer;
 
 import javax.swing.*;
 import java.awt.*;

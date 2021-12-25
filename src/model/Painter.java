@@ -1,8 +1,8 @@
-package Model;
+package model;
 
-import Model.DrawableShapes.Drawable;
-import ObserverInterface.Observable;
-import ObserverInterface.Observer;
+import model.DrawableShapes.Drawable;
+import observerInterface.Observable;
+import observerInterface.Observer;
 
 import java.io.*;
 import java.util.ArrayList;

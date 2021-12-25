@@ -1,4 +1,4 @@
-package ObserverInterface;
+package observerInterface;
 
 public interface Observable {
     void registerObserver(Observer o);

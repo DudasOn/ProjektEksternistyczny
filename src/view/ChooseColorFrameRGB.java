@@ -1,7 +1,7 @@
-package View;
+package view;
 
-import ObserverInterface.Observable;
-import ObserverInterface.Observer;
+import observerInterface.Observable;
+import observerInterface.Observer;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

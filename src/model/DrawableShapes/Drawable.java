@@ -1,6 +1,6 @@
-package Model.DrawableShapes;
+package model.DrawableShapes;
 
-import Model.ColorConverter;
+import model.ColorConverter;
 
 import java.io.Serializable;
 
