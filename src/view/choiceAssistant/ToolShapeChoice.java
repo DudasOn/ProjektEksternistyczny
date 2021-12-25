@@ -1,35 +1,34 @@
-package view.choosers;
+package view.choiceAssistant;
 
-import model.drawableShapes.Drawable;
 import view.PaintingPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class ToolChooser extends ChooserFrame {
+public class ToolShapeChoice extends ChoiceFrame {
 
     private PaintingPanel toolGatherer;
     private final JSlider toolAtriuteSlider;
     private final JLabel chooseToolAtributeInfo;
-    private JButton circle;
-    private JButton triangle;
-    private JButton square;
-    private JButton line;
-    private JPanel topPanel;
-    private JPanel middlePanel;
-    private JPanel bottomPanel;
+    private final JButton circle;
+    private final JButton triangle;
+    private final JButton square;
+    private final JButton line;
+    private final JPanel topPanel;
+    private final JPanel middlePanel;
+    private final JPanel bottomPanel;
 
-    private String CIRCLE = "circle.png";
-    private String SQUARE = "square.png";
-    private String TRIANGLE = "triangle.png";
-    private String LINE = "line.png";
-    private int BUTTONSIDE = 75;
+    private final String CIRCLE = "circle.png";
+    private final String SQUARE = "square.png";
+    private final String TRIANGLE = "triangle.png";
+    private final String LINE = "line.png";
+    private final int BUTTONSIDE = 75;
 
     private int chosenTool = 1;
 
 
-    public ToolChooser() {
+    public ToolShapeChoice() {
         super();
         this.setTitle("Choose a tool");
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
@@ -109,7 +108,6 @@ public class ToolChooser extends ChooserFrame {
     }
     public int[] getTool(){
         int[] choice ={toolAtriuteSlider.getValue(), chosenTool};
-
         return choice;
     }
 }

@@ -1,16 +1,16 @@
-package view.choosers;
+package view.choiceAssistant;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class ChooserFrame extends JFrame {
+public abstract class ChoiceFrame extends JFrame {
 
     protected JButton okButton;
 
     protected final int HEIGHT = 300;
     protected final int WIDTH = 250;
 
-    public ChooserFrame() {
+    public ChoiceFrame() {
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setResizable(false);

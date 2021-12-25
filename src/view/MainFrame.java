@@ -1,9 +1,8 @@
 package view;
 
-import view.choosers.ColorChooserHEX;
-import view.choosers.ColorChooserRGB;
-import view.choosers.ToolChooser;
-
+import view.choiceAssistant.ColorChoiceFrameHEX;
+import view.choiceAssistant.ColorChoiceFrameRGB;
+import view.choiceAssistant.ToolShapeChoice;
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,16 +26,16 @@ public class MainFrame {
     private final JMenuItem deleteAll;
     private final JMenuItem deleteLast;
     private final PaintingPanel paintingPanel;
-    private final ColorChooserRGB toolColor;
-    private final ColorChooserHEX backgroundColor;
-    private final ToolChooser toolChooser;
+    private final ColorChoiceFrameRGB toolColor;
+    private final ColorChoiceFrameHEX backgroundColor;
+    private final ToolShapeChoice toolChooser;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
-        toolColor = new ColorChooserRGB();
-        backgroundColor = new ColorChooserHEX();
-        toolChooser = new ToolChooser();
+        toolColor = new ColorChoiceFrameRGB();
+        backgroundColor = new ColorChoiceFrameHEX();
+        toolChooser = new ToolShapeChoice();
         paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor, toolColor, toolChooser);
         backgroundColor.registerColorGatherer(paintingPanel);
         toolColor.registerColorGatherer(paintingPanel);
@@ -67,8 +66,10 @@ public class MainFrame {
         deserialize = new JMenuItem("Deserialize");
         deserialize.addActionListener(e -> FileOperations.saveFile());
 
-        draw = new JMenuItem("Draw"); // TODO: 25.12.2021 add a way to choose a tool
-        cover = new JMenuItem("Cover"); // TODO: 25.12.2021 painting in a background color
+        draw = new JMenuItem("Draw");
+        draw.addActionListener(e->paintingPanel.swapColorToForeground());
+        cover = new JMenuItem("Cover");
+        cover.addActionListener(e->paintingPanel.swapColorToBackground());
         deleteLast = new JMenuItem("Delete last drawn shape"); // TODO: 25.12.2021 delete last drawn shape from board
         deleteAll = new JMenuItem("Delete all drawn shapes"); // TODO: 25.12.2021 clear entire board
 

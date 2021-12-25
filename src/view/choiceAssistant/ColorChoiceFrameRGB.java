@@ -1,9 +1,9 @@
-package view.choosers;
+package view.choiceAssistant;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ColorChooserRGB extends ColorChooserFrame {
+public class ColorChoiceFrameRGB extends ColorChoiceFrame {
 
 
     private final JSlider rSlider;
@@ -14,7 +14,7 @@ public class ColorChooserRGB extends ColorChooserFrame {
     private final JLabel gLabel;
     private final JLabel bLabel;
 
-    public ColorChooserRGB() {
+    public ColorChoiceFrameRGB() {
         super();
 
         rSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);

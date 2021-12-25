@@ -1,5 +1,6 @@
 package model.drawableShapes;
 
+import model.drawableShapes.drawInterface.DrawSquare;
 import java.awt.*;
 
 public class Square extends Shape {
@@ -10,10 +11,12 @@ public class Square extends Shape {
     public Square() {
         super();
         sideLength = 5;
+        this.drawMe = new DrawSquare();
     }
 
     public Square(int posX, int posY, Color color, int sideLength) {
         super(posX, posY, color);
         this.sideLength = sideLength;
+        this.drawMe = new DrawSquare();
     }
 }

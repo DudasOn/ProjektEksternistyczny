@@ -1,9 +1,9 @@
-package view.choosers;
+package view.choiceAssistant;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ColorChooserHEX extends ColorChooserFrame {
+public class ColorChoiceFrameHEX extends ColorChoiceFrame {
 
     private final JTextField colorValueInput;
     private final JLabel initialInfo;
@@ -12,7 +12,7 @@ public class ColorChooserHEX extends ColorChooserFrame {
     private final JPanel middlePanel;
     private final JPanel bottomPanel;
 
-    public ColorChooserHEX() {
+    public ColorChoiceFrameHEX() {
         super();
 
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));

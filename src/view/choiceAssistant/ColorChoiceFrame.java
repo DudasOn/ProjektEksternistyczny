@@ -1,16 +1,16 @@
-package view.choosers;
+package view.choiceAssistant;
 
 import view.PaintingPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class ColorChooserFrame extends ChooserFrame {
+public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     protected JPanel chooseColorPanel;
 
     protected PaintingPanel colorGatherer;
 
-    public ColorChooserFrame(){
+    public ColorChoiceFrame(){
         super();
 
         this.setTitle("Choose a color");

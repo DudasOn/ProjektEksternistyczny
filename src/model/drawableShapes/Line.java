@@ -1,5 +1,6 @@
 package model.drawableShapes;
 
+import model.drawableShapes.drawInterface.DrawLine;
 import java.awt.*;
 
 public class Line extends Drawable {
@@ -15,6 +16,7 @@ public class Line extends Drawable {
         posYStart = 0;
         posXStop = 0;
         posYStop = 0;
+        this.drawMe = new DrawLine();
     }
 
     public Line(int posXStart, int posYStart, int posXStop, int posYStop, Color color) {
@@ -23,6 +25,7 @@ public class Line extends Drawable {
         this.posYStart = posYStart;
         this.posXStop = posXStop;
         this.posYStop = posYStop;
+        this.drawMe = new DrawLine();
     }
 
 
