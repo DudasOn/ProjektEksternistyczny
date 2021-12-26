@@ -1,6 +1,7 @@
 package model.drawableShapes;
 
-import model.drawableShapes.drawInterface.DrawCircle;
+import model.drawableShapes.drawInterface.FillCircle;
+
 import java.awt.*;
 
 public class Circle extends Shape {
@@ -10,14 +11,14 @@ public class Circle extends Shape {
 
     public Circle() {
         super();
-        radius = 5;
-        this.drawMe = new DrawCircle();
+        radius = 50;
+        this.drawMe = new FillCircle(this.posX,this.posY,this.radius,this.color);
     }
 
     public Circle(int posX, int posY, Color color, int radius) {
         super(posX, posY, color);
         this.radius = radius;
-        this.drawMe = new DrawCircle();
+        this.drawMe = new FillCircle(this.posX,this.posY,this.radius,this.color);
     }
 
 

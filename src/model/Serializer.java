@@ -1,21 +1,13 @@
 package model;
 
 import model.drawableShapes.Drawable;
-import observerInterface.Subject;
-import observerInterface.Observer;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class Painter implements Subject {
-    private ArrayList<Observer> observers;
-    private ArrayList<Drawable> drawables;
+public class Serializer {
 
-    public Painter(){
-        observers = new ArrayList<>();
-        drawables = new ArrayList<>();
-    }
-
+    ArrayList<Drawable> drawables;
 
     public void serializeDrawn(File f){
         try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
@@ -34,27 +26,6 @@ public class Painter implements Subject {
         } catch (IOException | ClassNotFoundException e) {
 //			e.printStackTrace();
             System.out.println("Couldn't deserialize the drawing!");
-        }
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        if (!observers.contains(o)) {
-            observers.add(o);
-        }
-    }
-
-    @Override
-    public void removeObserver(Observer o) {
-        if (observers.contains(o)){
-            observers.remove(o);
-        }
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (int i = 0; i < observers.size(); i++) {
-           observers.get(i).update();
         }
     }
 }

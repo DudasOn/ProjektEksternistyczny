@@ -1,6 +1,7 @@
 package model.drawableShapes;
 
-import model.drawableShapes.drawInterface.DrawTriangle;
+import model.drawableShapes.drawInterface.FillTriangle;
+
 import java.awt.*;
 
 public class Triangle extends Shape {
@@ -10,13 +11,13 @@ public class Triangle extends Shape {
 
     public Triangle() {
         super();
-        sideLength = 5;
-        this.drawMe = new DrawTriangle();
+        sideLength = 50;
+        drawMe = new FillTriangle(this.posX,this.posY,this.sideLength,this.color);
     }
 
     public Triangle(int posX, int posY, Color color, int sideLength) {
         super(posX, posY, color);
         this.sideLength = sideLength;
-        this.drawMe = new DrawTriangle();
+        drawMe = new FillTriangle(this.posX,this.posY,this.sideLength,this.color);
     }
 }

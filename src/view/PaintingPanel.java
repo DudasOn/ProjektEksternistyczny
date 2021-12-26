@@ -1,5 +1,8 @@
 package view;
 
+import model.DrawablesCreator;
+import model.drawableShapes.Circle;
+import model.drawableShapes.Drawable;
 import observerInterface.Observer;
 import view.choiceAssistant.ColorChoiceFrame;
 import view.choiceAssistant.ToolShapeChoice;
@@ -8,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 
 public class PaintingPanel extends JPanel implements MouseListener, Observer {
@@ -20,6 +24,8 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     private int sizeOfChosenTool;
     private int typeOfChosenTool;
     private boolean ifCovering;
+    private ArrayList<Drawable> drawables = new ArrayList<>();
+    private DrawablesCreator drawablesCreator;
 
     public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolShapeChoice toolShapeChooser) {
         this.setPreferredSize(new Dimension(width, height));
@@ -32,7 +38,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         this.sizeOfChosenTool = toolShapeChooser.getTool()[0];
         this.typeOfChosenTool = toolShapeChooser.getTool()[1];
         this.ifCovering = false;
-        dataAboutCurrentObject = new Object[7];
+        dataAboutCurrentObject = new Object[6];
     }
 
 
@@ -62,23 +68,21 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        dataAboutCurrentObject[0] = MouseInfo.getPointerInfo().getLocation().x; //x location
-        dataAboutCurrentObject[1] = MouseInfo.getPointerInfo().getLocation().y; //y location
+        dataAboutCurrentObject[0] = e.getX(); //x location
+        dataAboutCurrentObject[1] = e.getY(); //y location
         dataAboutCurrentObject[2] = toolColor; //tool color
-        dataAboutCurrentObject[3] = this.getBackground(); //background color todo: delete this variable after figuring out how to draw stuff (and replace with just redrawing stuff when chaning the background)
-        dataAboutCurrentObject[4] = sizeOfChosenTool; //tool atribute
-        dataAboutCurrentObject[5] = typeOfChosenTool; //tool shape
-        dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
+        //dataAboutCurrentObject[3] = this.getBackground(); //background color todo: delete this variable after figuring out how to draw stuff (and replace with just redrawing stuff when chaning the background)
+        dataAboutCurrentObject[3] = sizeOfChosenTool; //tool atribute
+        dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
+        dataAboutCurrentObject[5] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
         System.out.println("x:" + dataAboutCurrentObject[0] + " y: " + dataAboutCurrentObject[1] + " color: " + dataAboutCurrentObject[2] +
-                " color of background: " + dataAboutCurrentObject[3] + " size: " + dataAboutCurrentObject[5] + " type: "
-                + dataAboutCurrentObject[5] + " ifCovering: " + dataAboutCurrentObject[6]);
-
-        this.repaint();
+                " size: " + dataAboutCurrentObject[3] + " type: " + dataAboutCurrentObject[4] + " ifCovering: " + dataAboutCurrentObject[5]);
+        drawablesCreator.createShape(dataAboutCurrentObject);
     }
 
-    public static Object[] getDataAboutCurrentObject() {
-        return dataAboutCurrentObject;
+    public void setDrawablesCreator(DrawablesCreator drawablesCreator) {
+        this.drawablesCreator = drawablesCreator;
     }
 
     @Override
@@ -100,6 +104,20 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     @Override
     public void update() {
+        this.drawables.add(drawablesCreator.getDrawn());
+        this.repaint();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (drawables == null) ;
+        else {
+            for (int i = 0; i < drawables.size(); i++) {
+                System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
+                drawables.get(i).getDrawMe().drawMe(g);
+            }
+        }
 
     }
 }

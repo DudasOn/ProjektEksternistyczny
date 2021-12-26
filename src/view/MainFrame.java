@@ -92,4 +92,7 @@ public class MainFrame {
         mainFrame.setVisible(true);
     }
 
+    public PaintingPanel getPaintingPanel() {
+        return paintingPanel;
+    }
 }
