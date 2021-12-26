@@ -79,8 +79,9 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         dataAboutCurrentObject[5] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
         dataAboutCurrentObject[6] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
 
-        System.out.println("x:" + dataAboutCurrentObject[0] + " y: " + dataAboutCurrentObject[1] + " color: " + dataAboutCurrentObject[2] +
-                " size: " + dataAboutCurrentObject[3] + " type: " + dataAboutCurrentObject[4] + " ifCovering: " + dataAboutCurrentObject[5]+ " ifFilledIn: "+dataAboutCurrentObject[6]);
+        System.out.println("X:" + dataAboutCurrentObject[0] + "/Y: " + dataAboutCurrentObject[1] + "/Color: " + dataAboutCurrentObject[2] +
+                "/Atribute: " + dataAboutCurrentObject[3] + "/Type: " + dataAboutCurrentObject[4] + "/ifCovering: " + dataAboutCurrentObject[5]+ "/ifFilledIn: "+dataAboutCurrentObject[6]);
+
         drawablesCreator.createShape(dataAboutCurrentObject);
     }
 
@@ -117,7 +118,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         if (drawables == null) ;
         else {
             for (int i = 0; i < drawables.size(); i++) {
-                System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
+                //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
                 drawables.get(i).getDrawMe().drawMe(g);
             }
         }
