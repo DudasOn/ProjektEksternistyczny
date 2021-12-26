@@ -54,7 +54,7 @@ public class MainFrame {
         changeToolColor = new JMenuItem("Change tool color");
         changeToolColor.addActionListener(e -> toolColor.setVisibility());
 
-        changeToolType = new JMenuItem("Change tool shape");
+        changeToolType = new JMenuItem("Change tool properties");
         changeToolType.addActionListener(e->toolChooser.setVisibility());
 
         changeBackgroundColor = new JMenuItem("Change background color");

@@ -8,6 +8,7 @@ public abstract class Shape extends Drawable {
 
     protected int posX;
     protected int posY;
+    protected boolean ifFilledIn;
 
     public Shape() {
         super();
@@ -15,8 +16,9 @@ public abstract class Shape extends Drawable {
         this.posY = 100;
     }
 
-    public Shape(int posX, int posY, Color color) {
+    public Shape(int posX, int posY, Color color, boolean ifFilledIn) {
         super(color);
+        this.ifFilledIn = ifFilledIn;
         this.posX = posX;
         this.posY = posY;
     }

@@ -1,6 +1,7 @@
 package model.drawableShapes;
 
-import model.drawableShapes.drawInterface.FillSquare;
+import model.drawableShapes.drawInterface.drawShape.DrawSquare;
+import model.drawableShapes.drawInterface.fillShape.FillSquare;
 import java.awt.*;
 
 public class Square extends Shape {
@@ -11,12 +12,13 @@ public class Square extends Shape {
     public Square() {
         super();
         sideLength = 50;
-        this.drawMe = new FillSquare(this.posX,this.posY,this.sideLength,this.color);
+        this.drawMe = new FillSquare(this.posX, this.posY, this.sideLength, this.color);
     }
 
-    public Square(int posX, int posY, Color color, int sideLength) {
-        super(posX, posY, color);
+    public Square(int posX, int posY, Color color, int sideLength, boolean ifFilledIn) {
+        super(posX, posY, color, ifFilledIn);
         this.sideLength = sideLength;
-        this.drawMe = new FillSquare(this.posX,this.posY,this.sideLength,this.color);
+        if (ifFilledIn) this.drawMe = new FillSquare(this.posX, this.posY, this.sideLength, this.color);
+        else this.drawMe = new DrawSquare(this.posX, this.posY, this.sideLength, this.color);
     }
 }

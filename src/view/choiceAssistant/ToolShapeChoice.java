@@ -14,7 +14,8 @@ public class ToolShapeChoice extends ChoiceFrame {
     private final JButton circle;
     private final JButton triangle;
     private final JButton square;
-    private final JButton line;
+    private final JRadioButton filledIn;
+    private final JRadioButton notFilledIn;
     private final JPanel topPanel;
     private final JPanel middlePanel;
     private final JPanel bottomPanel;
@@ -22,10 +23,10 @@ public class ToolShapeChoice extends ChoiceFrame {
     private final String CIRCLE = "circle.png";
     private final String SQUARE = "square.png";
     private final String TRIANGLE = "triangle.png";
-    private final String LINE = "line.png";
     private final int BUTTONSIDE = 75;
 
     private int chosenTool = 1;
+    private boolean ifFilledIn = true;
 
 
     public ToolShapeChoice() {
@@ -47,18 +48,28 @@ public class ToolShapeChoice extends ChoiceFrame {
         circle = new JButton(CIRCLE);
         square = new JButton(SQUARE);
         triangle = new JButton(TRIANGLE);
-        line = new JButton(LINE);
-
+        filledIn = new JRadioButton("Filled in", true);
+        notFilledIn = new JRadioButton("Only outline", false);
 
         circle.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
         square.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
         triangle.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
-        line.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
 
         circle.addActionListener(e -> chosenTool = 1);
         square.addActionListener(e -> chosenTool = 2);
         triangle.addActionListener(e -> chosenTool = 3);
-        line.addActionListener(e -> chosenTool = 4);
+
+        filledIn.addActionListener(e -> {
+            ifFilledIn = true;
+            filledIn.setSelected(true);
+            notFilledIn.setSelected(false);
+        });
+
+        notFilledIn.addActionListener(e -> {
+            ifFilledIn = false;
+            filledIn.setSelected(false);
+            notFilledIn.setSelected(true);
+        });
 
         File file = new File(CIRCLE);
         if (file.canRead()) {
@@ -78,11 +89,6 @@ public class ToolShapeChoice extends ChoiceFrame {
             triangle.setText("");
         }
 
-        file = new File(LINE);
-        if (file.canRead()) {
-            line.setIcon(new ImageIcon(LINE));
-            line.setText("");
-        }
 
         okButton.addActionListener(e -> {
             setVisibility();
@@ -91,10 +97,11 @@ public class ToolShapeChoice extends ChoiceFrame {
 
         topPanel.add(chooseToolAtributeInfo);
         topPanel.add(toolAtriuteSlider);
+        middlePanel.add(filledIn);
+        middlePanel.add(notFilledIn);
         middlePanel.add(circle);
         middlePanel.add(square);
         middlePanel.add(triangle);
-        middlePanel.add(line);
         bottomPanel.add(okButton);
         this.add(topPanel);
         this.add(middlePanel);
@@ -109,8 +116,13 @@ public class ToolShapeChoice extends ChoiceFrame {
     public void informOfToolChange() {
         toolGatherer.changeTool();
     }
-    public int[] getTool(){
-        int[] choice ={toolAtriuteSlider.getValue(), chosenTool};
+
+    public int[] getTool() {
+        int[] choice = {toolAtriuteSlider.getValue(), chosenTool};
         return choice;
+    }
+
+    public boolean getIfFilledIn(){
+        return ifFilledIn;
     }
 }

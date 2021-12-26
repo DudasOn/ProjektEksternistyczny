@@ -1,14 +1,13 @@
-package model.drawableShapes.drawInterface;
+package model.drawableShapes.drawInterface.fillShape;
+
+import model.drawableShapes.drawInterface.PaintAll;
 
 import java.awt.*;
 
 public class FillTriangle extends PaintAll {
 
     public FillTriangle(int x, int y, int sideLength, Color color) {
-        this.x = x;
-        this.y = y;
-        this.color = color;
-        this.atribute = sideLength;
+        super(x, y, sideLength, color);
     }
 
     public void drawMe(Graphics g) {

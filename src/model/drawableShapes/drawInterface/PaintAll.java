@@ -8,6 +8,13 @@ public abstract class PaintAll implements PaintInteface {
     protected int atribute;
     protected Color color;
 
+    public PaintAll(int x, int y, int atribute, Color color){
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.atribute = atribute;
+    }
+
     protected Graphics2D setGraphicsProperties(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
