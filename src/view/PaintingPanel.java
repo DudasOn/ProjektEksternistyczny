@@ -39,7 +39,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         this.sizeOfChosenTool = toolShapeChooser.getTool()[0];
         this.typeOfChosenTool = toolShapeChooser.getTool()[1];
         this.ifCovering = false;
-        this.ifFilledIn=toolShapeChooser.getIfFilledIn();
+        this.ifFilledIn = toolShapeChooser.getIfFilledIn();
         dataAboutCurrentObject = new Object[7];
     }
 
@@ -69,18 +69,37 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         ifCovering = false;
     }
 
+    public void deleteLast() {
+        if (drawables.size() > 0) drawables.remove((drawables.size() - 1));
+        this.repaint();
+    }
+
+    public void deleteAll() {
+        drawables.clear();
+        this.repaint();
+    }
+
+    public ArrayList<Drawable> getArrayOfDrawables() {
+        return drawables;
+    }
+
+    public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
+        this.drawables = drawables;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
-        dataAboutCurrentObject[2] = toolColor; //tool color
+        if (!ifCovering) dataAboutCurrentObject[2] = toolColor;
+        else dataAboutCurrentObject[2] = this.getBackground(); //tool color
         dataAboutCurrentObject[3] = sizeOfChosenTool; //tool atribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
-        dataAboutCurrentObject[5] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
-        dataAboutCurrentObject[6] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
+        dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
+        dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
         System.out.println("X:" + dataAboutCurrentObject[0] + "/Y: " + dataAboutCurrentObject[1] + "/Color: " + dataAboutCurrentObject[2] +
-                "/Atribute: " + dataAboutCurrentObject[3] + "/Type: " + dataAboutCurrentObject[4] + "/ifCovering: " + dataAboutCurrentObject[5]+ "/ifFilledIn: "+dataAboutCurrentObject[6]);
+                "/Atribute: " + dataAboutCurrentObject[3] + "/Type: " + dataAboutCurrentObject[4] + "/ifCovering: " + dataAboutCurrentObject[5] + "/ifFilledIn: " + dataAboutCurrentObject[6]);
 
         drawablesCreator.createShape(dataAboutCurrentObject);
     }
@@ -115,13 +134,11 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (drawables == null) ;
-        else {
-            for (int i = 0; i < drawables.size(); i++) {
-                //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
-                drawables.get(i).getDrawMe().drawMe(g);
-            }
-        }
 
+        for (int i = 0; i < drawables.size(); i++) {
+            System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
+            if(drawables.get(i).getIfCovering()) drawables.get(i).setColor(this.getBackground());
+            drawables.get(i).getDrawMe().drawMe(g);
+        }
     }
 }

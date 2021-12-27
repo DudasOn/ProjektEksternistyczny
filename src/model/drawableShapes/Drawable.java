@@ -7,13 +7,16 @@ import java.io.Serializable;
 public abstract class Drawable implements Serializable {
     protected Color color;
     protected PaintInteface drawMe;
+    protected boolean ifCovering;
 
     public Drawable() {
         color = new Color(0,0,0);
+        this.ifCovering = false;
     }
 
-    public Drawable(Color color) {
+    public Drawable(Color color, boolean ifCovering) {
         this.color = color;
+        this.ifCovering = ifCovering;
     }
 
     public PaintInteface getDrawMe(){
@@ -21,6 +24,14 @@ public abstract class Drawable implements Serializable {
     }
 
     public Color getColor(){
-        return color;
+        return this.color;
+    }
+
+    public boolean getIfCovering(){
+        return this.ifCovering;
+    }
+
+    public void setColor(Color color){
+        this.color=color;
     }
 }

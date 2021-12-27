@@ -1,13 +1,14 @@
 package model.drawableShapes.drawInterface.drawShape;
 
+import model.drawableShapes.Drawable;
 import model.drawableShapes.drawInterface.PaintAll;
 
 import java.awt.*;
 
 public class DrawCircle extends PaintAll {
 
-    public DrawCircle(int x, int y, int radius, Color color) {
-        super(x, y, radius, color);
+    public DrawCircle(int x, int y, int radius,Drawable drawable) {
+        super(x, y, radius, drawable);
     }
 
     @Override

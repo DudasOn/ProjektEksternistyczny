@@ -1,11 +1,15 @@
 package view;
 
+import model.Serializer;
+import model.drawableShapes.Drawable;
+
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public abstract class FileOperations {
 
-    public static void chooseFile() {
+    public static void chooseFile(ArrayList<Drawable> drawables) {
 
             JFileChooser chooser = new JFileChooser();
             chooser.setCurrentDirectory(new File("."));
@@ -13,6 +17,7 @@ public abstract class FileOperations {
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = new File(chooser.getSelectedFile().getAbsolutePath());
                 System.out.println(chooser.getSelectedFile().getAbsolutePath());
+                Serializer.serializeDrawn(file, drawables);
             }
     }
 

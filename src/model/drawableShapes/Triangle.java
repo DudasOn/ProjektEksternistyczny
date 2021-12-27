@@ -12,13 +12,13 @@ public class Triangle extends Shape {
     public Triangle() {
         super();
         sideLength = 50;
-        drawMe = new FillTriangle(this.posX, this.posY, this.sideLength, this.color);
+        drawMe = new FillTriangle(this.posX, this.posY, this.sideLength, this);
     }
 
-    public Triangle(int posX, int posY, Color color, int sideLength, boolean ifFilledIn) {
-        super(posX, posY, color, ifFilledIn);
+    public Triangle(int posX, int posY, Color color, int sideLength, boolean ifFilledIn, boolean ifCovering) {
+        super(posX, posY, color, ifFilledIn, ifCovering);
         this.sideLength = sideLength;
-        if (ifFilledIn) drawMe = new FillTriangle(this.posX, this.posY, this.sideLength, this.color);
-        else drawMe = new DrawTriangle(this.posX, this.posY, this.sideLength, this.color);
+        if (ifFilledIn) drawMe = new FillTriangle(this.posX, this.posY, this.sideLength, this);
+        else drawMe = new DrawTriangle(this.posX, this.posY, this.sideLength, this);
     }
 }

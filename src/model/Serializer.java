@@ -1,15 +1,13 @@
 package model;
 
 import model.drawableShapes.Drawable;
-
 import java.io.*;
 import java.util.ArrayList;
 
-public class Serializer {
+public abstract class Serializer {
 
-    ArrayList<Drawable> drawables;
 
-    public void serializeDrawn(File f){
+    public static void serializeDrawn(File f, ArrayList<Drawable> drawables){
         try(ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))){
             os.writeObject(drawables);
         } catch (IOException e) {
@@ -18,7 +16,7 @@ public class Serializer {
         }
     }
 
-    public void deserializeDrawn(File f){
+    public static void deserializeDrawn(File f, ArrayList<Drawable> drawables){
         try(ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))){
             Object out = is.readObject();
             if (out instanceof ArrayList)

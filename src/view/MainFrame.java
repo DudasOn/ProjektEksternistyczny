@@ -61,7 +61,7 @@ public class MainFrame {
         changeBackgroundColor.addActionListener(e -> backgroundColor.setVisibility());
 
         serialize = new JMenuItem("Serialize");
-        serialize.addActionListener(e -> FileOperations.chooseFile());
+        serialize.addActionListener(e -> FileOperations.chooseFile(paintingPanel.getArrayOfDrawables()));
 
         deserialize = new JMenuItem("Deserialize");
         deserialize.addActionListener(e -> FileOperations.saveFile());
@@ -70,8 +70,11 @@ public class MainFrame {
         draw.addActionListener(e->paintingPanel.allowCovering());
         cover = new JMenuItem("Cover");
         cover.addActionListener(e->paintingPanel.dissallowCovering());
-        deleteLast = new JMenuItem("Delete last drawn shape"); // TODO: 25.12.2021 delete last drawn shape from board
-        deleteAll = new JMenuItem("Delete all drawn shapes"); // TODO: 25.12.2021 clear entire board
+
+        deleteLast = new JMenuItem("Delete last drawn shape");
+        deleteLast.addActionListener(e -> paintingPanel.deleteLast());
+        deleteAll = new JMenuItem("Delete all drawn shapes");
+        deleteAll.addActionListener(e -> paintingPanel.deleteAll());
 
 
         //dodawanie elementow do ramki glownej i odpowiednich menu
