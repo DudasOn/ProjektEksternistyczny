@@ -1,6 +1,6 @@
 package view;
 
-import model.DrawablesCreator;
+import model.DrawablesManipulator;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
 import view.choiceAssistant.ColorChoiceFrame;
@@ -24,7 +24,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     private boolean ifCovering;
     private boolean ifFilledIn;
     private ArrayList<Drawable> drawables = new ArrayList<>();
-    private DrawablesCreator drawablesCreator;
+    private DrawablesManipulator drawablesManipulator;
 
     public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolShapeChoice toolShapeChooser) {
         this.setPreferredSize(new Dimension(width, height));
@@ -83,6 +83,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
         this.drawables = drawables;
+        this.repaint();
     }
 
     @Override
@@ -95,14 +96,14 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
         dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
-        System.out.println("X: " + dataAboutCurrentObject[0] + "\tY: " + dataAboutCurrentObject[1] + "\tColor: " + dataAboutCurrentObject[2] +
-                "\tAtribute: " + dataAboutCurrentObject[3] + "\tType: " + dataAboutCurrentObject[4] + "\tifFilledIn: " + dataAboutCurrentObject[5] + "\tifCovering: " + dataAboutCurrentObject[6]);
+        System.out.println("X:" + dataAboutCurrentObject[0] + "\tY:" + dataAboutCurrentObject[1] + "\tColor:" + dataAboutCurrentObject[2] +
+                "\tAttribute:" + dataAboutCurrentObject[3] + "\tType:" + dataAboutCurrentObject[4] + "\tifFilledIn:" + dataAboutCurrentObject[5] + "\tifCovering:" + dataAboutCurrentObject[6]);
 
-        drawablesCreator.createShape(dataAboutCurrentObject);
+        drawablesManipulator.createShape(dataAboutCurrentObject);
     }
 
-    public void setDrawablesCreator(DrawablesCreator drawablesCreator) {
-        this.drawablesCreator = drawablesCreator;
+    public void setDrawablesManipulator(DrawablesManipulator drawablesManipulator) {
+        this.drawablesManipulator = drawablesManipulator;
     }
 
     @Override
@@ -124,7 +125,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     @Override
     public void update() {
-        this.drawables.add(drawablesCreator.getDrawn());
+        this.drawables.add(drawablesManipulator.getDrawn());
         this.repaint();
     }
 

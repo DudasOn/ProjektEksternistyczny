@@ -1,8 +1,12 @@
 package model.drawableShapes.drawInterface;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class PaintAll implements PaintInteface {
+public abstract class PaintAll implements PaintInteface, Serializable {
+
+    private static final long serialVersionUID = 6500543986416300862L;
+
     protected int x;
     protected int y;
     protected int attribute;

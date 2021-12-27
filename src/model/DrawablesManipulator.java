@@ -4,13 +4,16 @@ import model.drawableShapes.*;
 import observerInterface.Subject;
 import observerInterface.Observer;
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class DrawablesCreator implements Subject {
+public class DrawablesManipulator implements Subject {
     private ArrayList<Observer> observers;
     private Drawable drawn;
 
-    public DrawablesCreator() {
+    public DrawablesManipulator() {
         observers = new ArrayList<>();
     }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class FileOperations {
 
-    public static void chooseFile(ArrayList<Drawable> drawables) {
+    public static ArrayList<Drawable> chooseFile() {
 
             JFileChooser chooser = new JFileChooser();
             chooser.setCurrentDirectory(new File("."));
@@ -16,18 +16,20 @@ public abstract class FileOperations {
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = new File(chooser.getSelectedFile().getAbsolutePath());
                 System.out.println(chooser.getSelectedFile().getAbsolutePath());
-                Serializer.serializeDrawn(file, drawables);
+                return Serializer.deserializeDrawn(file);
             }
+            else return null;
     }
 
-    public static void saveFile() {
+    public static void saveFile(ArrayList<Drawable> drawables) {
 
         JFileChooser saver = new JFileChooser();
         saver.setCurrentDirectory(new File("."));
         int response = saver.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
             File file = new File(saver.getSelectedFile().getAbsolutePath());
-            System.out.println(saver.getSelectedFile().getAbsolutePath());
+            System.out.println("Serialization path: "+saver.getSelectedFile().getAbsolutePath());
+            Serializer.serializeDrawn(file, drawables);
         }
     }
     }

@@ -61,10 +61,10 @@ public class MainFrame {
         changeBackgroundColor.addActionListener(e -> backgroundColor.setVisibility());
 
         serialize = new JMenuItem("Serialize");
-        serialize.addActionListener(e -> FileOperations.chooseFile(paintingPanel.getArrayOfDrawables()));
+        serialize.addActionListener(e -> FileOperations.saveFile(paintingPanel.getArrayOfDrawables()));
 
         deserialize = new JMenuItem("Deserialize");
-        deserialize.addActionListener(e -> FileOperations.saveFile());
+        deserialize.addActionListener(e -> paintingPanel.setArrayOfDrawables(FileOperations.chooseFile()));
 
         draw = new JMenuItem("Draw");
         draw.addActionListener(e->paintingPanel.allowCovering());
