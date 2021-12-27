@@ -34,9 +34,9 @@ public class ToolShapeChoice extends ChoiceFrame {
         this.setTitle("Choose a tool");
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         chooseToolAtributeInfo = new JLabel("This value alters the size of drawn object");
-        toolAtriuteSlider = new JSlider(JSlider.HORIZONTAL, 20, 200, 50);
-        toolAtriuteSlider.setMajorTickSpacing(180);
-        toolAtriuteSlider.setMinorTickSpacing(20);
+        toolAtriuteSlider = new JSlider(JSlider.HORIZONTAL, 10, 300, 50);
+        toolAtriuteSlider.setMajorTickSpacing(145);
+        toolAtriuteSlider.setMinorTickSpacing(10);
         toolAtriuteSlider.setPaintTicks(true);
         toolAtriuteSlider.setPaintLabels(true);
 
