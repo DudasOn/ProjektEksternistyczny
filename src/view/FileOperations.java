@@ -40,11 +40,9 @@ public abstract class FileOperations {
         int response = saver.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
 
-            if ((saver.getSelectedFile().getAbsolutePath().substring(saver.getSelectedFile().getAbsolutePath().length() - 4)).equals(".ser")) {
-                File file = new File(saver.getSelectedFile().getAbsolutePath());
+                File file = new File(saver.getSelectedFile().getAbsolutePath()+".ser");
                 System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
                 Serializer.serialize(file, drawables);
-            } else System.out.println("Incorrect file type");
         }
     }
 
@@ -56,7 +54,7 @@ public abstract class FileOperations {
         int response = saver.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
 
-            File file = new File(saver.getSelectedFile().getAbsolutePath());
+            File file = new File(saver.getSelectedFile().getAbsolutePath()+".jpeg");
             System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
             Serializer.saveJPEG(file, panel);
 
