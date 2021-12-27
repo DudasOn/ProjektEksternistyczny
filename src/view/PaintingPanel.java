@@ -9,10 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 
-public class PaintingPanel extends JPanel implements MouseListener, Observer {
+public class PaintingPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
 
     private final ColorChoiceFrame backgroundColorChanger;
     private final ColorChoiceFrame toolsColorChanger;
@@ -30,6 +31,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
         this.addMouseListener(this);
+        this.addMouseMotionListener(this);
         this.backgroundColorChanger = backgroundColorChanger;
         this.toolsColorChanger = objectsColor;
         this.toolShapeChooser = toolShapeChooser;
@@ -89,8 +91,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         this.drawablesCreator = drawablesCreator;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    private void reactToMouse(MouseEvent e){
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
         dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering: redundant) allows for easier expansion of the program
@@ -105,24 +106,30 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         drawablesCreator.createShape(dataAboutCurrentObject);
     }
 
-
-
     @Override
-    public void mousePressed(MouseEvent e) {
-
+    public void mouseDragged(MouseEvent e) {
+        reactToMouse(e);
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
+        reactToMouse(e);
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseMoved(MouseEvent e) {}
 
     @Override
     public void update() {
@@ -145,4 +152,6 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
             }
         }
     }
+
+
 }
