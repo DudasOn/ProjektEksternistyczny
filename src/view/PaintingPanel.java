@@ -89,14 +89,14 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     public void mouseClicked(MouseEvent e) {
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
-        dataAboutCurrentObject[2] = toolColor; //tool color
-        dataAboutCurrentObject[3] = sizeOfChosenTool; //tool atribute
+        dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering: redundant) allows for easier expansion of the program
+        dataAboutCurrentObject[3] = sizeOfChosenTool; //tool attribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
         dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
         dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
         System.out.println("X: " + dataAboutCurrentObject[0] + "\tY: " + dataAboutCurrentObject[1] + "\tColor: " + dataAboutCurrentObject[2] +
-                "\tAtribute: " + dataAboutCurrentObject[3] + "\tType: " + dataAboutCurrentObject[4] + "\tifCovering: " + dataAboutCurrentObject[5] + "\tifFilledIn: " + dataAboutCurrentObject[6]);
+                "\tAtribute: " + dataAboutCurrentObject[3] + "\tType: " + dataAboutCurrentObject[4] + "\tifFilledIn: " + dataAboutCurrentObject[5] + "\tifCovering: " + dataAboutCurrentObject[6]);
 
         drawablesCreator.createShape(dataAboutCurrentObject);
     }
@@ -134,7 +134,10 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
         for (int i = 0; i < drawables.size(); i++) {
             //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
-            if(drawables.get(i).getIfCovering()) drawables.get(i).setColor(this.getBackground());
+            if(drawables.get(i).getIfCovering()) {
+                //drawables.get(i).setColor(this.getBackground());
+                drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing allows us to expand our program (by for example adding "Uncover all" option)
+            }
             drawables.get(i).getDrawMe().drawMe(g);
         }
     }

@@ -1,19 +1,18 @@
 package model.drawableShapes.drawInterface.drawShape;
 
-import model.drawableShapes.Drawable;
 import model.drawableShapes.drawInterface.PaintAll;
 import java.awt.*;
 
 public class DrawCircle extends PaintAll {
 
-    public DrawCircle(int x, int y, int radius,Drawable drawable) {
-        super(x, y, radius, drawable);
+    public DrawCircle(int x, int y, int radius, Color color) {
+        super(x, y, radius, color);
     }
 
     @Override
     public void drawMe(Graphics g) {
         Graphics2D g2d = super.setGraphicsProperties(g);
 
-        g2d.drawOval(x - (atribute / 2), y - (atribute / 2), atribute, atribute);
+        g2d.drawOval(x - (attribute / 2), y - (attribute / 2), attribute, attribute);
     }
 }

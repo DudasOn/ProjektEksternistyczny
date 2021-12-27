@@ -1,19 +1,18 @@
 package model.drawableShapes.drawInterface;
 
-import model.drawableShapes.Drawable;
 import java.awt.*;
 
 public abstract class PaintAll implements PaintInteface {
     protected int x;
     protected int y;
-    protected int atribute;
-    protected Drawable drawable;
+    protected int attribute;
+    protected Color color;
 
-    public PaintAll(int x, int y, int atribute, Drawable drawable) {
+    public PaintAll(int x, int y, int attribute, Color color) {
         this.x = x;
         this.y = y;
-        this.atribute = atribute;
-        this.drawable = drawable;
+        this.attribute = attribute;
+        this.color = color;
     }
 
     protected Graphics2D setGraphicsProperties(Graphics g) {
@@ -22,8 +21,12 @@ public abstract class PaintAll implements PaintInteface {
         rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHints(rh);
 
-        g2d.setColor(drawable.getColor());
+        g2d.setColor(this.color);
 
         return g2d;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
