@@ -1,12 +1,10 @@
 package view;
 
 import model.DrawablesCreator;
-import model.drawableShapes.Circle;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
 import view.choiceAssistant.ColorChoiceFrame;
 import view.choiceAssistant.ToolShapeChoice;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -91,15 +89,14 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     public void mouseClicked(MouseEvent e) {
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
-        if (!ifCovering) dataAboutCurrentObject[2] = toolColor;
-        else dataAboutCurrentObject[2] = this.getBackground(); //tool color
+        dataAboutCurrentObject[2] = toolColor; //tool color
         dataAboutCurrentObject[3] = sizeOfChosenTool; //tool atribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
         dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
         dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
 
-        System.out.println("X:" + dataAboutCurrentObject[0] + "/Y: " + dataAboutCurrentObject[1] + "/Color: " + dataAboutCurrentObject[2] +
-                "/Atribute: " + dataAboutCurrentObject[3] + "/Type: " + dataAboutCurrentObject[4] + "/ifCovering: " + dataAboutCurrentObject[5] + "/ifFilledIn: " + dataAboutCurrentObject[6]);
+        System.out.println("X: " + dataAboutCurrentObject[0] + "\tY: " + dataAboutCurrentObject[1] + "\tColor: " + dataAboutCurrentObject[2] +
+                "\tAtribute: " + dataAboutCurrentObject[3] + "\tType: " + dataAboutCurrentObject[4] + "\tifCovering: " + dataAboutCurrentObject[5] + "\tifFilledIn: " + dataAboutCurrentObject[6]);
 
         drawablesCreator.createShape(dataAboutCurrentObject);
     }
@@ -136,7 +133,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         super.paintComponent(g);
 
         for (int i = 0; i < drawables.size(); i++) {
-            System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
+            //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
             if(drawables.get(i).getIfCovering()) drawables.get(i).setColor(this.getBackground());
             drawables.get(i).getDrawMe().drawMe(g);
         }

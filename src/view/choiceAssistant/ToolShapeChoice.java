@@ -1,7 +1,6 @@
 package view.choiceAssistant;
 
 import view.PaintingPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;

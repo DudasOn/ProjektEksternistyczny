@@ -1,7 +1,6 @@
 package model.drawableShapes.drawInterface;
 
 import model.drawableShapes.Drawable;
-
 import java.awt.*;
 
 public abstract class PaintAll implements PaintInteface {

@@ -22,5 +22,4 @@ public abstract class Shape extends Drawable {
         this.posX = posX;
         this.posY = posY;
     }
-
 }

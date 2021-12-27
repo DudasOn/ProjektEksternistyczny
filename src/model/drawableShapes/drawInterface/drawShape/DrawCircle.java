@@ -2,7 +2,6 @@ package model.drawableShapes.drawInterface.drawShape;
 
 import model.drawableShapes.Drawable;
 import model.drawableShapes.drawInterface.PaintAll;
-
 import java.awt.*;
 
 public class DrawCircle extends PaintAll {
@@ -17,6 +16,4 @@ public class DrawCircle extends PaintAll {
 
         g2d.drawOval(x - (atribute / 2), y - (atribute / 2), atribute, atribute);
     }
-
-
 }

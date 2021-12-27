@@ -2,7 +2,6 @@ package model.drawableShapes.drawInterface.drawShape;
 
 import model.drawableShapes.Drawable;
 import model.drawableShapes.drawInterface.PaintAll;
-
 import java.awt.*;
 
 public class DrawTriangle extends PaintAll {

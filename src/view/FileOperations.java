@@ -2,7 +2,6 @@ package view;
 
 import model.Serializer;
 import model.drawableShapes.Drawable;
-
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;

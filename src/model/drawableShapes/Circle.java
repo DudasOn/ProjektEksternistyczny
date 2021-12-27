@@ -11,17 +11,16 @@ public class Circle extends Shape {
 
     public Circle() {
         super();
+
         radius = 50;
         this.drawMe = new FillCircle(this.posX, this.posY, this.radius, this);
     }
 
     public Circle(int posX, int posY, Color color, int radius, boolean ifFilledIn, boolean ifCovering) {
         super(posX, posY, color, ifFilledIn, ifCovering);
+
         this.radius = radius;
         if (ifFilledIn) this.drawMe = new FillCircle(this.posX, this.posY, this.radius, this);
         else this.drawMe = new DrawCircle(this.posX, this.posY, this.radius, this);
-
     }
-
-
 }
