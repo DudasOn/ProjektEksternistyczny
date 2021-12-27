@@ -9,6 +9,7 @@ public class DrawSquare extends PaintAll {
         super(x, y, sideLength, color);
     }
 
+    @Override
     public void drawMe(Graphics g) {
         Graphics2D g2d = super.setGraphicsProperties(g);
 

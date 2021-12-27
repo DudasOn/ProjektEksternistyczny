@@ -30,6 +30,7 @@ public class ToolShapeChoice extends ChoiceFrame {
 
     public ToolShapeChoice() {
         super();
+
         this.setTitle("Choose a tool");
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         chooseToolAtributeInfo = new JLabel("This value alters the size of drawn object");

@@ -12,12 +12,14 @@ public abstract class Shape extends Drawable {
 
     public Shape() {
         super();
+
         this.posX = 100;
         this.posY = 100;
     }
 
     public Shape(int posX, int posY, Color color, boolean ifFilledIn, boolean ifCovering) {
         super(color, ifCovering);
+
         this.ifFilledIn = ifFilledIn;
         this.posX = posX;
         this.posY = posY;

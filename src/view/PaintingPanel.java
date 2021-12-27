@@ -1,6 +1,6 @@
 package view;
 
-import model.DrawablesManipulator;
+import model.DrawablesCreator;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
 import view.choiceAssistant.ColorChoiceFrame;
@@ -24,7 +24,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     private boolean ifCovering;
     private boolean ifFilledIn;
     private ArrayList<Drawable> drawables = new ArrayList<>();
-    private DrawablesManipulator drawablesManipulator;
+    private DrawablesCreator drawablesCreator;
 
     public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolShapeChoice toolShapeChooser) {
         this.setPreferredSize(new Dimension(width, height));
@@ -51,15 +51,15 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     public void changeTool() {
 
-        this.sizeOfChosenTool = toolShapeChooser.getTool()[0];
-        this.typeOfChosenTool = toolShapeChooser.getTool()[1];
+        this.sizeOfChosenTool = toolShapeChooser.getTool()[0]; //tool size
+        this.typeOfChosenTool = toolShapeChooser.getTool()[1]; //tool type (shape)
         this.ifFilledIn = toolShapeChooser.getIfFilledIn();
 
         for (int i = 0; i < toolShapeChooser.getTool().length; i++)
             System.out.println(toolShapeChooser.getTool()[i]);
     }
 
-    public void dissallowCovering() {
+    public void disallowCovering() {
         ifCovering = true;
     }
 
@@ -82,8 +82,11 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     }
 
     public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
-        this.drawables = drawables;
+        if(drawables!=null) this.drawables = drawables;
         this.repaint();
+    }
+    public void setDrawablesManipulator(DrawablesCreator drawablesCreator) {
+        this.drawablesCreator = drawablesCreator;
     }
 
     @Override
@@ -99,12 +102,10 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
         System.out.println("X:" + dataAboutCurrentObject[0] + "\tY:" + dataAboutCurrentObject[1] + "\tColor:" + dataAboutCurrentObject[2] +
                 "\tAttribute:" + dataAboutCurrentObject[3] + "\tType:" + dataAboutCurrentObject[4] + "\tifFilledIn:" + dataAboutCurrentObject[5] + "\tifCovering:" + dataAboutCurrentObject[6]);
 
-        drawablesManipulator.createShape(dataAboutCurrentObject);
+        drawablesCreator.createShape(dataAboutCurrentObject);
     }
 
-    public void setDrawablesManipulator(DrawablesManipulator drawablesManipulator) {
-        this.drawablesManipulator = drawablesManipulator;
-    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -125,7 +126,7 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
 
     @Override
     public void update() {
-        this.drawables.add(drawablesManipulator.getDrawn());
+        this.drawables.add(drawablesCreator.getDrawn());
         this.repaint();
     }
 
@@ -133,13 +134,15 @@ public class PaintingPanel extends JPanel implements MouseListener, Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (int i = 0; i < drawables.size(); i++) {
-            //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
-            if(drawables.get(i).getIfCovering()) {
-                //drawables.get(i).setColor(this.getBackground());
-                drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing allows us to expand our program (by for example adding "Uncover all" option)
+        if(drawables!= null) {
+            for (int i = 0; i < drawables.size(); i++) {
+                //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
+                if (drawables.get(i).getIfCovering()) {
+                    //drawables.get(i).setColor(this.getBackground());
+                    drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing allows us to expand our program (by for example adding "Uncover all" option)
+                }
+                drawables.get(i).getDrawMe().drawMe(g);
             }
-            drawables.get(i).getDrawMe().drawMe(g);
         }
     }
 }

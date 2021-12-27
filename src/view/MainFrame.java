@@ -1,10 +1,13 @@
 package view;
 
+import model.Serializer;
 import view.choiceAssistant.ColorChoiceFrameHEX;
 import view.choiceAssistant.ColorChoiceFrameRGB;
 import view.choiceAssistant.ToolShapeChoice;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class MainFrame {
@@ -19,8 +22,9 @@ public class MainFrame {
     private final JMenuItem changeToolType;
     private final JMenuItem changeToolColor;
     private final JMenuItem changeBackgroundColor;
-    private final JMenuItem serialize;
-    private final JMenuItem deserialize;
+    private final JMenuItem serializeTo;
+    private final JMenuItem deserializeFrom;
+    private final JMenuItem deserializeStationary;
     private final JMenuItem draw;
     private final JMenuItem cover;
     private final JMenuItem deleteAll;
@@ -42,7 +46,14 @@ public class MainFrame {
         toolChooser.registerToolGatherer(paintingPanel);
         mainFrame = new JFrame("Painter");
         mainFrame.setSize(new Dimension(WIDTH, HEIGHT));
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                saveAndClose();
+            }
+        });
 
 
         //tworzenie paska menu i glownych kategorii
@@ -60,19 +71,24 @@ public class MainFrame {
         changeBackgroundColor = new JMenuItem("Change background color");
         changeBackgroundColor.addActionListener(e -> backgroundColor.setVisibility());
 
-        serialize = new JMenuItem("Serialize");
-        serialize.addActionListener(e -> FileOperations.saveFile(paintingPanel.getArrayOfDrawables()));
+        serializeTo = new JMenuItem("Save drawn shapes");
+        serializeTo.addActionListener(e -> FileOperations.saveFile(paintingPanel.getArrayOfDrawables()));
 
-        deserialize = new JMenuItem("Deserialize");
-        deserialize.addActionListener(e -> paintingPanel.setArrayOfDrawables(FileOperations.chooseFile()));
+        deserializeFrom = new JMenuItem("Load drawn shapes");
+        deserializeFrom.addActionListener(e -> paintingPanel.setArrayOfDrawables(FileOperations.chooseFile()));
+
+        deserializeStationary = new JMenuItem("Get previously drawn shapes");
+        deserializeStationary.addActionListener(e-> paintingPanel.setArrayOfDrawables(Serializer.deserialize()));
 
         draw = new JMenuItem("Draw");
         draw.addActionListener(e->paintingPanel.allowCovering());
+
         cover = new JMenuItem("Cover");
-        cover.addActionListener(e->paintingPanel.dissallowCovering());
+        cover.addActionListener(e->paintingPanel.disallowCovering());
 
         deleteLast = new JMenuItem("Delete last drawn shape");
         deleteLast.addActionListener(e -> paintingPanel.deleteLast());
+
         deleteAll = new JMenuItem("Delete all drawn shapes");
         deleteAll.addActionListener(e -> paintingPanel.deleteAll());
 
@@ -81,8 +97,11 @@ public class MainFrame {
         mainFrame.setResizable(true);
         mainFrame.setJMenuBar(mainMenu);
         mainFrame.add(BorderLayout.CENTER, paintingPanel);
-        fileOperation.add(serialize);
-        fileOperation.add(deserialize);
+
+        fileOperation.add(serializeTo);
+        fileOperation.add(deserializeFrom);
+        fileOperation.add(deserializeStationary);
+
         changeTool.add(draw);
         changeTool.add(cover);
         changeTool.add(deleteLast);
@@ -90,12 +109,19 @@ public class MainFrame {
         changeTool.add(changeToolType);
         changeTool.add(changeToolColor);
         changeTool.add(changeBackgroundColor);
+
         mainMenu.add(changeTool);
         mainMenu.add(fileOperation);
+
         mainFrame.setVisible(true);
     }
 
     public PaintingPanel getPaintingPanel() {
         return paintingPanel;
+    }
+
+    public void saveAndClose(){
+        Serializer.serialize(paintingPanel.getArrayOfDrawables());
+        System.exit(0);
     }
 }
