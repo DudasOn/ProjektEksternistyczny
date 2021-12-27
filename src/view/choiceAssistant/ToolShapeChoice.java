@@ -19,9 +19,9 @@ public class ToolShapeChoice extends ChoiceFrame {
     private final JPanel middlePanel;
     private final JPanel bottomPanel;
 
-    private final String CIRCLE = "circle.png";
-    private final String SQUARE = "square.png";
-    private final String TRIANGLE = "triangle.png";
+    private final String CIRCLE = "./iconImages/circle.png";
+    private final String SQUARE = "./iconImages/square.png";
+    private final String TRIANGLE = "./iconImages/triangle.png";
     private final int BUTTONSIDE = 75;
 
     private int chosenTool = 1;

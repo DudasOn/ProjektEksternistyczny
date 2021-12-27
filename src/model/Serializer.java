@@ -1,6 +1,10 @@
 package model;
 
 import model.drawableShapes.Drawable;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -42,5 +46,20 @@ public abstract class Serializer {
             System.out.println("Couldn't deserialize drawables!");
             return null;
         }
+    }
+
+    public static void saveJPEG(File file, JPanel panel){
+
+        BufferedImage image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+        panel.printAll(image.getGraphics());
+
+        try {
+            ImageIO.write(image, "jpg", file);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Generating an image wasn't successful");
+        }
+
     }
 }
