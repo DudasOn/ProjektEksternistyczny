@@ -94,7 +94,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     private void reactToMouse(MouseEvent e){
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
-        dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering: redundant) allows for easier expansion of the program
+        dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering" redundant) allows for easier expansion of the program
         dataAboutCurrentObject[3] = sizeOfChosenTool; //tool attribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
         dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
