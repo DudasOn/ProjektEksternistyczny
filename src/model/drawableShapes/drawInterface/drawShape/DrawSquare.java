@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class DrawSquare extends PaintAll {
 
+    private static final long serialVersionUID = 3758627117775789534L;
+
     public DrawSquare(int x, int y, int sideLength, Color color) {
         super(x, y, sideLength, color);
     }

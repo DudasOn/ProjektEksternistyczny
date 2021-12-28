@@ -5,6 +5,9 @@ import java.awt.*;
 import java.io.Serializable;
 
 public abstract class Drawable implements Serializable {
+
+    private static final long serialVersionUID = 152179614998769691L;
+
     protected Color color;
     protected PaintInteface drawMe;
     protected int posX;
@@ -12,32 +15,32 @@ public abstract class Drawable implements Serializable {
     protected boolean ifCovering;
 
     public Drawable() {
-        color = new Color(0,0,0);
+        color = new Color(0, 0, 0);
         this.ifCovering = false;
         this.posX = 100;
         this.posY = 100;
     }
 
-    public Drawable(int posX, int posY,Color color, boolean ifCovering) {
+    public Drawable(int posX, int posY, Color color, boolean ifCovering) {
         this.color = color;
         this.ifCovering = ifCovering;
         this.posX = posX;
         this.posY = posY;
     }
 
-    public PaintInteface getDrawMe(){
+    public PaintInteface getDrawMe() {
         return this.drawMe;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return this.color;
     }
 
-    public boolean getIfCovering(){
+    public boolean getIfCovering() {
         return this.ifCovering;
     }
 
-    public void setColor(Color color){
-        this.color=color;
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

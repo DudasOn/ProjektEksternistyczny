@@ -7,6 +7,7 @@ import java.awt.*;
 public class Triangle extends Shape {
 
     private static final long serialVersionUID = -2476412665637375549L;
+    
     private int sideLength;
 
     public Triangle() {

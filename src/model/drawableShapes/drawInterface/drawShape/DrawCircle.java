@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class DrawCircle extends PaintAll {
 
+    private static final long serialVersionUID = 3257391477273444991L;
+
     public DrawCircle(int x, int y, int radius, Color color) {
         super(x, y, radius, color);
     }

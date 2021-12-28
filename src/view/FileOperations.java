@@ -2,7 +2,6 @@ package view;
 
 import model.Serializer;
 import model.drawableShapes.Drawable;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 public abstract class FileOperations {
 
-    private static final FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JAVA Serlialization files", "ser");
+    private static final FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JAVA Serlialization files (*.ser)", "ser");
 
     public static ArrayList<Drawable> readSerFile() {
 

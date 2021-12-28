@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class DrawTriangle extends PaintAll {
 
+    private static final long serialVersionUID = -3850272933883999053L;
+
     public DrawTriangle(int x, int y, int sideLength, Color color) {
         super(x, y, sideLength, color);
     }

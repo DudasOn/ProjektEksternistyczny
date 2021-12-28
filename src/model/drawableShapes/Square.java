@@ -7,6 +7,7 @@ import java.awt.*;
 public class Square extends Shape {
 
     private static final long serialVersionUID = -6548560327968536545L;
+
     private int sideLength;
 
     public Square() {

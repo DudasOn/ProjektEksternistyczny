@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class FillTriangle extends PaintAll {
 
+    private static final long serialVersionUID = -3888825530075278707L;
+
     public FillTriangle(int x, int y, int sideLength, Color color) {
         super(x, y, sideLength, color);
     }
