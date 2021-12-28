@@ -1,5 +1,7 @@
 package observerInterface;
 
+import model.drawableShapes.Drawable;
+
 public interface Observer {
-    void update();
+    void update(Drawable drawable);
 }

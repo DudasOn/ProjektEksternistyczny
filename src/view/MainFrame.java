@@ -3,7 +3,7 @@ package view;
 import model.Serializer;
 import view.choiceAssistant.ColorChoiceFrameHEX;
 import view.choiceAssistant.ColorChoiceFrameRGB;
-import view.choiceAssistant.ToolShapeChoice;
+import view.choiceAssistant.ToolPropertiesChoice;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -32,14 +32,14 @@ public class MainFrame extends JFrame{
     private final PaintingPanel paintingPanel;
     private final ColorChoiceFrameRGB toolColor;
     private final ColorChoiceFrameHEX backgroundColor;
-    private final ToolShapeChoice toolChooser;
+    private final ToolPropertiesChoice toolChooser;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
         toolColor = new ColorChoiceFrameRGB();
         backgroundColor = new ColorChoiceFrameHEX();
-        toolChooser = new ToolShapeChoice();
+        toolChooser = new ToolPropertiesChoice();
         paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColor, toolColor, toolChooser);
         backgroundColor.registerColorGatherer(paintingPanel);
         toolColor.registerColorGatherer(paintingPanel);

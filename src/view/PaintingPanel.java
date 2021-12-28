@@ -4,7 +4,7 @@ import model.DrawablesCreator;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
 import view.choiceAssistant.ColorChoiceFrame;
-import view.choiceAssistant.ToolShapeChoice;
+import view.choiceAssistant.ToolPropertiesChoice;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -17,7 +17,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
 
     private final ColorChoiceFrame backgroundColorChanger;
     private final ColorChoiceFrame toolsColorChanger;
-    private final ToolShapeChoice toolShapeChooser;
+    private final ToolPropertiesChoice toolShapeChooser;
     private static Object[] dataAboutCurrentObject;
     private Color toolColor;
     private int sizeOfChosenTool;
@@ -27,7 +27,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     private ArrayList<Drawable> drawables = new ArrayList<>();
     private DrawablesCreator drawablesCreator;
 
-    public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolShapeChoice toolShapeChooser) {
+    public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolPropertiesChoice toolShapeChooser) {
         this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
         this.addMouseListener(this);
@@ -132,8 +132,8 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     public void mouseMoved(MouseEvent e) {}
 
     @Override
-    public void update() {
-        this.drawables.add(drawablesCreator.getDrawn());
+    public void update(Drawable drawable) {
+        this.drawables.add(drawable);
         this.repaint();
     }
 

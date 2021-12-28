@@ -33,9 +33,6 @@ public class DrawablesCreator implements Subject {
         notifyObservers();
     }
 
-    public Drawable getDrawn() {
-        return drawn;
-    }
 
     @Override
     public void registerObserver(Observer o) {
@@ -54,7 +51,7 @@ public class DrawablesCreator implements Subject {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update();
+            observers.get(i).update(drawn);
         }
     }
 }

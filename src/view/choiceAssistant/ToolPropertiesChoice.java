@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class ToolShapeChoice extends ChoiceFrame {
+public class ToolPropertiesChoice extends ChoiceFrame {
 
     private PaintingPanel toolGatherer;
     private final JSlider toolAtriuteSlider;
@@ -28,7 +28,7 @@ public class ToolShapeChoice extends ChoiceFrame {
     private boolean ifFilledIn = true;
 
 
-    public ToolShapeChoice() {
+    public ToolPropertiesChoice() {
         super();
 
         this.setTitle("Choose a tool");
@@ -39,7 +39,6 @@ public class ToolShapeChoice extends ChoiceFrame {
         toolAtriuteSlider.setMinorTickSpacing(10);
         toolAtriuteSlider.setPaintTicks(true);
         toolAtriuteSlider.setPaintLabels(true);
-
 
         topPanel = new JPanel();
         middlePanel = new JPanel();
@@ -89,7 +88,6 @@ public class ToolShapeChoice extends ChoiceFrame {
             triangle.setText("");
         }
 
-
         okButton.addActionListener(e -> {
             setVisibility();
             informOfToolChange();
@@ -97,12 +95,15 @@ public class ToolShapeChoice extends ChoiceFrame {
 
         topPanel.add(chooseToolAtributeInfo);
         topPanel.add(toolAtriuteSlider);
+
         middlePanel.add(filledIn);
         middlePanel.add(notFilledIn);
         middlePanel.add(circle);
         middlePanel.add(square);
         middlePanel.add(triangle);
+
         bottomPanel.add(okButton);
+
         this.add(topPanel);
         this.add(middlePanel);
         this.add(bottomPanel);
