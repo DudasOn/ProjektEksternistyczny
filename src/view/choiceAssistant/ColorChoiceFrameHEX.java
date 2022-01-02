@@ -83,5 +83,6 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
     @Override
     protected void changeColorOfPreviewLabel(){
         colorPreviewLabel.setBackground(Color.decode("#"+ colorValueInput.getText().toUpperCase()));
+        super.changeColorOfPreviewLabel();
     }
 }

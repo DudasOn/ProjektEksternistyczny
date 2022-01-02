@@ -20,7 +20,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
         this.setTitle("Choose a color");
         chooseColorPanel = new JPanel();
-        colorPreviewLabel = new JLabel();
+        colorPreviewLabel = new JLabel("   Color");
         colorPreviewLabel.setPreferredSize(new Dimension(COLORPREVIEWLABELWIDTH, COLORPREVIEWLABELHEIGHT));
         colorPreviewLabel.setBackground(Color.WHITE);
         colorPreviewLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -40,5 +40,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     public abstract Color getColor();
 
-    protected abstract void changeColorOfPreviewLabel();
+    protected void changeColorOfPreviewLabel() {
+        colorPreviewLabel.setForeground(new Color(255 - colorPreviewLabel.getBackground().getRed(), 255 - colorPreviewLabel.getBackground().getGreen(), 255 - colorPreviewLabel.getBackground().getBlue()));
+    }
 }

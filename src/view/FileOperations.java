@@ -20,7 +20,7 @@ public abstract class FileOperations {
         int response = reader.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
 
-            if ((reader.getSelectedFile().getAbsolutePath().substring(reader.getSelectedFile().getAbsolutePath().length() - 4)).equals(".ser")) {
+            if (reader.getSelectedFile().getAbsolutePath().endsWith(".ser")) {
                 File file = new File(reader.getSelectedFile().getAbsolutePath());
                 System.out.println(reader.getSelectedFile().getAbsolutePath());
 

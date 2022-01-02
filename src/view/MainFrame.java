@@ -80,7 +80,7 @@ public class MainFrame extends JFrame{
         deserializeStationary = new JMenuItem("Get previously drawn shapes");
         deserializeStationary.addActionListener(e-> paintingPanel.setArrayOfDrawables(Serializer.deserialize()));
 
-        saveToJPEG = new JMenuItem("Save to JPEG");
+        saveToJPEG = new JMenuItem("Export entire project to JPEG");
         saveToJPEG.addActionListener(e->FileOperations.saveJPEG(paintingPanel));
 
         draw = new JMenuItem("Draw");
