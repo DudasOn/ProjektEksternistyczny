@@ -1,7 +1,6 @@
 package view.choiceAssistant;
 
-import view.PaintingPanel;
-
+import view.MainFrame;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +8,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     protected JPanel chooseColorPanel;
     protected JLabel colorPreviewLabel;
-    protected PaintingPanel colorGatherer;
+    protected MainFrame colorGatherer;
 
     protected final int COLORPREVIEWLABELHEIGHT = 50;
     protected final int COLORPREVIEWLABELWIDTH = 50;
@@ -20,7 +19,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
         this.setTitle("Choose a color");
         chooseColorPanel = new JPanel();
-        colorPreviewLabel = new JLabel("   Color");
+        colorPreviewLabel = new JLabel("Color", SwingConstants.CENTER);
         colorPreviewLabel.setPreferredSize(new Dimension(COLORPREVIEWLABELWIDTH, COLORPREVIEWLABELHEIGHT));
         colorPreviewLabel.setBackground(Color.WHITE);
         colorPreviewLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -32,7 +31,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
         });
     }
 
-    public void registerColorGatherer(PaintingPanel colorGatherer) {
+    public void registerColorGatherer(MainFrame colorGatherer) {
         this.colorGatherer = colorGatherer;
     }
 

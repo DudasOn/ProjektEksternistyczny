@@ -8,7 +8,7 @@ public class Square extends Shape {
 
     private static final long serialVersionUID = -6548560327968536545L;
 
-    private int sideLength;
+    private final int sideLength;
 
     public Square() {
         super();

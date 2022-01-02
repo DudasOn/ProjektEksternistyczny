@@ -8,7 +8,7 @@ public class Circle extends Shape {
 
     private static final long serialVersionUID = -154076889492952007L;
 
-    private int radius;
+    private final int radius;
 
     public Circle() {
         super();

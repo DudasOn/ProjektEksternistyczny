@@ -3,8 +3,6 @@ package view;
 import model.DrawablesCreator;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
-import view.choiceAssistant.ColorChoiceFrame;
-import view.choiceAssistant.ToolPropertiesChoice;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -15,9 +13,6 @@ import java.util.ArrayList;
 
 public class PaintingPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
 
-    private final ColorChoiceFrame backgroundColorChanger;
-    private final ColorChoiceFrame toolsColorChanger;
-    private final ToolPropertiesChoice toolShapeChooser;
     private static Object[] dataAboutCurrentObject;
     private Color toolColor;
     private int sizeOfChosenTool;
@@ -27,38 +22,32 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     private ArrayList<Drawable> drawables = new ArrayList<>();
     private DrawablesCreator drawablesCreator;
 
-    public PaintingPanel(int width, int height, ColorChoiceFrame backgroundColorChanger, ColorChoiceFrame objectsColor, ToolPropertiesChoice toolShapeChooser) {
+    public PaintingPanel(int width, int height, Color backgroundColor, Color foregroundColor, int[] toolProperties, boolean ifFilledIn) {
         this.setPreferredSize(new Dimension(width, height));
         this.setVisible(true);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        this.backgroundColorChanger = backgroundColorChanger;
-        this.toolsColorChanger = objectsColor;
-        this.toolShapeChooser = toolShapeChooser;
-        this.changeColor();
-        this.sizeOfChosenTool = toolShapeChooser.getTool()[0];
-        this.typeOfChosenTool = toolShapeChooser.getTool()[1];
+        this.changeColor(backgroundColor, foregroundColor);
+        this.changeTool(toolProperties, ifFilledIn);
         this.ifCovering = false;
-        this.ifFilledIn = toolShapeChooser.getIfFilledIn();
         dataAboutCurrentObject = new Object[7];
     }
 
 
-    public void changeColor() {
-        this.setBackground(backgroundColorChanger.getColor());
-        this.toolColor = toolsColorChanger.getColor();
+    public void changeColor(Color backgroundColor, Color foregroundColor) {
+        this.setBackground(backgroundColor);
+        this.toolColor = foregroundColor;
         revalidate();
         repaint();
     }
 
-    public void changeTool() {
+    public void changeTool(int[] toolProperties, boolean ifFilledIn) {
 
-        this.sizeOfChosenTool = toolShapeChooser.getTool()[0]; //tool size
-        this.typeOfChosenTool = toolShapeChooser.getTool()[1]; //tool type (shape)
-        this.ifFilledIn = toolShapeChooser.getIfFilledIn();
+        this.sizeOfChosenTool = toolProperties[0]; //tool size
+        this.typeOfChosenTool = toolProperties[1]; //tool type (shape)
+        this.ifFilledIn = ifFilledIn;
 
-        for (int i = 0; i < toolShapeChooser.getTool().length; i++)
-            System.out.println(toolShapeChooser.getTool()[i]);
+        System.out.println("Tool size: " + sizeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
     }
 
     public void disallowCovering() {
@@ -84,14 +73,17 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
-        if(drawables!=null) this.drawables = drawables;
+        if (drawables != null) {
+            if (drawables.size() > 0) this.drawables = drawables;
+        }
         this.repaint();
     }
+
     public void setDrawablesManipulator(DrawablesCreator drawablesCreator) {
         this.drawablesCreator = drawablesCreator;
     }
 
-    private void reactToMouse(MouseEvent e){
+    private void reactToMouse(MouseEvent e) {
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
         dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering" redundant) allows for easier expansion of the program
@@ -117,19 +109,24 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) {
+    }
 
     @Override
     public void update(Drawable drawable) {
@@ -141,7 +138,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(drawables!= null) {
+        if (drawables != null) {
             for (int i = 0; i < drawables.size(); i++) {
                 //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
                 if (drawables.get(i).getIfCovering()) {

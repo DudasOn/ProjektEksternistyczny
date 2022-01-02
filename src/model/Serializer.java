@@ -37,8 +37,7 @@ public abstract class Serializer {
 
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))) {
             Object out = is.readObject();
-            if (out instanceof ArrayList)
-                drawables = (ArrayList<Drawable>) out;
+            if (out instanceof ArrayList) drawables = (ArrayList<Drawable>) out;
             return drawables;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -1,13 +1,13 @@
 package view.choiceAssistant;
 
-import view.PaintingPanel;
+import view.MainFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
 public class ToolPropertiesChoice extends ChoiceFrame {
 
-    private PaintingPanel toolGatherer;
+    private MainFrame toolGatherer;
     private final JSlider toolAtriuteSlider;
     private final JLabel chooseToolAtributeInfo;
     private final JButton circle;
@@ -110,7 +110,7 @@ public class ToolPropertiesChoice extends ChoiceFrame {
         this.pack();
     }
 
-    public void registerToolGatherer(PaintingPanel toolGatherer) {
+    public void registerToolGatherer(MainFrame toolGatherer) {
         this.toolGatherer = toolGatherer;
     }
 
@@ -119,8 +119,7 @@ public class ToolPropertiesChoice extends ChoiceFrame {
     }
 
     public int[] getTool() {
-        int[] choice = {toolAtriuteSlider.getValue(), chosenTool};
-        return choice;
+        return new int[]{toolAtriuteSlider.getValue(), chosenTool};
     }
 
     public boolean getIfFilledIn(){
