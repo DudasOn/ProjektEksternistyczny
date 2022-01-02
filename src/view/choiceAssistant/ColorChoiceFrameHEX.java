@@ -18,16 +18,21 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         bottomPanel = new JPanel();
         middlePanel = new JPanel();
+
         colorValueInput = new JTextField("FFFFFF",6);
-        colorValueInput.setFont(new Font("Arial",1,30));
-        initialInfo = new JLabel("Enter value of desired HEX color");
+        colorValueInput.setFont(new Font("Arial",Font.BOLD,30));
+
+        initialInfo = new JLabel("Enter HEX value of desired color");
         adequateInfo = new JLabel();
-        checkButton = new JButton("Check");
+
         okButton.setVisible(false);
+        checkButton = new JButton("Check");
         checkButton.addActionListener(e->{
 
             if(colorValueInput.getText().length()==6) {
+
                 if(checkIfValueIsCorrect(colorValueInput.getText().toUpperCase())) {
+                    changeColorOfPreviewLabel();
                     okButton.setVisible(true);
                     adequateInfo.setText("<html>Value is correct!<br>Press OK to set the color<html>");
                 }
@@ -36,8 +41,9 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
                 else adequateInfo.setText("<html>Incorrect number of characters!<br>Please try again<html>");
         });
 
-        chooseColorPanel.add(initialInfo);
+        chooseColorPanel.add(initialInfo); //used as top panel
         chooseColorPanel.add(colorValueInput);
+        chooseColorPanel.add(colorPreviewLabel);
         chooseColorPanel.add(checkButton);
         middlePanel.add(adequateInfo);
         bottomPanel.add(okButton);
@@ -62,6 +68,7 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
         else return false;
     }
 
+    @Override
     public void informOfColorChange(){
         okButton.setVisible(false);
         adequateInfo.setText("");
@@ -71,5 +78,10 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
     @Override
     public Color getColor(){
         return Color.decode("#"+ colorValueInput.getText().toUpperCase());
+    }
+
+    @Override
+    protected void changeColorOfPreviewLabel(){
+        colorPreviewLabel.setBackground(Color.decode("#"+ colorValueInput.getText().toUpperCase()));
     }
 }
