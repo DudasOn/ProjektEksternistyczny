@@ -21,9 +21,9 @@ public class ColorChoiceFrameRGB extends ColorChoiceFrame {
         gSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
         bSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, 255);
 
-        rSlider.addChangeListener(e->changeColorOfPreviewLabel());
-        gSlider.addChangeListener(e->changeColorOfPreviewLabel());
-        bSlider.addChangeListener(e->changeColorOfPreviewLabel());
+        rSlider.addChangeListener(e -> changeColorOfPreviewLabel());
+        gSlider.addChangeListener(e -> changeColorOfPreviewLabel());
+        bSlider.addChangeListener(e -> changeColorOfPreviewLabel());
 
         rLabel = new JLabel("Red: ");
         gLabel = new JLabel("Green: ");
@@ -57,18 +57,18 @@ public class ColorChoiceFrameRGB extends ColorChoiceFrame {
     }
 
     @Override
-    public void informOfColorChange(){
+    public void informOfColorChange() {
         colorGatherer.changeColor();
     }
 
     @Override
     public Color getColor() {
-        return new Color(rSlider.getValue(),gSlider.getValue(),bSlider.getValue());
+        return new Color(rSlider.getValue(), gSlider.getValue(), bSlider.getValue());
     }
 
     @Override
-    protected void changeColorOfPreviewLabel(){
-        colorPreviewLabel.setBackground(new Color(rSlider.getValue(),gSlider.getValue(),bSlider.getValue()));
+    protected void changeColorOfPreviewLabel() {
+        colorPreviewLabel.setBackground(new Color(rSlider.getValue(), gSlider.getValue(), bSlider.getValue()));
         super.changeColorOfPreviewLabel();
     }
 

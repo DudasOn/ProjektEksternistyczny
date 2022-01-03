@@ -2,8 +2,10 @@ package view;
 
 import model.Serializer;
 import model.drawableShapes.Drawable;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public abstract class FileOperations {
 
     private static final FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JAVA Serlialization files (*.ser)", "ser");
 
-    public static ArrayList<Drawable> readSerFile() {
+    public static ArrayList<Object> readSerFile() {
 
         JFileChooser reader = new JFileChooser();
         reader.setCurrentDirectory(new File("./savedSerFiles"));
@@ -30,7 +32,7 @@ public abstract class FileOperations {
         return null;
     }
 
-    public static void saveSerFiles(ArrayList<Drawable> drawables) {
+    public static void saveSerFiles(ArrayList<Drawable> drawables, Color color) {
 
         JFileChooser saver = new JFileChooser();
         saver.setCurrentDirectory(new File("./savedSerFiles"));
@@ -39,9 +41,9 @@ public abstract class FileOperations {
         int response = saver.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
 
-                File file = new File(saver.getSelectedFile().getAbsolutePath()+".ser");
-                System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
-                Serializer.serialize(file, drawables);
+            File file = new File(saver.getSelectedFile().getAbsolutePath() + ".ser");
+            System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
+            Serializer.serialize(file, drawables, color);
         }
     }
 
@@ -53,7 +55,7 @@ public abstract class FileOperations {
         int response = saver.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
 
-            File file = new File(saver.getSelectedFile().getAbsolutePath()+".jpeg");
+            File file = new File(saver.getSelectedFile().getAbsolutePath() + ".jpeg");
             System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
             Serializer.saveJPEG(file, panel);
 

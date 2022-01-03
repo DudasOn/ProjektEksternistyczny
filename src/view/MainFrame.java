@@ -4,13 +4,14 @@ import model.Serializer;
 import view.choiceAssistant.ColorChoiceFrameHEX;
 import view.choiceAssistant.ColorChoiceFrameRGB;
 import view.choiceAssistant.ToolPropertiesChoice;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
 
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
@@ -66,28 +67,28 @@ public class MainFrame extends JFrame{
         changeToolColor.addActionListener(e -> toolColorChooser.setVisibility());
 
         changeToolType = new JMenuItem("Change tool properties");
-        changeToolType.addActionListener(e->toolChooser.setVisibility());
+        changeToolType.addActionListener(e -> toolChooser.setVisibility());
 
         changeBackgroundColor = new JMenuItem("Change background color");
         changeBackgroundColor.addActionListener(e -> backgroundColorChooser.setVisibility());
 
-        serializeTo = new JMenuItem("Save drawn shapes");
-        serializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables()));
+        serializeTo = new JMenuItem("Save drawn paining");
+        serializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
 
-        deserializeFrom = new JMenuItem("Load drawn shapes");
-        deserializeFrom.addActionListener(e -> paintingPanel.setArrayOfDrawables(FileOperations.readSerFile()));
+        deserializeFrom = new JMenuItem("Load serialized painting");
+        deserializeFrom.addActionListener(e -> paintingPanel.loadFromFile(FileOperations.readSerFile()));
 
-        deserializeStationary = new JMenuItem("Get previously drawn shapes");
-        deserializeStationary.addActionListener(e-> paintingPanel.setArrayOfDrawables(Serializer.deserialize()));
+        deserializeStationary = new JMenuItem("Get previously drawn painting");
+        deserializeStationary.addActionListener(e -> paintingPanel.loadFromFile(Serializer.deserialize()));
 
         saveToJPEG = new JMenuItem("Export entire project to JPEG");
-        saveToJPEG.addActionListener(e->FileOperations.saveJPEG(paintingPanel));
+        saveToJPEG.addActionListener(e -> FileOperations.saveJPEG(paintingPanel));
 
         draw = new JMenuItem("Draw");
-        draw.addActionListener(e->paintingPanel.allowCovering());
+        draw.addActionListener(e -> paintingPanel.allowCovering());
 
         cover = new JMenuItem("Cover");
-        cover.addActionListener(e->paintingPanel.disallowCovering());
+        cover.addActionListener(e -> paintingPanel.disallowCovering());
 
         deleteLast = new JMenuItem("Delete last drawn shape");
         deleteLast.addActionListener(e -> paintingPanel.deleteLast());
@@ -120,11 +121,11 @@ public class MainFrame extends JFrame{
         this.setVisible(true);
     }
 
-    public void changeTool(){
+    public void changeTool() {
         paintingPanel.changeTool(toolChooser.getTool(), toolChooser.getIfFilledIn());
     }
 
-    public void changeColor(){
+    public void changeColor() {
         paintingPanel.changeColor(backgroundColorChooser.getColor(), toolColorChooser.getColor());
     }
 
@@ -132,8 +133,8 @@ public class MainFrame extends JFrame{
         return paintingPanel;
     }
 
-    public void saveAndClose(){
-        Serializer.serialize(paintingPanel.getArrayOfDrawables());
+    public void saveAndClose() {
+        Serializer.serialize(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground());
         System.exit(0);
     }
 }

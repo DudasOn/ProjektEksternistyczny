@@ -6,7 +6,6 @@ public abstract class Shape extends Drawable {
 
     private static final long serialVersionUID = -205830904934342349L;
 
-
     protected boolean ifFilledIn;
 
     public Shape() {

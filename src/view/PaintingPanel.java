@@ -3,6 +3,7 @@ package view;
 import model.DrawablesCreator;
 import model.drawableShapes.Drawable;
 import observerInterface.Observer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -44,7 +45,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     public void changeTool(int[] toolProperties, boolean ifFilledIn) {
 
         this.sizeOfChosenTool = toolProperties[0]; //tool size
-        this.typeOfChosenTool = toolProperties[1]; //tool type (shape)
+        this.typeOfChosenTool = toolProperties[1]; //tool type
         this.ifFilledIn = ifFilledIn;
 
         System.out.println("Tool size: " + sizeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
@@ -73,8 +74,17 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
-        if (drawables != null) {
-            if (drawables.size() > 0) this.drawables = drawables;
+        this.drawables = drawables;
+    }
+
+    public void loadFromFile(ArrayList<Object> info) {
+        if (info != null) {
+            this.setBackground((Color) info.get(info.size() - 1));
+            info.remove(info.size() - 1);
+            this.drawables.clear();
+            for (int i = 0; i < info.size(); i++) {
+                this.drawables.add((Drawable) info.get(i));
+            }
         }
         this.repaint();
     }

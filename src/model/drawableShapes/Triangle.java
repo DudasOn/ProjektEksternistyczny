@@ -2,12 +2,13 @@ package model.drawableShapes;
 
 import model.drawableShapes.drawInterface.drawShape.DrawTriangle;
 import model.drawableShapes.drawInterface.fillShape.FillTriangle;
+
 import java.awt.*;
 
 public class Triangle extends Shape {
 
     private static final long serialVersionUID = -2476412665637375549L;
-    
+
     private final int sideLength;
 
     public Triangle() {

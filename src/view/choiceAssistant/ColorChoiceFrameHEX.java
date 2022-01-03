@@ -19,26 +19,24 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
         bottomPanel = new JPanel();
         middlePanel = new JPanel();
 
-        colorValueInput = new JTextField("FFFFFF",6);
-        colorValueInput.setFont(new Font("Arial",Font.BOLD,30));
+        colorValueInput = new JTextField("FFFFFF", 6);
+        colorValueInput.setFont(new Font("Arial", Font.BOLD, 30));
 
         initialInfo = new JLabel("Enter HEX value of desired color");
         adequateInfo = new JLabel();
 
         okButton.setVisible(false);
         checkButton = new JButton("Check");
-        checkButton.addActionListener(e->{
+        checkButton.addActionListener(e -> {
 
-            if(colorValueInput.getText().length()==6) {
+            if (colorValueInput.getText().length() == 6) {
 
-                if(checkIfValueIsCorrect(colorValueInput.getText().toUpperCase())) {
+                if (checkIfValueIsCorrect(colorValueInput.getText().toUpperCase())) {
                     changeColorOfPreviewLabel();
                     okButton.setVisible(true);
                     adequateInfo.setText("<html>Value is correct!<br>Press OK to set the color<html>");
-                }
-                else adequateInfo.setText("<html>Incorrect input value!<br>Please try again!<html>");
-            }
-                else adequateInfo.setText("<html>Incorrect number of characters!<br>Please try again<html>");
+                } else adequateInfo.setText("<html>Incorrect input value!<br>Please try again!<html>");
+            } else adequateInfo.setText("<html>Incorrect number of characters!<br>Please try again<html>");
         });
 
         chooseColorPanel.add(initialInfo); //used as top panel
@@ -53,36 +51,36 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
         this.add(bottomPanel);
     }
 
-    public boolean checkIfValueIsCorrect(String string){
-        int checker=0;
+    public boolean checkIfValueIsCorrect(String string) {
+        int checker = 0;
         char[] charOfString = string.toCharArray();
 
-        char[] possibleValues = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-        for(int i=0;i<charOfString.length;i++){
-            for(int j=0;j<possibleValues.length;j++){
-                if(charOfString[i]==possibleValues[j]) checker++;
+        char[] possibleValues = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        for (int i = 0; i < charOfString.length; i++) {
+            for (int j = 0; j < possibleValues.length; j++) {
+                if (charOfString[i] == possibleValues[j]) checker++;
             }
         }
 
-        if(checker==string.length()) return true;
+        if (checker == string.length()) return true;
         else return false;
     }
 
     @Override
-    public void informOfColorChange(){
+    public void informOfColorChange() {
         okButton.setVisible(false);
         adequateInfo.setText("");
         colorGatherer.changeColor();
     }
 
     @Override
-    public Color getColor(){
-        return Color.decode("#"+ colorValueInput.getText().toUpperCase());
+    public Color getColor() {
+        return Color.decode("#" + colorValueInput.getText().toUpperCase());
     }
 
     @Override
-    protected void changeColorOfPreviewLabel(){
-        colorPreviewLabel.setBackground(Color.decode("#"+ colorValueInput.getText().toUpperCase()));
+    protected void changeColorOfPreviewLabel() {
+        colorPreviewLabel.setBackground(Color.decode("#" + colorValueInput.getText().toUpperCase()));
         super.changeColorOfPreviewLabel();
     }
 }

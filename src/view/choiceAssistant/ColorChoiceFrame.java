@@ -1,6 +1,7 @@
 package view.choiceAssistant;
 
 import view.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
 

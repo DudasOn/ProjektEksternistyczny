@@ -1,6 +1,7 @@
 package view.choiceAssistant;
 
 import view.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -122,7 +123,7 @@ public class ToolPropertiesChoice extends ChoiceFrame {
         return new int[]{toolAtriuteSlider.getValue(), chosenTool};
     }
 
-    public boolean getIfFilledIn(){
+    public boolean getIfFilledIn() {
         return ifFilledIn;
     }
 }
