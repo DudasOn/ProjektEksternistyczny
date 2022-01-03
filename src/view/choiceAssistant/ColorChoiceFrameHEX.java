@@ -34,6 +34,7 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
                 if (checkIfValueIsCorrect(colorValueInput.getText().toUpperCase())) {
                     changeColorOfPreviewLabel();
                     okButton.setVisible(true);
+                    chosenColor = Color.decode("#" + colorValueInput.getText().toUpperCase());
                     adequateInfo.setText("<html>Value is correct!<br>Press OK to set the color<html>");
                 } else adequateInfo.setText("<html>Incorrect input value!<br>Please try again!<html>");
             } else adequateInfo.setText("<html>Incorrect number of characters!<br>Please try again<html>");
@@ -71,11 +72,6 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
         okButton.setVisible(false);
         adequateInfo.setText("");
         colorGatherer.changeColor();
-    }
-
-    @Override
-    public Color getColor() {
-        return Color.decode("#" + colorValueInput.getText().toUpperCase());
     }
 
     @Override

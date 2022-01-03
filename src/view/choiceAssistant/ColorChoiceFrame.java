@@ -13,6 +13,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     protected final int COLORPREVIEWLABELHEIGHT = 50;
     protected final int COLORPREVIEWLABELWIDTH = 50;
+    protected Color chosenColor;
 
 
     public ColorChoiceFrame() {
@@ -29,7 +30,10 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
         okButton.addActionListener(e -> {
             setVisibility();
             informOfColorChange();
+
         });
+
+        chosenColor = new Color(255, 255, 255);
     }
 
     public void registerColorGatherer(MainFrame colorGatherer) {
@@ -38,7 +42,9 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     public abstract void informOfColorChange();
 
-    public abstract Color getColor();
+    public Color getChosenColor() {
+        return chosenColor;
+    }
 
     protected void changeColorOfPreviewLabel() {
         colorPreviewLabel.setForeground(new Color(255 - colorPreviewLabel.getBackground().getRed(), 255 - colorPreviewLabel.getBackground().getGreen(), 255 - colorPreviewLabel.getBackground().getBlue()));

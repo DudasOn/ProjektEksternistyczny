@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
         toolColorChooser = new ColorChoiceFrameRGB();
         backgroundColorChooser = new ColorChoiceFrameHEX();
         toolChooser = new ToolPropertiesChoice();
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getColor(), toolColorChooser.getColor(), toolChooser.getTool(), toolChooser.getIfFilledIn());
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor(), toolChooser.getTool(), toolChooser.getIfFilledIn());
         backgroundColorChooser.registerColorGatherer(this);
         toolColorChooser.registerColorGatherer(this);
         toolChooser.registerToolGatherer(this);
@@ -126,7 +126,7 @@ public class MainFrame extends JFrame {
     }
 
     public void changeColor() {
-        paintingPanel.changeColor(backgroundColorChooser.getColor(), toolColorChooser.getColor());
+        paintingPanel.changeColor(backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor());
     }
 
     public PaintingPanel getPaintingPanel() {

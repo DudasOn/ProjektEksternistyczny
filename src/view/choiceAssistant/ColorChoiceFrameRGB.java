@@ -58,12 +58,8 @@ public class ColorChoiceFrameRGB extends ColorChoiceFrame {
 
     @Override
     public void informOfColorChange() {
+        chosenColor = new Color(rSlider.getValue(), gSlider.getValue(), bSlider.getValue());
         colorGatherer.changeColor();
-    }
-
-    @Override
-    public Color getColor() {
-        return new Color(rSlider.getValue(), gSlider.getValue(), bSlider.getValue());
     }
 
     @Override
