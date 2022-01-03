@@ -75,6 +75,13 @@ public class ColorChoiceFrameHEX extends ColorChoiceFrame {
     }
 
     @Override
+    public void setChosenColor(Color chosenColor){
+        super.setChosenColor(chosenColor);
+        colorValueInput.setText(String.format("%02X%02X%02X", chosenColor.getRed(), chosenColor.getGreen(), chosenColor.getBlue()));
+        checkButton.doClick();
+    }
+
+    @Override
     protected void changeColorOfPreviewLabel() {
         colorPreviewLabel.setBackground(Color.decode("#" + colorValueInput.getText().toUpperCase()));
         super.changeColorOfPreviewLabel();

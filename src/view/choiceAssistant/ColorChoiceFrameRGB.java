@@ -63,6 +63,14 @@ public class ColorChoiceFrameRGB extends ColorChoiceFrame {
     }
 
     @Override
+    public void setChosenColor(Color chosenColor){
+        super.setChosenColor(chosenColor);
+        rSlider.setValue(chosenColor.getRed());
+        gSlider.setValue(chosenColor.getGreen());
+        bSlider.setValue(chosenColor.getBlue());
+    }
+
+    @Override
     protected void changeColorOfPreviewLabel() {
         colorPreviewLabel.setBackground(new Color(rSlider.getValue(), gSlider.getValue(), bSlider.getValue()));
         super.changeColorOfPreviewLabel();

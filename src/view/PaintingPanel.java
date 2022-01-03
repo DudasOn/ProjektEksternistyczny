@@ -80,9 +80,8 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     public void loadFromFile(ArrayList<Object> info) {
         if (info != null) {
             this.setBackground((Color) info.get(info.size() - 1));
-            info.remove(info.size() - 1);
             this.drawables.clear();
-            for (int i = 0; i < info.size(); i++) {
+            for (int i = 0; i < info.size()-1; i++) {
                 this.drawables.add((Drawable) info.get(i));
             }
         }

@@ -30,7 +30,6 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
         okButton.addActionListener(e -> {
             setVisibility();
             informOfColorChange();
-
         });
 
         chosenColor = new Color(255, 255, 255);
@@ -44,6 +43,10 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
 
     public Color getChosenColor() {
         return chosenColor;
+    }
+
+    public void setChosenColor(Color chosenColor){
+        this.chosenColor = chosenColor;
     }
 
     protected void changeColorOfPreviewLabel() {

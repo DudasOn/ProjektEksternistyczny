@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 
 public class MainFrame extends JFrame {
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame {
     private final ColorChoiceFrameRGB toolColorChooser;
     private final ColorChoiceFrameHEX backgroundColorChooser;
     private final ToolPropertiesChoice toolChooser;
+    private ArrayList<Object> backgroundColorHelper;
 
 
     public MainFrame() {
@@ -76,10 +78,16 @@ public class MainFrame extends JFrame {
         serializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
 
         deserializeFrom = new JMenuItem("Load serialized painting");
-        deserializeFrom.addActionListener(e -> paintingPanel.loadFromFile(FileOperations.readSerFile()));
+        deserializeFrom.addActionListener(e -> {
+            backgroundColorHelper = FileOperations.readSerFile();
+            this.setBackgroundValueWhileLoading();
+        });
 
         deserializeStationary = new JMenuItem("Get previously drawn painting");
-        deserializeStationary.addActionListener(e -> paintingPanel.loadFromFile(Serializer.deserialize()));
+        deserializeStationary.addActionListener(e -> {
+            backgroundColorHelper = Serializer.deserialize();
+            this.setBackgroundValueWhileLoading();
+        });
 
         saveToJPEG = new JMenuItem("Export entire project to JPEG");
         saveToJPEG.addActionListener(e -> FileOperations.saveJPEG(paintingPanel));
@@ -119,6 +127,11 @@ public class MainFrame extends JFrame {
         mainMenu.add(fileOperation);
 
         this.setVisible(true);
+    }
+
+    private void setBackgroundValueWhileLoading(){
+        paintingPanel.loadFromFile(backgroundColorHelper);
+        if (backgroundColorHelper != null) backgroundColorChooser.setChosenColor((Color) backgroundColorHelper.get(backgroundColorHelper.size() - 1));
     }
 
     public void changeTool() {
