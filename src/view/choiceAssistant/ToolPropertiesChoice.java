@@ -11,9 +11,9 @@ public class ToolPropertiesChoice extends ChoiceFrame {
     private MainFrame toolGatherer;
     private final JSlider toolAtriuteSlider;
     private final JLabel chooseToolAtributeInfo;
-    private final JButton circle;
-    private final JButton triangle;
-    private final JButton square;
+    private final JButton circleChoiceButton;
+    private final JButton triangleChoiceButton;
+    private final JButton squareChoiceButton;
     private final JRadioButton filledIn;
     private final JRadioButton notFilledIn;
     private final JPanel topPanel;
@@ -45,19 +45,19 @@ public class ToolPropertiesChoice extends ChoiceFrame {
         middlePanel = new JPanel();
         bottomPanel = new JPanel();
 
-        circle = new JButton(CIRCLE);
-        square = new JButton(SQUARE);
-        triangle = new JButton(TRIANGLE);
+        circleChoiceButton = new JButton(CIRCLE);
+        squareChoiceButton = new JButton(SQUARE);
+        triangleChoiceButton = new JButton(TRIANGLE);
         filledIn = new JRadioButton("Filled in", true);
         notFilledIn = new JRadioButton("Only outline", false);
 
-        circle.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
-        square.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
-        triangle.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
+        circleChoiceButton.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
+        squareChoiceButton.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
+        triangleChoiceButton.setPreferredSize(new Dimension(BUTTONSIDE, BUTTONSIDE));
 
-        circle.addActionListener(e -> chosenTool = 1);
-        square.addActionListener(e -> chosenTool = 2);
-        triangle.addActionListener(e -> chosenTool = 3);
+        circleChoiceButton.addActionListener(e -> chosenTool = 1);
+        squareChoiceButton.addActionListener(e -> chosenTool = 2);
+        triangleChoiceButton.addActionListener(e -> chosenTool = 3);
 
         filledIn.addActionListener(e -> {
             ifFilledIn = true;
@@ -73,20 +73,20 @@ public class ToolPropertiesChoice extends ChoiceFrame {
 
         File file = new File(CIRCLE);
         if (file.canRead()) {
-            circle.setIcon(new ImageIcon(CIRCLE));
-            circle.setText("");
+            circleChoiceButton.setIcon(new ImageIcon(CIRCLE));
+            circleChoiceButton.setText("");
         }
 
         file = new File(SQUARE);
         if (file.canRead()) {
-            square.setIcon(new ImageIcon(SQUARE));
-            square.setText("");
+            squareChoiceButton.setIcon(new ImageIcon(SQUARE));
+            squareChoiceButton.setText("");
         }
 
         file = new File(TRIANGLE);
         if (file.canRead()) {
-            triangle.setIcon(new ImageIcon(TRIANGLE));
-            triangle.setText("");
+            triangleChoiceButton.setIcon(new ImageIcon(TRIANGLE));
+            triangleChoiceButton.setText("");
         }
 
         okButton.addActionListener(e -> {
@@ -99,9 +99,9 @@ public class ToolPropertiesChoice extends ChoiceFrame {
 
         middlePanel.add(filledIn);
         middlePanel.add(notFilledIn);
-        middlePanel.add(circle);
-        middlePanel.add(square);
-        middlePanel.add(triangle);
+        middlePanel.add(circleChoiceButton);
+        middlePanel.add(squareChoiceButton);
+        middlePanel.add(triangleChoiceButton);
 
         bottomPanel.add(okButton);
 

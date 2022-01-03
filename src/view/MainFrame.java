@@ -18,8 +18,8 @@ public class MainFrame extends JFrame {
     private final int HEIGHT = 600;
 
     private final JMenuBar mainMenu;
-    private final JMenu changeTool;
-    private final JMenu fileOperation;
+    private final JMenu toolOptionsMenu;
+    private final JMenu fileOperationsMenu;
     private final JMenuItem changeToolType;
     private final JMenuItem changeToolColor;
     private final JMenuItem changeBackgroundColor;
@@ -34,19 +34,19 @@ public class MainFrame extends JFrame {
     private final PaintingPanel paintingPanel;
     private final ColorChoiceFrameRGB toolColorChooser;
     private final ColorChoiceFrameHEX backgroundColorChooser;
-    private final ToolPropertiesChoice toolChooser;
-    private ArrayList<Object> backgroundColorHelper;
+    private final ToolPropertiesChoice toolPropertiesChooser;
+    private ArrayList<Object> temporaryHelpfulArray;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
         toolColorChooser = new ColorChoiceFrameRGB();
         backgroundColorChooser = new ColorChoiceFrameHEX();
-        toolChooser = new ToolPropertiesChoice();
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor(), toolChooser.getTool(), toolChooser.getIfFilledIn());
+        toolPropertiesChooser = new ToolPropertiesChoice();
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor(), toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
         backgroundColorChooser.registerColorGatherer(this);
         toolColorChooser.registerColorGatherer(this);
-        toolChooser.registerToolGatherer(this);
+        toolPropertiesChooser.registerToolGatherer(this);
         this.setTitle("Painter");
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -54,22 +54,23 @@ public class MainFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                saveAndClose();
+                Serializer.serialize(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground());
+                System.exit(0);
             }
         });
 
 
         //tworzenie paska menu i glownych kategorii
         mainMenu = new JMenuBar();
-        changeTool = new JMenu("Painting options");
-        fileOperation = new JMenu("File");
+        toolOptionsMenu = new JMenu("Painting options");
+        fileOperationsMenu = new JMenu("File");
 
         //tworzenie odpowiednich elementow do menu
         changeToolColor = new JMenuItem("Change tool color");
         changeToolColor.addActionListener(e -> toolColorChooser.setVisibility());
 
         changeToolType = new JMenuItem("Change tool properties");
-        changeToolType.addActionListener(e -> toolChooser.setVisibility());
+        changeToolType.addActionListener(e -> toolPropertiesChooser.setVisibility());
 
         changeBackgroundColor = new JMenuItem("Change background color");
         changeBackgroundColor.addActionListener(e -> backgroundColorChooser.setVisibility());
@@ -79,13 +80,13 @@ public class MainFrame extends JFrame {
 
         deserializeFrom = new JMenuItem("Load serialized painting");
         deserializeFrom.addActionListener(e -> {
-            backgroundColorHelper = FileOperations.readSerFile();
+            temporaryHelpfulArray = FileOperations.readSerFile();
             this.setBackgroundValueWhileLoading();
         });
 
         deserializeStationary = new JMenuItem("Get previously drawn painting");
         deserializeStationary.addActionListener(e -> {
-            backgroundColorHelper = Serializer.deserialize();
+            temporaryHelpfulArray = Serializer.deserialize();
             this.setBackgroundValueWhileLoading();
         });
 
@@ -110,32 +111,32 @@ public class MainFrame extends JFrame {
         this.setJMenuBar(mainMenu);
         this.add(BorderLayout.CENTER, paintingPanel);
 
-        fileOperation.add(serializeTo);
-        fileOperation.add(deserializeFrom);
-        fileOperation.add(deserializeStationary);
-        fileOperation.add(saveToJPEG);
+        fileOperationsMenu.add(serializeTo);
+        fileOperationsMenu.add(deserializeFrom);
+        fileOperationsMenu.add(deserializeStationary);
+        fileOperationsMenu.add(saveToJPEG);
 
-        changeTool.add(draw);
-        changeTool.add(cover);
-        changeTool.add(deleteLast);
-        changeTool.add(deleteAll);
-        changeTool.add(changeToolType);
-        changeTool.add(changeToolColor);
-        changeTool.add(changeBackgroundColor);
+        toolOptionsMenu.add(draw);
+        toolOptionsMenu.add(cover);
+        toolOptionsMenu.add(deleteLast);
+        toolOptionsMenu.add(deleteAll);
+        toolOptionsMenu.add(changeToolType);
+        toolOptionsMenu.add(changeToolColor);
+        toolOptionsMenu.add(changeBackgroundColor);
 
-        mainMenu.add(changeTool);
-        mainMenu.add(fileOperation);
+        mainMenu.add(toolOptionsMenu);
+        mainMenu.add(fileOperationsMenu);
 
         this.setVisible(true);
     }
 
     private void setBackgroundValueWhileLoading(){
-        paintingPanel.loadFromFile(backgroundColorHelper);
-        if (backgroundColorHelper != null) backgroundColorChooser.setChosenColor((Color) backgroundColorHelper.get(backgroundColorHelper.size() - 1));
+        paintingPanel.loadFromFile(temporaryHelpfulArray);
+        if (temporaryHelpfulArray != null) backgroundColorChooser.setChosenColor((Color) temporaryHelpfulArray.get(temporaryHelpfulArray.size() - 1));
     }
 
     public void changeTool() {
-        paintingPanel.changeTool(toolChooser.getTool(), toolChooser.getIfFilledIn());
+        paintingPanel.changeTool(toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
     }
 
     public void changeColor() {
@@ -144,10 +145,5 @@ public class MainFrame extends JFrame {
 
     public PaintingPanel getPaintingPanel() {
         return paintingPanel;
-    }
-
-    public void saveAndClose() {
-        Serializer.serialize(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground());
-        System.exit(0);
     }
 }

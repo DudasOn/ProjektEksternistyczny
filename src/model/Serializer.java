@@ -54,7 +54,7 @@ public abstract class Serializer {
         panel.printAll(image.getGraphics());
 
         try {
-            ImageIO.write(image, "jpg", file);
+            ImageIO.write(image, "jpeg", file);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Generating an image wasn't successful");

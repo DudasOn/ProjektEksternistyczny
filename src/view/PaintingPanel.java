@@ -16,7 +16,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
 
     private static Object[] dataAboutCurrentObject;
     private Color toolColor;
-    private int sizeOfChosenTool;
+    private int attributeOfChosenTool;
     private int typeOfChosenTool;
     private boolean ifCovering;
     private boolean ifFilledIn;
@@ -44,11 +44,11 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
 
     public void changeTool(int[] toolProperties, boolean ifFilledIn) {
 
-        this.sizeOfChosenTool = toolProperties[0]; //tool size
+        this.attributeOfChosenTool = toolProperties[0]; //tool size
         this.typeOfChosenTool = toolProperties[1]; //tool type
         this.ifFilledIn = ifFilledIn;
 
-        System.out.println("Tool size: " + sizeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
+        System.out.println("Tool size: " + attributeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
     }
 
     public void disallowCovering() {
@@ -96,7 +96,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         dataAboutCurrentObject[0] = e.getX(); //x location
         dataAboutCurrentObject[1] = e.getY(); //y location
         dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering" redundant) allows for easier expansion of the program
-        dataAboutCurrentObject[3] = sizeOfChosenTool; //tool attribute
+        dataAboutCurrentObject[3] = attributeOfChosenTool; //tool attribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
         dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
         dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
@@ -152,7 +152,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
                 //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
                 if (drawables.get(i).getIfCovering()) {
                     //drawables.get(i).setColor(this.getBackground());
-                    drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing allows us to expand our program (by for example adding "Uncover all" option)
+                    drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing keeps the chosen tool color in the drawable object
                 }
                 drawables.get(i).getDrawMe().drawMe(g);
             }
