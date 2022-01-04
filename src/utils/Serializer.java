@@ -33,13 +33,15 @@ public abstract class Serializer {
     }
 
     public static ArrayList<Object> deserialize(File f) {
-        ArrayList<Object> info = new ArrayList<>();
+        ArrayList<Object> info;
 
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))) {
             Object out = is.readObject();
             if (out instanceof ArrayList) info = (ArrayList<Object>) out;
+            else return null;
             out = is.readObject();
             if (out instanceof Color) info.add(out);
+            else return null;
             return info;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
