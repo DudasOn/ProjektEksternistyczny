@@ -1,6 +1,5 @@
-package view;
+package utils;
 
-import model.Serializer;
 import model.drawableShapes.Drawable;
 
 import javax.swing.*;

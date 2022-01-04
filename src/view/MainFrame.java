@@ -1,6 +1,7 @@
 package view;
 
-import model.Serializer;
+import utils.FileOperations;
+import utils.Serializer;
 import view.choiceAssistant.ColorChoiceFrameHEX;
 import view.choiceAssistant.ColorChoiceFrameRGB;
 import view.choiceAssistant.ToolPropertiesChoice;
