@@ -43,5 +43,6 @@ public abstract class Drawable implements Serializable {
 
     public void setColor(Color color) {
         this.color = color;
+        drawMe.setColor(color);
     }
 }

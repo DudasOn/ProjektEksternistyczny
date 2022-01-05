@@ -6,40 +6,44 @@ import observerInterface.Observer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 
-public class PaintingPanel extends JPanel implements MouseListener, MouseMotionListener, Observer {
+public class PaintingPanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener, Observer {
 
-    private static Object[] dataAboutCurrentObject;
-    private Color toolColor;
     private int attributeOfChosenTool;
     private int typeOfChosenTool;
     private boolean ifCovering;
     private boolean ifFilledIn;
+    private int xInfo = 0;
+    private int yInfo = 0;
+
+    private Color toolColor;
     private ArrayList<Drawable> drawables = new ArrayList<>();
     private DrawablesCreator drawablesCreator;
+    private static Object[] dataAboutCurrentObject;
 
     public PaintingPanel(int width, int height, Color backgroundColor, Color foregroundColor, int[] toolProperties, boolean ifFilledIn) {
-        this.setPreferredSize(new Dimension(width, height));
-        this.setVisible(true);
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
-        this.changeColor(backgroundColor, foregroundColor);
-        this.changeTool(toolProperties, ifFilledIn);
         this.ifCovering = false;
         dataAboutCurrentObject = new Object[7];
+
+        this.setPreferredSize(new Dimension(width, height));
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        this.addKeyListener(this);
+        this.changeColor(backgroundColor, foregroundColor);
+        this.changeTool(toolProperties, ifFilledIn);
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+        this.setVisible(true);
     }
 
 
     public void changeColor(Color backgroundColor, Color foregroundColor) {
         this.setBackground(backgroundColor);
         this.toolColor = foregroundColor;
-        revalidate();
-        repaint();
+        this.repaint();
     }
 
     public void changeTool(int[] toolProperties, boolean ifFilledIn) {
@@ -81,7 +85,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         if (info != null) {
             this.setBackground((Color) info.get(info.size() - 1));
             this.drawables.clear();
-            for (int i = 0; i < info.size()-1; i++) {
+            for (int i = 0; i < info.size() - 1; i++) {
                 this.drawables.add((Drawable) info.get(i));
             }
         }
@@ -92,9 +96,9 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         this.drawablesCreator = drawablesCreator;
     }
 
-    private void reactToMouse(MouseEvent e) {
-        dataAboutCurrentObject[0] = e.getX(); //x location
-        dataAboutCurrentObject[1] = e.getY(); //y location
+    private void sendDataAboutCurrentObjectToDrawablesCreator() {
+        dataAboutCurrentObject[0] = xInfo; //x location
+        dataAboutCurrentObject[1] = yInfo; //y location
         dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering" redundant) allows for easier expansion of the program
         dataAboutCurrentObject[3] = attributeOfChosenTool; //tool attribute
         dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
@@ -105,6 +109,12 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
                 "\tAttribute:" + dataAboutCurrentObject[3] + "\tType:" + dataAboutCurrentObject[4] + "\tifFilledIn:" + dataAboutCurrentObject[5] + "\tifCovering:" + dataAboutCurrentObject[6]);
 
         drawablesCreator.createShape(dataAboutCurrentObject);
+    }
+
+    private void reactToMouse(MouseEvent e) {
+        xInfo = e.getX();
+        yInfo = e.getY();
+        sendDataAboutCurrentObjectToDrawablesCreator();
     }
 
     @Override
@@ -118,23 +128,28 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-    }
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
+        if (key == KeyEvent.VK_LEFT && xInfo > 10) {
+            xInfo -= 10;
+            sendDataAboutCurrentObjectToDrawablesCreator();
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
+        if (key == KeyEvent.VK_RIGHT && xInfo < this.getWidth()-10) {
+            xInfo += 10;
+            sendDataAboutCurrentObjectToDrawablesCreator();
+        }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
+        if (key == KeyEvent.VK_UP && yInfo > 10) {
+            yInfo -= 10;
+            sendDataAboutCurrentObjectToDrawablesCreator();
+        }
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
+        if (key == KeyEvent.VK_DOWN && yInfo < this.getHeight()-10) {
+            yInfo += 10;
+            sendDataAboutCurrentObjectToDrawablesCreator();
+        }
     }
 
     @Override
@@ -151,13 +166,31 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
             for (int i = 0; i < drawables.size(); i++) {
                 //System.out.println(drawables.get(i) + " " + drawables.get(i).getColor());
                 if (drawables.get(i).getIfCovering()) {
-                    //drawables.get(i).setColor(this.getBackground());
-                    drawables.get(i).getDrawMe().setColor(this.getBackground()); //changing the color ONLY in drawing keeps the chosen tool color in the drawable object
+                    drawables.get(i).setColor(this.getBackground());
                 }
                 drawables.get(i).getDrawMe().drawMe(g);
             }
         }
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {}
 
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseMoved(MouseEvent e) {}
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 }
