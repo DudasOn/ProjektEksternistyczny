@@ -15,7 +15,7 @@ public class DrawablesCreator implements Subject {
         observers = new ArrayList<>();
     }
 
-    public void createShape(Object[] dataAboutCurrentObject) {
+    public void createDrawable(Object[] dataAboutCurrentObject) {
 
         switch ((int) dataAboutCurrentObject[4]) {
             case 1:

@@ -108,7 +108,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         System.out.println("X:" + dataAboutCurrentObject[0] + "\tY:" + dataAboutCurrentObject[1] + "\tColor:" + dataAboutCurrentObject[2] +
                 "\tAttribute:" + dataAboutCurrentObject[3] + "\tType:" + dataAboutCurrentObject[4] + "\tifFilledIn:" + dataAboutCurrentObject[5] + "\tifCovering:" + dataAboutCurrentObject[6]);
 
-        drawablesCreator.createShape(dataAboutCurrentObject);
+        drawablesCreator.createDrawable(dataAboutCurrentObject);
     }
 
     private void reactToMouse(MouseEvent e) {

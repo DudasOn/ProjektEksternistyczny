@@ -9,20 +9,20 @@ public class Circle extends Shape {
 
     private static final long serialVersionUID = -154076889492952007L;
 
-    private final int radius;
+    private final int diameter;
 
     public Circle() {
         super();
 
-        radius = 50;
-        this.drawMe = new FillCircle(this.posX, this.posY, this.radius, this.color);
+        diameter = 50;
+        this.drawMe = new FillCircle(this.posX, this.posY, this.diameter, this.color);
     }
 
-    public Circle(int posX, int posY, Color color, int radius, boolean ifFilledIn, boolean ifCovering) {
+    public Circle(int posX, int posY, Color color, int diameter, boolean ifFilledIn, boolean ifCovering) {
         super(posX, posY, color, ifFilledIn, ifCovering);
 
-        this.radius = radius;
-        if (ifFilledIn) this.drawMe = new FillCircle(this.posX, this.posY, this.radius, this.color);
-        else this.drawMe = new DrawCircle(this.posX, this.posY, this.radius, this.color);
+        this.diameter = diameter;
+        if (ifFilledIn) this.drawMe = new FillCircle(this.posX, this.posY, this.diameter, this.color);
+        else this.drawMe = new DrawCircle(this.posX, this.posY, this.diameter, this.color);
     }
 }
