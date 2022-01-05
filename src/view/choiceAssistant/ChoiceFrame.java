@@ -15,6 +15,7 @@ public abstract class ChoiceFrame extends JFrame {
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setResizable(false);
         this.setAlwaysOnTop(true);
+        this.setLocationRelativeTo(null);
 
         okButton = new JButton("OK");
     }

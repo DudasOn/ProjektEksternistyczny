@@ -128,6 +128,7 @@ public class MainFrame extends JFrame {
         mainMenu.add(toolOptionsMenu);
         mainMenu.add(fileOperationsMenu);
 
+        this.setLocationRelativeTo(null); //opens the window in the middle of the screen, regardless of resolution
         this.setVisible(true);
     }
 

@@ -1,6 +1,6 @@
 package model.drawableShapes;
 
-import model.drawableShapes.drawInterface.PaintInteface;
+import model.drawableShapes.drawInterface.PaintInterface;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -10,7 +10,7 @@ public abstract class Drawable implements Serializable {
     private static final long serialVersionUID = 152179614998769691L;
 
     protected Color color;
-    protected PaintInteface drawMe;
+    protected PaintInterface drawMe;
     protected int posX;
     protected int posY;
     protected boolean ifCovering;
@@ -29,7 +29,7 @@ public abstract class Drawable implements Serializable {
         this.posY = posY;
     }
 
-    public PaintInteface getDrawMe() {
+    public PaintInterface getDrawMe() {
         return this.drawMe;
     }
 

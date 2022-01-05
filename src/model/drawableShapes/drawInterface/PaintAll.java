@@ -3,7 +3,7 @@ package model.drawableShapes.drawInterface;
 import java.awt.*;
 import java.io.Serializable;
 
-public abstract class PaintAll implements PaintInteface, Serializable {
+public abstract class PaintAll implements PaintInterface, Serializable {
 
     private static final long serialVersionUID = 6500543986416300862L;
 

@@ -48,7 +48,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         this.typeOfChosenTool = toolProperties[1]; //tool type
         this.ifFilledIn = ifFilledIn;
 
-        System.out.println("Tool size: " + attributeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
+        System.out.println("Tool attribute: " + attributeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
     }
 
     public void disallowCovering() {
