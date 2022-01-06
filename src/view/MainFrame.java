@@ -2,9 +2,10 @@ package view;
 
 import utils.FileOperations;
 import utils.Serializer;
+import view.choiceAssistant.FilteringToolPropertiesChoice;
 import view.choiceAssistant.ColorChoiceFrameHEX;
 import view.choiceAssistant.ColorChoiceFrameRGB;
-import view.choiceAssistant.ToolPropertiesChoice;
+import view.choiceAssistant.DrawingToolPropertiesChoice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,19 +36,20 @@ public class MainFrame extends JFrame {
     private final PaintingPanel paintingPanel;
     private final ColorChoiceFrameRGB toolColorChooser;
     private final ColorChoiceFrameHEX backgroundColorChooser;
-    private final ToolPropertiesChoice toolPropertiesChooser;
+    private final DrawingToolPropertiesChoice toolPropertiesChooser;
     private ArrayList<Object> temporaryHelpfulArray;
+    private final JButton changeFunctionalityToFiltering;
+
+    private final JMenuBar filteringMainMenu;
+    private final FilteringPanel filteringPanel;
+    private final FilteringToolPropertiesChoice filteringToolPropertiesChoice;
+    private final JButton filteringToolOptions;
+    private final JMenu filteringFileOperationsMenu;
+    private final JButton changeFunctionalityToDrawing;
 
 
     public MainFrame() {
         //tworzenie glownej ramki
-        toolColorChooser = new ColorChoiceFrameRGB();
-        backgroundColorChooser = new ColorChoiceFrameHEX();
-        toolPropertiesChooser = new ToolPropertiesChoice();
-        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor(), toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
-        backgroundColorChooser.registerColorGatherer(this);
-        toolColorChooser.registerColorGatherer(this);
-        toolPropertiesChooser.registerToolGatherer(this);
         this.setTitle("Painter");
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -59,14 +61,28 @@ public class MainFrame extends JFrame {
                 System.exit(0);
             }
         });
-
-
-        //tworzenie paska menu i glownych kategorii
+        filteringMainMenu = new JMenuBar();
         mainMenu = new JMenuBar();
-        toolOptionsMenu = new JMenu("Painting options");
-        fileOperationsMenu = new JMenu("File");
 
-        //tworzenie odpowiednich elementow do menu
+
+        //tworzenie elementow do malowania
+        toolColorChooser = new ColorChoiceFrameRGB();
+        backgroundColorChooser = new ColorChoiceFrameHEX();
+        toolPropertiesChooser = new DrawingToolPropertiesChoice();
+        paintingPanel = new PaintingPanel(WIDTH, HEIGHT, backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor(), toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
+        backgroundColorChooser.registerColorGatherer(this);
+        toolColorChooser.registerColorGatherer(this);
+        toolPropertiesChooser.registerToolGatherer(this);
+
+        //tworzenie elementow do filtrowania
+        filteringPanel = new FilteringPanel(WIDTH, HEIGHT,50,0);
+        filteringToolPropertiesChoice = new FilteringToolPropertiesChoice();
+        filteringToolPropertiesChoice.registerToolGatherer(this);
+
+        //tworzenie paska menu do malowania
+        toolOptionsMenu = new JMenu("Painting options");
+        fileOperationsMenu = new JMenu("File options");
+
         changeToolColor = new JMenuItem("Change tool color");
         changeToolColor.addActionListener(e -> toolColorChooser.setVisibility());
 
@@ -106,11 +122,33 @@ public class MainFrame extends JFrame {
         deleteAll = new JMenuItem("Delete all drawn shapes");
         deleteAll.addActionListener(e -> paintingPanel.deleteAll());
 
+        changeFunctionalityToFiltering = new JButton("To filtering mode");
+        this.makeButtonLookLikeJMenuItem(changeFunctionalityToFiltering);
+        changeFunctionalityToFiltering.addActionListener(e->{
+            this.setContentPane(filteringPanel);
+            this.setJMenuBar(filteringMainMenu);
+            this.invalidate();
+            this.validate();
+        });
+
+        //tworzenie paska menu do filtrowania
+        filteringToolOptions = new JButton("Change filtering options");
+        this.makeButtonLookLikeJMenuItem(filteringToolOptions);
+        filteringToolOptions.addActionListener(e->filteringToolPropertiesChoice.setVisibility());
+
+        filteringFileOperationsMenu = new JMenu("File options");
+
+        changeFunctionalityToDrawing = new JButton("To drawing mode");
+        this.makeButtonLookLikeJMenuItem(changeFunctionalityToDrawing);
+        changeFunctionalityToDrawing.addActionListener(e->{
+            this.setContentPane(paintingPanel);
+            this.setJMenuBar(mainMenu);
+            this.invalidate();
+            this.validate();
+        });
+
 
         //dodawanie elementow do ramki glownej i odpowiednich menu
-        this.setResizable(true);
-        this.setJMenuBar(mainMenu);
-        this.add(BorderLayout.CENTER, paintingPanel);
 
         fileOperationsMenu.add(serializeTo);
         fileOperationsMenu.add(deserializeFrom);
@@ -125,11 +163,26 @@ public class MainFrame extends JFrame {
         toolOptionsMenu.add(changeToolColor);
         toolOptionsMenu.add(changeBackgroundColor);
 
+        mainMenu.add(changeFunctionalityToFiltering);
         mainMenu.add(toolOptionsMenu);
         mainMenu.add(fileOperationsMenu);
 
+        filteringMainMenu.add(changeFunctionalityToDrawing);
+        filteringMainMenu.add(filteringToolOptions);
+        filteringMainMenu.add(filteringFileOperationsMenu);
+
+        this.setResizable(true);
+        this.setJMenuBar(mainMenu);
+        this.add(BorderLayout.CENTER, paintingPanel);
         this.setLocationRelativeTo(null); //opens the window in the middle of the screen, regardless of resolution
         this.setVisible(true);
+    }
+
+    private void makeButtonLookLikeJMenuItem(JButton button){
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setRolloverEnabled(true);
+        button.setBorderPainted(false);
     }
 
     private void setBackgroundValueWhileLoading(){
@@ -140,6 +193,8 @@ public class MainFrame extends JFrame {
     public void changeTool() {
         paintingPanel.changeTool(toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
     }
+
+    public void changeFilter(){}
 
     public void changeColor() {
         paintingPanel.changeColor(backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor());

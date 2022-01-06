@@ -1,6 +1,6 @@
-package model.drawableShapes.drawInterface.drawShape;
+package model.paintingModel.drawableShapes.drawInterface.drawShape;
 
-import model.drawableShapes.drawInterface.PaintAll;
+import model.paintingModel.drawableShapes.drawInterface.PaintAll;
 
 import java.awt.*;
 

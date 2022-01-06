@@ -1,7 +1,7 @@
-package model.drawableShapes;
+package model.paintingModel.drawableShapes;
 
-import model.drawableShapes.drawInterface.drawShape.DrawTriangle;
-import model.drawableShapes.drawInterface.fillShape.FillTriangle;
+import model.paintingModel.drawableShapes.drawInterface.drawShape.DrawTriangle;
+import model.paintingModel.drawableShapes.drawInterface.fillShape.FillTriangle;
 
 import java.awt.*;
 

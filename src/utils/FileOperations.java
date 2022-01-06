@@ -1,6 +1,6 @@
 package utils;
 
-import model.drawableShapes.Drawable;
+import model.paintingModel.drawableShapes.Drawable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

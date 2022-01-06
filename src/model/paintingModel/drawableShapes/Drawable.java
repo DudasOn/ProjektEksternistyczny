@@ -1,6 +1,6 @@
-package model.drawableShapes;
+package model.paintingModel.drawableShapes;
 
-import model.drawableShapes.drawInterface.PaintInterface;
+import model.paintingModel.drawableShapes.drawInterface.PaintInterface;
 
 import java.awt.*;
 import java.io.Serializable;

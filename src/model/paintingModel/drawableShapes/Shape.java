@@ -1,4 +1,4 @@
-package model.drawableShapes;
+package model.paintingModel.drawableShapes;
 
 import java.awt.*;
 

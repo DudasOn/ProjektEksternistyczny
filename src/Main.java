@@ -1,4 +1,4 @@
-import model.DrawablesCreator;
+import model.paintingModel.DrawablesCreator;
 import view.MainFrame;
 
 public class Main {

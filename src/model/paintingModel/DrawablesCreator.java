@@ -1,6 +1,6 @@
-package model;
+package model.paintingModel;
 
-import model.drawableShapes.*;
+import model.paintingModel.drawableShapes.*;
 import observerInterface.Subject;
 import observerInterface.Observer;
 

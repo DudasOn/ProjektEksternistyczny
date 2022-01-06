@@ -1,7 +1,7 @@
-package model.drawableShapes;
+package model.paintingModel.drawableShapes;
 
-import model.drawableShapes.drawInterface.drawShape.DrawSquare;
-import model.drawableShapes.drawInterface.fillShape.FillSquare;
+import model.paintingModel.drawableShapes.drawInterface.drawShape.DrawSquare;
+import model.paintingModel.drawableShapes.drawInterface.fillShape.FillSquare;
 
 import java.awt.*;
 

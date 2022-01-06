@@ -6,19 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class ToolPropertiesChoice extends ChoiceFrame {
+public class DrawingToolPropertiesChoice extends ToolChoiceFrame {
 
-    private MainFrame toolGatherer;
-    private final JSlider toolAtriuteSlider;
-    private final JLabel chooseToolAtributeInfo;
+
     private final JButton circleChoiceButton;
     private final JButton triangleChoiceButton;
     private final JButton squareChoiceButton;
     private final JRadioButton filledIn;
     private final JRadioButton notFilledIn;
-    private final JPanel topPanel;
-    private final JPanel middlePanel;
-    private final JPanel bottomPanel;
 
     private final String CIRCLE = "./iconImages/circle.png";
     private final String SQUARE = "./iconImages/square.png";
@@ -29,22 +24,10 @@ public class ToolPropertiesChoice extends ChoiceFrame {
     private boolean ifFilledIn = true;
 
 
-    public ToolPropertiesChoice() {
+    public DrawingToolPropertiesChoice() {
         super();
 
-        this.setTitle("Choose a tool");
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        chooseToolAtributeInfo = new JLabel("Tool attribute: 50");
-        toolAtriuteSlider = new JSlider(JSlider.HORIZONTAL, 10, 300, 50);
-        toolAtriuteSlider.setMajorTickSpacing(145);
-        toolAtriuteSlider.setMinorTickSpacing(10);
-        toolAtriuteSlider.setPaintTicks(true);
-        toolAtriuteSlider.setPaintLabels(true);
-        toolAtriuteSlider.addChangeListener(e -> chooseToolAtributeInfo.setText("Tool attribute: " + toolAtriuteSlider.getValue()));
-
-        topPanel = new JPanel();
-        middlePanel = new JPanel();
-        bottomPanel = new JPanel();
+        this.setTitle("Choose a drawing tool");
 
         circleChoiceButton = new JButton(CIRCLE);
         squareChoiceButton = new JButton(SQUARE);
@@ -91,8 +74,8 @@ public class ToolPropertiesChoice extends ChoiceFrame {
         }
 
         okButton.addActionListener(e -> {
-            setVisibility();
-            informOfToolChange();
+            this.setVisibility();
+            this.informOfToolChange();
         });
 
         topPanel.add(chooseToolAtributeInfo);
@@ -112,9 +95,6 @@ public class ToolPropertiesChoice extends ChoiceFrame {
         this.pack();
     }
 
-    public void registerToolGatherer(MainFrame toolGatherer) {
-        this.toolGatherer = toolGatherer;
-    }
 
     public void informOfToolChange() {
         toolGatherer.changeTool();

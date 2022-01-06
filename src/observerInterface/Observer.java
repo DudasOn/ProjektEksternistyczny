@@ -1,6 +1,6 @@
 package observerInterface;
 
-import model.drawableShapes.Drawable;
+import model.paintingModel.drawableShapes.Drawable;
 
 public interface Observer {
     void update(Drawable drawable);

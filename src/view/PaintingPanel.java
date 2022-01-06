@@ -1,7 +1,7 @@
 package view;
 
-import model.DrawablesCreator;
-import model.drawableShapes.Drawable;
+import model.paintingModel.DrawablesCreator;
+import model.paintingModel.drawableShapes.Drawable;
 import observerInterface.Observer;
 
 import javax.swing.*;

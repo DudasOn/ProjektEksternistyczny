@@ -1,6 +1,6 @@
 package utils;
 
-import model.drawableShapes.Drawable;
+import model.paintingModel.drawableShapes.Drawable;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
