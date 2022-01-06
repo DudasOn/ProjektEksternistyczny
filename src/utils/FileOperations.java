@@ -5,6 +5,7 @@ import model.paintingModel.drawableShapes.Drawable;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -61,5 +62,18 @@ public abstract class FileOperations {
         }
     }
 
+    public static BufferedImage readJPEG() {
+        JFileChooser reader = new JFileChooser();
+        reader.setCurrentDirectory(new File("./savedImages"));
 
+        int response = reader.showSaveDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            if (reader.getSelectedFile().getAbsolutePath().endsWith(".jpeg")) {
+                File file = new File(reader.getSelectedFile().getAbsolutePath());
+                System.out.println("Serialization path: " + reader.getSelectedFile().getAbsolutePath());
+                return Serializer.readJPEG(file);
+            } else System.out.println("Incorrect file type");
+        }
+        return null;
+    }
 }

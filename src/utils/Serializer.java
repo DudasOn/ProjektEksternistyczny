@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public abstract class Serializer {
 
     private final static String DRAWABLES_FILE_NAME = "LastDrawnDrawables.ser";
+    private final static String IMAGE_FILE_NAME = "LastFilteredImage.jpeg";
 
     public static void serialize(ArrayList<Drawable> drawables, Color color) {
         Serializer.serialize(new File(DRAWABLES_FILE_NAME), drawables, color);
@@ -50,17 +51,36 @@ public abstract class Serializer {
         }
     }
 
+    public static void saveJPEG(JPanel panel) {
+        saveJPEG(new File(IMAGE_FILE_NAME), panel);
+    }
+
     public static void saveJPEG(File file, JPanel panel) {
+        if (panel.getWidth() > 0 || panel.getHeight() > 0) {
+            BufferedImage image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+            panel.printAll(image.getGraphics());
 
-        BufferedImage image = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
-        panel.printAll(image.getGraphics());
+            try {
+                ImageIO.write(image, "jpeg", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Generating an image wasn't successful");
+            }
+        } else System.out.println("Couldn't save the image!");
+    }
 
+    public static BufferedImage readJPEG() {
+        return readJPEG(new File(IMAGE_FILE_NAME));
+    }
+
+    public static BufferedImage readJPEG(File f) {
+        BufferedImage image;
         try {
-            ImageIO.write(image, "jpeg", file);
+            image = ImageIO.read(f);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Generating an image wasn't successful");
+            System.out.println("Couldn't read JPEG");
+            image = null;
         }
-
+        return image;
     }
 }

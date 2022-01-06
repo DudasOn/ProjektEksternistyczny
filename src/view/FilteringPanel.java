@@ -20,10 +20,6 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
     public FilteringPanel(int width, int height, int toolSize, int filterType){
         this.setPreferredSize(new Dimension(width, height));
         this.addMouseListener(this);
-        //this.changeTool(toolProperties, ifFilledIn);
-        this.setFocusable(true);
-        this.requestFocusInWindow();
-        this.setVisible(true);
 
         try {
             images.add(ImageIO.read(new File("./testingPhoto.jpg")));
@@ -31,6 +27,10 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
             System.out.println(":c");
         }
 
+        this.setPreferredSize(getPreferredSize());
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+        this.setVisible(true);
     }
 
     public void changeTool(int[] toolProperties, boolean ifFilledIn) {
@@ -40,6 +40,15 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
         //this.ifFilledIn = ifFilledIn;
 
         //System.out.println("Tool attribute: " + attributeOfChosenTool + "\tTool type: " + typeOfChosenTool + "\tifFilledIn: " + ifFilledIn);
+    }
+
+    public void setImage(BufferedImage image){
+        if(image!=null) {
+            images.clear();
+            images.add(image);
+            this.setPreferredSize(getPreferredSize());
+            this.repaint();
+        }
     }
 
     public void deleteLast() {

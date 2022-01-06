@@ -7,6 +7,7 @@ import observerInterface.Observer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -79,6 +80,12 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
 
     public void setArrayOfDrawables(ArrayList<Drawable> drawables) {
         this.drawables = drawables;
+    }
+
+    public BufferedImage getPaintingPanelAsPicture(){
+        BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        this.printAll(image.getGraphics());
+        return image;
     }
 
     public void loadFromFile(ArrayList<Object> info) {
