@@ -19,25 +19,25 @@ public class MainFrame extends JFrame {
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
 
-    private final JMenuBar mainMenu;
-    private final JMenu toolOptionsMenu;
-    private final JMenu fileOperationsMenu;
-    private final JMenuItem changeToolType;
-    private final JMenuItem changeToolColor;
-    private final JMenuItem changeBackgroundColor;
-    private final JMenuItem serializeTo;
-    private final JMenuItem deserializeFrom;
-    private final JMenuItem deserializeStationary;
-    private final JMenuItem saveToJPEG;
-    private final JMenuItem draw;
-    private final JMenuItem cover;
-    private final JMenuItem deleteAll;
-    private final JMenuItem deleteLast;
+    private final JMenuBar paintingMainMenu;
+    private final JMenu paintingToolOptionsMenu;
+    private final JMenu paintingFileOperationsMenu;
+    private final JMenuItem paintingChangeToolType;
+    private final JMenuItem paintingChangeToolColor;
+    private final JMenuItem paintingChangeBackgroundColor;
+    private final JMenuItem paintingSerializeTo;
+    private final JMenuItem paintingDeserializeFrom;
+    private final JMenuItem paintingDeserializeStationary;
+    private final JMenuItem paintingSaveToJPEG;
+    private final JMenuItem paintingDrawOption;
+    private final JMenuItem paintingCoverOption;
+    private final JMenuItem paintingDeleteAll;
+    private final JMenuItem paintingDeleteLast;
     private final PaintingPanel paintingPanel;
     private final ColorChoiceFrameRGB toolColorChooser;
     private final ColorChoiceFrameHEX backgroundColorChooser;
     private final DrawingToolPropertiesChoice toolPropertiesChooser;
-    private ArrayList<Object> temporaryHelpfulArray;
+    private ArrayList<Object> paintingTemporaryHelpfulArray;
     private final JButton changeFunctionalityToFiltering;
 
     private final JMenuBar filteringMainMenu;
@@ -45,13 +45,13 @@ public class MainFrame extends JFrame {
     private final FilteringToolPropertiesChoice filteringToolPropertiesChoice;
     private final JButton filteringToolOptions;
     private final JMenu filteringFileOperationsMenu;
-    private final JButton changeFunctionalityToDrawing;
     private final JMenuItem filteringDeleteLast;
     private final JMenuItem filteringDeleteAll;
     private final JMenuItem filteringGetImageFromDrawing;
     private final JMenuItem filteringSerializeTo;
     private final JMenuItem filteringDeserializeFrom;
     private final JMenuItem filteringDeserializeStationary;
+    private final JButton changeFunctionalityToDrawing;
 
 
 
@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
             }
         });
         filteringMainMenu = new JMenuBar();
-        mainMenu = new JMenuBar();
+        paintingMainMenu = new JMenuBar();
 
 
         //tworzenie elementow do malowania
@@ -88,47 +88,47 @@ public class MainFrame extends JFrame {
         filteringToolPropertiesChoice.registerToolGatherer(this);
 
         //tworzenie paska menu do malowania
-        toolOptionsMenu = new JMenu("Painting options");
-        fileOperationsMenu = new JMenu("File options");
+        paintingToolOptionsMenu = new JMenu("Painting options");
+        paintingFileOperationsMenu = new JMenu("File options");
 
-        changeToolColor = new JMenuItem("Change tool color");
-        changeToolColor.addActionListener(e -> toolColorChooser.setVisibility());
+        paintingChangeToolColor = new JMenuItem("Change tool color");
+        paintingChangeToolColor.addActionListener(e -> toolColorChooser.setVisibility());
 
-        changeToolType = new JMenuItem("Change tool properties");
-        changeToolType.addActionListener(e -> toolPropertiesChooser.setVisibility());
+        paintingChangeToolType = new JMenuItem("Change tool properties");
+        paintingChangeToolType.addActionListener(e -> toolPropertiesChooser.setVisibility());
 
-        changeBackgroundColor = new JMenuItem("Change background color");
-        changeBackgroundColor.addActionListener(e -> backgroundColorChooser.setVisibility());
+        paintingChangeBackgroundColor = new JMenuItem("Change background color");
+        paintingChangeBackgroundColor.addActionListener(e -> backgroundColorChooser.setVisibility());
 
-        serializeTo = new JMenuItem("Save drawn paining");
-        serializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
+        paintingSerializeTo = new JMenuItem("Save drawn paining");
+        paintingSerializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
 
-        deserializeFrom = new JMenuItem("Load serialized painting");
-        deserializeFrom.addActionListener(e -> {
-            temporaryHelpfulArray = FileOperations.readSerFile();
+        paintingDeserializeFrom = new JMenuItem("Load serialized painting");
+        paintingDeserializeFrom.addActionListener(e -> {
+            paintingTemporaryHelpfulArray = FileOperations.readSerFile();
             this.setBackgroundValueWhileLoading();
         });
 
-        deserializeStationary = new JMenuItem("Get previously drawn painting");
-        deserializeStationary.addActionListener(e -> {
-            temporaryHelpfulArray = Serializer.deserialize();
+        paintingDeserializeStationary = new JMenuItem("Get previously drawn painting");
+        paintingDeserializeStationary.addActionListener(e -> {
+            paintingTemporaryHelpfulArray = Serializer.deserialize();
             this.setBackgroundValueWhileLoading();
         });
 
-        saveToJPEG = new JMenuItem("Export entire project to JPEG");
-        saveToJPEG.addActionListener(e -> FileOperations.saveJPEG(paintingPanel));
+        paintingSaveToJPEG = new JMenuItem("Export entire project to JPEG");
+        paintingSaveToJPEG.addActionListener(e -> FileOperations.saveJPEG(paintingPanel));
 
-        draw = new JMenuItem("Draw");
-        draw.addActionListener(e -> paintingPanel.allowCovering());
+        paintingDrawOption = new JMenuItem("Draw");
+        paintingDrawOption.addActionListener(e -> paintingPanel.allowCovering());
 
-        cover = new JMenuItem("Cover");
-        cover.addActionListener(e -> paintingPanel.disallowCovering());
+        paintingCoverOption = new JMenuItem("Cover");
+        paintingCoverOption.addActionListener(e -> paintingPanel.disallowCovering());
 
-        deleteLast = new JMenuItem("Delete last drawn shape");
-        deleteLast.addActionListener(e -> paintingPanel.deleteLast());
+        paintingDeleteLast = new JMenuItem("Delete last drawn shape");
+        paintingDeleteLast.addActionListener(e -> paintingPanel.deleteLast());
 
-        deleteAll = new JMenuItem("Delete all drawn shapes");
-        deleteAll.addActionListener(e -> paintingPanel.deleteAll());
+        paintingDeleteAll = new JMenuItem("Delete all drawn shapes");
+        paintingDeleteAll.addActionListener(e -> paintingPanel.deleteAll());
 
         changeFunctionalityToFiltering = new JButton("To filtering mode");
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToFiltering);
@@ -137,6 +137,7 @@ public class MainFrame extends JFrame {
             this.setJMenuBar(filteringMainMenu);
             this.invalidate();
             this.validate();
+            this.pack();
         });
 
         //tworzenie paska menu do filtrowania
@@ -168,44 +169,47 @@ public class MainFrame extends JFrame {
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToDrawing);
         changeFunctionalityToDrawing.addActionListener(e->{
             this.setContentPane(paintingPanel);
-            this.setJMenuBar(mainMenu);
+            this.setJMenuBar(paintingMainMenu);
             this.invalidate();
             this.validate();
+            this.pack();
         });
 
 
         //dodawanie elementow do ramki glownej i odpowiednich menu
 
-        fileOperationsMenu.add(serializeTo);
-        fileOperationsMenu.add(deserializeFrom);
-        fileOperationsMenu.add(deserializeStationary);
-        fileOperationsMenu.add(saveToJPEG);
+        paintingFileOperationsMenu.add(paintingSerializeTo);
+        paintingFileOperationsMenu.add(paintingDeserializeFrom);
+        paintingFileOperationsMenu.add(paintingDeserializeStationary);
+        paintingFileOperationsMenu.add(paintingSaveToJPEG);
 
-        toolOptionsMenu.add(draw);
-        toolOptionsMenu.add(cover);
-        toolOptionsMenu.add(deleteLast);
-        toolOptionsMenu.add(deleteAll);
-        toolOptionsMenu.add(changeToolType);
-        toolOptionsMenu.add(changeToolColor);
-        toolOptionsMenu.add(changeBackgroundColor);
+        paintingToolOptionsMenu.add(paintingDrawOption);
+        paintingToolOptionsMenu.add(paintingCoverOption);
+        paintingToolOptionsMenu.add(paintingDeleteLast);
+        paintingToolOptionsMenu.add(paintingDeleteAll);
+        paintingToolOptionsMenu.add(paintingChangeToolType);
+        paintingToolOptionsMenu.add(paintingChangeToolColor);
+        paintingToolOptionsMenu.add(paintingChangeBackgroundColor);
 
-        mainMenu.add(changeFunctionalityToFiltering);
-        mainMenu.add(toolOptionsMenu);
-        mainMenu.add(fileOperationsMenu);
+        paintingMainMenu.add(paintingToolOptionsMenu);
+        paintingMainMenu.add(paintingFileOperationsMenu);
+        paintingMainMenu.add(changeFunctionalityToFiltering);
 
         filteringFileOperationsMenu.add(filteringSerializeTo);
         filteringFileOperationsMenu.add(filteringDeserializeFrom);
         filteringFileOperationsMenu.add(filteringDeserializeStationary);
         filteringFileOperationsMenu.add(filteringGetImageFromDrawing);
 
-        filteringMainMenu.add(changeFunctionalityToDrawing);
         filteringMainMenu.add(filteringToolOptions);
         filteringMainMenu.add(filteringFileOperationsMenu);
+        filteringMainMenu.add(changeFunctionalityToDrawing);
 
         this.setResizable(true);
-        this.setJMenuBar(mainMenu);
-        this.add(BorderLayout.CENTER, paintingPanel);
+        this.setJMenuBar(paintingMainMenu);
+        this.setContentPane(paintingPanel);
         this.setLocationRelativeTo(null); //opens the window in the middle of the screen, regardless of resolution
+        this.pack();
+        paintingPanel.requestFocus();
         this.setVisible(true);
     }
 
@@ -217,8 +221,8 @@ public class MainFrame extends JFrame {
     }
 
     private void setBackgroundValueWhileLoading(){
-        paintingPanel.loadFromFile(temporaryHelpfulArray);
-        if (temporaryHelpfulArray != null) backgroundColorChooser.setChosenColor((Color) temporaryHelpfulArray.get(temporaryHelpfulArray.size() - 1));
+        paintingPanel.loadFromFile(paintingTemporaryHelpfulArray);
+        if (paintingTemporaryHelpfulArray != null) backgroundColorChooser.setChosenColor((Color) paintingTemporaryHelpfulArray.get(paintingTemporaryHelpfulArray.size() - 1));
     }
 
     public void changeTool() {

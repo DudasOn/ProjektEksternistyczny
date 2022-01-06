@@ -35,9 +35,9 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         this.addKeyListener(this);
         this.changeColor(backgroundColor, foregroundColor);
         this.changeTool(toolProperties, ifFilledIn);
+        this.setVisible(true);
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setVisible(true);
     }
 
 

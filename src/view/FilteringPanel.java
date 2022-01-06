@@ -19,6 +19,8 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
 
     public FilteringPanel(int width, int height, int toolSize, int filterType){
         this.setPreferredSize(new Dimension(width, height));
+        this.setFocusable(true);
+        this.requestFocusInWindow();
         this.addMouseListener(this);
 
         try {
@@ -27,8 +29,6 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
             System.out.println(":c");
         }
 
-        this.setPreferredSize(getPreferredSize());
-        this.setFocusable(true);
         this.requestFocusInWindow();
         this.setVisible(true);
     }
