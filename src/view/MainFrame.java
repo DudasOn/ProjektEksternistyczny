@@ -43,6 +43,7 @@ public class MainFrame extends JFrame {
     private final JMenuBar filteringMainMenu;
     private final FilteringPanel filteringPanel;
     private final FilteringToolPropertiesChoice filteringToolPropertiesChoice;
+    private final JScrollPane filteringScrollPane;
     private final JMenuItem filteringToolOptions;
     private final JMenu filteringFileOperationsMenu;
     private final JMenu filteringToolOptionsMenu;
@@ -87,6 +88,9 @@ public class MainFrame extends JFrame {
         filteringToolPropertiesChoice.registerToolGatherer(this);
         filteringPanel = new FilteringPanel(WIDTH, HEIGHT, filteringToolPropertiesChoice.getFilter(), filteringToolPropertiesChoice.getIfAppliedToEntireImage());
 
+        filteringScrollPane = new JScrollPane(filteringPanel);
+        filteringScrollPane.setSize(WIDTH, HEIGHT);
+        filteringScrollPane.setVisible(true);
 
         //making of painting related menus
         paintingToolOptionsMenu = new JMenu("Painting options");
@@ -134,11 +138,12 @@ public class MainFrame extends JFrame {
         changeFunctionalityToFiltering = new JButton("To filtering mode");
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToFiltering);
         changeFunctionalityToFiltering.addActionListener(e -> {
-            this.setContentPane(filteringPanel);
+            this.setContentPane(filteringScrollPane);
             this.setJMenuBar(filteringMainMenu);
+            filteringScrollPane.invalidate();
+            filteringScrollPane.validate();
             this.invalidate();
             this.validate();
-            this.pack();
         });
 
         //making of filtering related menus
@@ -157,7 +162,8 @@ public class MainFrame extends JFrame {
         filteringGetImageFromDrawing = new JMenuItem("Get current image from drawing app");
         filteringGetImageFromDrawing.addActionListener(e -> {
             filteringPanel.setImage(paintingPanel.getPaintingPanelAsPicture());
-            this.pack();
+            filteringScrollPane.invalidate();
+            filteringScrollPane.validate();
         });
 
         filteringSerializeTo = new JMenuItem("Save filtered image");
@@ -166,13 +172,15 @@ public class MainFrame extends JFrame {
         filteringDeserializeFrom = new JMenuItem("Load saved image");
         filteringDeserializeFrom.addActionListener(e -> {
             filteringPanel.setImage(FileOperations.readJPEG());
-            this.pack();
+            filteringScrollPane.invalidate();
+            filteringScrollPane.validate();
         });
 
         filteringDeserializeStationary = new JMenuItem("Get previously filtered image");
         filteringDeserializeStationary.addActionListener(e -> {
             filteringPanel.setImage(Serializer.readJPEG());
-            this.pack();
+            filteringScrollPane.invalidate();
+            filteringScrollPane.validate();
         });
 
         changeFunctionalityToDrawing = new JButton("To drawing mode");
@@ -182,7 +190,6 @@ public class MainFrame extends JFrame {
             this.setJMenuBar(paintingMainMenu);
             this.invalidate();
             this.validate();
-            this.pack();
         });
 
 

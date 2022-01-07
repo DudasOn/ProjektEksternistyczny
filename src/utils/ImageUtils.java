@@ -15,6 +15,4 @@ public abstract class ImageUtils {
         }
         return bufferedImage;
     }
-
-
 }

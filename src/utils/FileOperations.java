@@ -68,7 +68,7 @@ public abstract class FileOperations {
 
         int response = reader.showSaveDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
-            if (reader.getSelectedFile().getAbsolutePath().endsWith(".jpeg")) {
+            if (reader.getSelectedFile().getAbsolutePath().endsWith(".jpeg") || reader.getSelectedFile().getAbsolutePath().endsWith(".jpg")) {
                 File file = new File(reader.getSelectedFile().getAbsolutePath());
                 System.out.println("Serialization path: " + reader.getSelectedFile().getAbsolutePath());
                 return Serializer.readJPEG(file);
