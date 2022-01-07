@@ -1,7 +1,5 @@
 package view.choiceAssistant;
 
-import view.MainFrame;
-
 import javax.swing.*;
 
 public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
@@ -77,14 +75,13 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
 
         });
 
-
         okButton.addActionListener(e -> {
             this.setVisibility();
             this.informOfFilterChange();
         });
 
-        topPanel.add(chooseToolAtributeInfo);
-        topPanel.add(toolAtriuteSlider);
+        topPanel.add(chooseToolAttributeInfo);
+        topPanel.add(toolAttriuteSlider);
 
         middlePanel.add(brightenRadioButton);
         middlePanel.add(darkenRadioButton);
@@ -110,12 +107,16 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         sepiaRadioButton.setSelected(false);
     }
 
-    public void registerToolGatherer(MainFrame toolGatherer) {
-        this.toolGatherer = toolGatherer;
-    }
-
     public void informOfFilterChange() {
         toolGatherer.changeFilter();
+    }
+
+    public int[] getFilter() {
+        return new int[]{toolAttriuteSlider.getValue(), chosenFilterType};
+    }
+
+    public boolean getIfAppliedToEntireImage(){
+        return ifAppliedToEntireImage;
     }
 
 }

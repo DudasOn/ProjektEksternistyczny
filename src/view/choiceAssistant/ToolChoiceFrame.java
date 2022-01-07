@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public abstract class ToolChoiceFrame extends ChoiceFrame{
     protected MainFrame toolGatherer;
-    protected JSlider toolAtriuteSlider;
-    protected JLabel chooseToolAtributeInfo;
+    protected JSlider toolAttriuteSlider;
+    protected JLabel chooseToolAttributeInfo;
 
     protected JPanel topPanel;
     protected JPanel middlePanel;
@@ -22,18 +22,16 @@ public abstract class ToolChoiceFrame extends ChoiceFrame{
         middlePanel = new JPanel();
         bottomPanel = new JPanel();
 
-        chooseToolAtributeInfo = new JLabel("Tool attribute: 50");
-        toolAtriuteSlider = new JSlider(JSlider.HORIZONTAL, 10, 300, 50);
-        toolAtriuteSlider.setMajorTickSpacing(145);
-        toolAtriuteSlider.setMinorTickSpacing(10);
-        toolAtriuteSlider.setPaintTicks(true);
-        toolAtriuteSlider.setPaintLabels(true);
-        toolAtriuteSlider.addChangeListener(e -> chooseToolAtributeInfo.setText("Tool attribute: " + toolAtriuteSlider.getValue()));
+        chooseToolAttributeInfo = new JLabel("Tool attribute: 50");
+        toolAttriuteSlider = new JSlider(JSlider.HORIZONTAL, 10, 300, 50);
+        toolAttriuteSlider.setMajorTickSpacing(145);
+        toolAttriuteSlider.setMinorTickSpacing(10);
+        toolAttriuteSlider.setPaintTicks(true);
+        toolAttriuteSlider.setPaintLabels(true);
+        toolAttriuteSlider.addChangeListener(e -> chooseToolAttributeInfo.setText("Tool attribute: " + toolAttriuteSlider.getValue()));
     }
 
     public void registerToolGatherer(MainFrame toolGatherer) {
         this.toolGatherer = toolGatherer;
     }
-
-
 }

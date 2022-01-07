@@ -1,3 +1,4 @@
+import model.filteringModel.FilteredImageCreator;
 import model.paintingModel.DrawablesCreator;
 import view.MainFrame;
 
@@ -8,5 +9,8 @@ public class Main {
         DrawablesCreator drawablesCreator = new DrawablesCreator();
         mainFrame.getPaintingPanel().setDrawablesManipulator(drawablesCreator);
         drawablesCreator.registerObserver(mainFrame.getPaintingPanel());
+        FilteredImageCreator filteredImageCreator = new FilteredImageCreator();
+        mainFrame.getFilteringPanel().setFilteredImageCreator(filteredImageCreator);
+        filteredImageCreator.registerObserver(mainFrame.getFilteringPanel());
     }
 }

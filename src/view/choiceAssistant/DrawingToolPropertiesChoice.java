@@ -1,7 +1,5 @@
 package view.choiceAssistant;
 
-import view.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -78,8 +76,8 @@ public class DrawingToolPropertiesChoice extends ToolChoiceFrame {
             this.informOfToolChange();
         });
 
-        topPanel.add(chooseToolAtributeInfo);
-        topPanel.add(toolAtriuteSlider);
+        topPanel.add(chooseToolAttributeInfo);
+        topPanel.add(toolAttriuteSlider);
 
         middlePanel.add(filledIn);
         middlePanel.add(notFilledIn);
@@ -101,7 +99,7 @@ public class DrawingToolPropertiesChoice extends ToolChoiceFrame {
     }
 
     public int[] getTool() {
-        return new int[]{toolAtriuteSlider.getValue(), chosenTool};
+        return new int[]{toolAttriuteSlider.getValue(), chosenTool};
     }
 
     public boolean getIfFilledIn() {

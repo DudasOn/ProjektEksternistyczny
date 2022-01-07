@@ -23,11 +23,9 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     private Color toolColor;
     private ArrayList<Drawable> drawables = new ArrayList<>();
     private DrawablesCreator drawablesCreator;
-    private static Object[] dataAboutCurrentObject;
 
     public PaintingPanel(int width, int height, Color backgroundColor, Color foregroundColor, int[] toolProperties, boolean ifFilledIn) {
         this.ifCovering = false;
-        dataAboutCurrentObject = new Object[7];
 
         this.setPreferredSize(new Dimension(width, height));
         this.addMouseListener(this);
@@ -82,7 +80,7 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         this.drawables = drawables;
     }
 
-    public BufferedImage getPaintingPanelAsPicture(){
+    public BufferedImage getPaintingPanelAsPicture() {
         BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
         this.printAll(image.getGraphics());
         return image;
@@ -103,25 +101,18 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
         this.drawablesCreator = drawablesCreator;
     }
 
-    private void sendDataAboutCurrentObjectToDrawablesCreator() {
-        dataAboutCurrentObject[0] = xInfo; //x location
-        dataAboutCurrentObject[1] = yInfo; //y location
-        dataAboutCurrentObject[2] = toolColor; //tool color, giving the color instead of null when using the cover option (this would make "ifCovering" redundant) allows for easier expansion of the program
-        dataAboutCurrentObject[3] = attributeOfChosenTool; //tool attribute
-        dataAboutCurrentObject[4] = typeOfChosenTool; //tool shape
-        dataAboutCurrentObject[5] = ifFilledIn; //if true it means that the drawn shape needs to be filled in, otherwise its just an outline
-        dataAboutCurrentObject[6] = ifCovering; //if true it means that the shape needs to change color accordingly to the background
+    private void sendDataToDrawablesCreator() {
 
-        System.out.println("X:" + dataAboutCurrentObject[0] + "\tY:" + dataAboutCurrentObject[1] + "\tColor:" + dataAboutCurrentObject[2] +
-                "\tAttribute:" + dataAboutCurrentObject[3] + "\tType:" + dataAboutCurrentObject[4] + "\tifFilledIn:" + dataAboutCurrentObject[5] + "\tifCovering:" + dataAboutCurrentObject[6]);
+        System.out.println("X:" + this.xInfo + "\tY:" + this.yInfo + "\tColor:" + this.toolColor +
+                "\tAttribute:" + this.attributeOfChosenTool + "\tType:" + this.typeOfChosenTool + "\tifFilledIn:" + this.ifFilledIn + "\tifCovering:" + this.ifCovering);
 
-        drawablesCreator.createDrawable(dataAboutCurrentObject);
+        drawablesCreator.createDrawable(xInfo, yInfo, toolColor, attributeOfChosenTool, typeOfChosenTool, ifFilledIn, ifCovering);
     }
 
     private void reactToMouse(MouseEvent e) {
         xInfo = e.getX();
         yInfo = e.getY();
-        sendDataAboutCurrentObjectToDrawablesCreator();
+        sendDataToDrawablesCreator();
     }
 
     @Override
@@ -140,28 +131,28 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
 
         if (key == KeyEvent.VK_LEFT && xInfo > 10) {
             xInfo -= 10;
-            sendDataAboutCurrentObjectToDrawablesCreator();
+            sendDataToDrawablesCreator();
         }
 
-        if (key == KeyEvent.VK_RIGHT && xInfo < this.getWidth()-10) {
+        if (key == KeyEvent.VK_RIGHT && xInfo < this.getWidth() - 10) {
             xInfo += 10;
-            sendDataAboutCurrentObjectToDrawablesCreator();
+            sendDataToDrawablesCreator();
         }
 
         if (key == KeyEvent.VK_UP && yInfo > 10) {
             yInfo -= 10;
-            sendDataAboutCurrentObjectToDrawablesCreator();
+            sendDataToDrawablesCreator();
         }
 
-        if (key == KeyEvent.VK_DOWN && yInfo < this.getHeight()-10) {
+        if (key == KeyEvent.VK_DOWN && yInfo < this.getHeight() - 10) {
             yInfo += 10;
-            sendDataAboutCurrentObjectToDrawablesCreator();
+            sendDataToDrawablesCreator();
         }
     }
 
     @Override
-    public void update(Drawable drawable) {
-        this.drawables.add(drawable);
+    public void update() {
+        this.drawables.add(drawablesCreator.getDrawn());
         this.repaint();
     }
 
@@ -181,23 +172,30 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) {
+    }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+    }
 }

@@ -4,14 +4,22 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Darken extends Filter{
+    public Darken(BufferedImage image) {
+        super(image);
+    }
+
+    public Darken(BufferedImage image, int xInfo, int yInfo, int filterSize) {
+        super(image, xInfo, yInfo, filterSize);
+    }
+
     @Override
-    public BufferedImage filterMe(BufferedImage image) {
+    public BufferedImage filterMe() {
 
         int valueOfDarkening = 15;
 
         //darken each pixel
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = startingPointHeight; y < endingPointHeight; y++) {
+            for (int x = startingPointWidth; x < endingPointWidth; x++) {
                 c = new Color(image.getRGB(x, y));
 
                 rValue = truncate(c.getRed()-valueOfDarkening);

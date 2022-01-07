@@ -4,12 +4,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Sepia extends Filter{
+    public Sepia(BufferedImage image) {
+        super(image);
+    }
+
+    public Sepia(BufferedImage image, int xInfo, int yInfo, int filterSize) {
+        super(image, xInfo, yInfo, filterSize);
+    }
+
     @Override
-    public BufferedImage filterMe(BufferedImage image) {
+    public BufferedImage filterMe() {
 
         // convert to sepia
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = startingPointHeight; y < endingPointHeight; y++) {
+            for (int x = startingPointWidth; x < endingPointWidth; x++) {
                  c = new Color(image.getRGB(x, y));
 
                 rValue = c.getRed();

@@ -7,12 +7,20 @@ public class Brighten extends Filter{
 
     private int valueOfBrightening = 20;
 
+    public Brighten(BufferedImage image) {
+        super(image);
+    }
+
+    public Brighten(BufferedImage image, int xInfo, int yInfo, int filterSize) {
+        super(image, xInfo, yInfo, filterSize);
+    }
+
     @Override
-    public BufferedImage filterMe(BufferedImage image) {
+    public BufferedImage filterMe() {
 
         //brighten each pixel
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = startingPointHeight; y < endingPointHeight; y++) {
+            for (int x = startingPointWidth; x < endingPointWidth; x++) {
                 c = new Color(image.getRGB(x, y));
 
                 rValue = truncate(c.getRed()+valueOfBrightening);

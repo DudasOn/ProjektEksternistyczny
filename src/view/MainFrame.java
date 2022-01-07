@@ -43,8 +43,9 @@ public class MainFrame extends JFrame {
     private final JMenuBar filteringMainMenu;
     private final FilteringPanel filteringPanel;
     private final FilteringToolPropertiesChoice filteringToolPropertiesChoice;
-    private final JButton filteringToolOptions;
+    private final JMenuItem filteringToolOptions;
     private final JMenu filteringFileOperationsMenu;
+    private final JMenu filteringToolOptionsMenu;
     private final JMenuItem filteringDeleteLast;
     private final JMenuItem filteringDeleteAll;
     private final JMenuItem filteringGetImageFromDrawing;
@@ -52,7 +53,6 @@ public class MainFrame extends JFrame {
     private final JMenuItem filteringDeserializeFrom;
     private final JMenuItem filteringDeserializeStationary;
     private final JButton changeFunctionalityToDrawing;
-
 
 
     public MainFrame() {
@@ -83,9 +83,10 @@ public class MainFrame extends JFrame {
         toolPropertiesChooser.registerToolGatherer(this);
 
         //tworzenie elementow do filtrowania
-        filteringPanel = new FilteringPanel(WIDTH, HEIGHT,50,0);
         filteringToolPropertiesChoice = new FilteringToolPropertiesChoice();
         filteringToolPropertiesChoice.registerToolGatherer(this);
+        filteringPanel = new FilteringPanel(WIDTH, HEIGHT, filteringToolPropertiesChoice.getFilter(), filteringToolPropertiesChoice.getIfAppliedToEntireImage());
+
 
         //tworzenie paska menu do malowania
         paintingToolOptionsMenu = new JMenu("Painting options");
@@ -132,7 +133,7 @@ public class MainFrame extends JFrame {
 
         changeFunctionalityToFiltering = new JButton("To filtering mode");
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToFiltering);
-        changeFunctionalityToFiltering.addActionListener(e->{
+        changeFunctionalityToFiltering.addActionListener(e -> {
             this.setContentPane(filteringPanel);
             this.setJMenuBar(filteringMainMenu);
             this.invalidate();
@@ -141,11 +142,11 @@ public class MainFrame extends JFrame {
         });
 
         //tworzenie paska menu do filtrowania
-        filteringToolOptions = new JButton("Change filtering options");
-        this.makeButtonLookLikeJMenuItem(filteringToolOptions);
-        filteringToolOptions.addActionListener(e->filteringToolPropertiesChoice.setVisibility());
-
+        filteringToolOptionsMenu = new JMenu("Filtering options");
         filteringFileOperationsMenu = new JMenu("File options");
+
+        filteringToolOptions = new JMenuItem("Change filter properties");
+        filteringToolOptions.addActionListener(e -> filteringToolPropertiesChoice.setVisibility());
 
         filteringDeleteLast = new JMenuItem("Delete last drawn shape");
         filteringDeleteLast.addActionListener(e -> filteringPanel.deleteLast());
@@ -154,7 +155,7 @@ public class MainFrame extends JFrame {
         filteringDeleteAll.addActionListener(e -> filteringPanel.deleteAll());
 
         filteringGetImageFromDrawing = new JMenuItem("Get current image from drawing app");
-        filteringGetImageFromDrawing.addActionListener(e->filteringPanel.setImage(paintingPanel.getPaintingPanelAsPicture()));
+        filteringGetImageFromDrawing.addActionListener(e -> filteringPanel.setImage(paintingPanel.getPaintingPanelAsPicture()));
 
         filteringSerializeTo = new JMenuItem("Save filtered image");
         filteringSerializeTo.addActionListener(e -> FileOperations.saveJPEG(filteringPanel));
@@ -167,7 +168,7 @@ public class MainFrame extends JFrame {
 
         changeFunctionalityToDrawing = new JButton("To drawing mode");
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToDrawing);
-        changeFunctionalityToDrawing.addActionListener(e->{
+        changeFunctionalityToDrawing.addActionListener(e -> {
             this.setContentPane(paintingPanel);
             this.setJMenuBar(paintingMainMenu);
             this.invalidate();
@@ -200,7 +201,11 @@ public class MainFrame extends JFrame {
         filteringFileOperationsMenu.add(filteringDeserializeStationary);
         filteringFileOperationsMenu.add(filteringGetImageFromDrawing);
 
-        filteringMainMenu.add(filteringToolOptions);
+        filteringToolOptionsMenu.add(filteringDeleteLast);
+        filteringToolOptionsMenu.add(filteringDeleteAll);
+        filteringToolOptionsMenu.add(filteringToolOptions);
+
+        filteringMainMenu.add(filteringToolOptionsMenu);
         filteringMainMenu.add(filteringFileOperationsMenu);
         filteringMainMenu.add(changeFunctionalityToDrawing);
 
@@ -213,23 +218,26 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
-    private void makeButtonLookLikeJMenuItem(JButton button){
+    private void makeButtonLookLikeJMenuItem(JButton button) {
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setRolloverEnabled(true);
         button.setBorderPainted(false);
     }
 
-    private void setBackgroundValueWhileLoading(){
+    private void setBackgroundValueWhileLoading() {
         paintingPanel.loadFromFile(paintingTemporaryHelpfulArray);
-        if (paintingTemporaryHelpfulArray != null) backgroundColorChooser.setChosenColor((Color) paintingTemporaryHelpfulArray.get(paintingTemporaryHelpfulArray.size() - 1));
+        if (paintingTemporaryHelpfulArray != null)
+            backgroundColorChooser.setChosenColor((Color) paintingTemporaryHelpfulArray.get(paintingTemporaryHelpfulArray.size() - 1));
     }
 
     public void changeTool() {
         paintingPanel.changeTool(toolPropertiesChooser.getTool(), toolPropertiesChooser.getIfFilledIn());
     }
 
-    public void changeFilter(){}
+    public void changeFilter() {
+        filteringPanel.changeFilter(filteringToolPropertiesChoice.getFilter(), filteringToolPropertiesChoice.getIfAppliedToEntireImage());
+    }
 
     public void changeColor() {
         paintingPanel.changeColor(backgroundColorChooser.getChosenColor(), toolColorChooser.getChosenColor());
@@ -237,5 +245,9 @@ public class MainFrame extends JFrame {
 
     public PaintingPanel getPaintingPanel() {
         return paintingPanel;
+    }
+
+    public FilteringPanel getFilteringPanel() {
+        return filteringPanel;
     }
 }

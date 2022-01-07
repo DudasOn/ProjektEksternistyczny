@@ -15,23 +15,27 @@ public class DrawablesCreator implements Subject {
         observers = new ArrayList<>();
     }
 
-    public void createDrawable(Object[] dataAboutCurrentObject) {
+    public void createDrawable(int xInfo, int yInfo, Color toolColor, int attributeOfChosenTool, int typeOfChosenTool, boolean ifFilledIn, boolean ifCovering) {
 
-        switch ((int) dataAboutCurrentObject[4]) {
+        switch (typeOfChosenTool) {
             case 1:
-                drawn = new Circle((int) dataAboutCurrentObject[0], (int) dataAboutCurrentObject[1], (Color) dataAboutCurrentObject[2], (int) dataAboutCurrentObject[3], (boolean) dataAboutCurrentObject[5], (boolean) dataAboutCurrentObject[6]);
+                drawn = new Circle(xInfo, yInfo, toolColor, attributeOfChosenTool, ifFilledIn, ifCovering);
                 break;
             case 2:
-                drawn = new Square((int) dataAboutCurrentObject[0], (int) dataAboutCurrentObject[1], (Color) dataAboutCurrentObject[2], (int) dataAboutCurrentObject[3], (boolean) dataAboutCurrentObject[5], (boolean) dataAboutCurrentObject[6]);
+                drawn = new Square(xInfo, yInfo, toolColor, attributeOfChosenTool, ifFilledIn, ifCovering);
                 break;
             case 3:
-                drawn = new Triangle((int) dataAboutCurrentObject[0], (int) dataAboutCurrentObject[1], (Color) dataAboutCurrentObject[2], (int) dataAboutCurrentObject[3], (boolean) dataAboutCurrentObject[5], (boolean) dataAboutCurrentObject[6]);
+                drawn = new Triangle(xInfo, yInfo, toolColor, attributeOfChosenTool, ifFilledIn, ifCovering);
                 break;
             default:
                 drawn = new Circle();
                 break;
         }
         notifyObservers();
+    }
+
+    public Drawable getDrawn() {
+        return drawn;
     }
 
 
@@ -52,7 +56,7 @@ public class DrawablesCreator implements Subject {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update(drawn);
+            observers.get(i).update();
         }
     }
 }
