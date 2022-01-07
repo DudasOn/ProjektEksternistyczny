@@ -100,13 +100,14 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(images.size()>0) g.drawImage(images.get(images.size() - 1), 0, 0, this);
+        if (images.size() > 0) g.drawImage(images.get(images.size() - 1), 0, 0, this);
     }
 
     @Override
     public Dimension getPreferredSize() {
-       if(images.size()>0) return new Dimension(images.get(images.size() - 1).getWidth(), images.get(images.size() - 1).getHeight());
-       else return new Dimension(this.getWidth(), this.getHeight());
+        if (images.size() > 0)
+            return new Dimension(images.get(images.size() - 1).getWidth(), images.get(images.size() - 1).getHeight());
+        else return new Dimension(this.getWidth(), this.getHeight());
     }
 
 }

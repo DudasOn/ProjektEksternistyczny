@@ -45,7 +45,7 @@ public abstract class ColorChoiceFrame extends ChoiceFrame {
         return chosenColor;
     }
 
-    public void setChosenColor(Color chosenColor){
+    public void setChosenColor(Color chosenColor) {
         this.chosenColor = chosenColor;
     }
 

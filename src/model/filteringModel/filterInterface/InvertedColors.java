@@ -1,4 +1,4 @@
-package model.filteringModel;
+package model.filteringModel.filterInterface;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,8 +23,8 @@ public class InvertedColors extends Filter {
 
                 // calculate new RGB values
                 c = new Color(rValue = 255 - c.getRed(),
-                gValue = 255 - c.getGreen(),
-                bValue = 255 - c.getBlue());
+                        gValue = 255 - c.getGreen(),
+                        bValue = 255 - c.getBlue());
 
                 image.setRGB(x, y, c.getRGB());
             }

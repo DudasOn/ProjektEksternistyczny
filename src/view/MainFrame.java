@@ -148,10 +148,10 @@ public class MainFrame extends JFrame {
         filteringToolOptions = new JMenuItem("Change filter properties");
         filteringToolOptions.addActionListener(e -> filteringToolPropertiesChoice.setVisibility());
 
-        filteringDeleteLast = new JMenuItem("Delete last drawn shape");
+        filteringDeleteLast = new JMenuItem("Delete last change");
         filteringDeleteLast.addActionListener(e -> filteringPanel.deleteLast());
 
-        filteringDeleteAll = new JMenuItem("Delete all drawn shapes");
+        filteringDeleteAll = new JMenuItem("Delete all changes");
         filteringDeleteAll.addActionListener(e -> filteringPanel.deleteAll());
 
         filteringGetImageFromDrawing = new JMenuItem("Get current image from drawing app");

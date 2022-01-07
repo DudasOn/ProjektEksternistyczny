@@ -4,7 +4,7 @@ import view.MainFrame;
 
 import javax.swing.*;
 
-public abstract class ToolChoiceFrame extends ChoiceFrame{
+public abstract class ToolChoiceFrame extends ChoiceFrame {
     protected MainFrame toolGatherer;
     protected JSlider toolAttriuteSlider;
     protected JLabel chooseToolAttributeInfo;
@@ -13,7 +13,7 @@ public abstract class ToolChoiceFrame extends ChoiceFrame{
     protected JPanel middlePanel;
     protected JPanel bottomPanel;
 
-    public ToolChoiceFrame(){
+    public ToolChoiceFrame() {
         super();
 
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));

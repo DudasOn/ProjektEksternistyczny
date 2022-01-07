@@ -1,5 +1,6 @@
 package model.filteringModel;
 
+import model.filteringModel.filterInterface.*;
 import observerInterface.Observer;
 import observerInterface.Subject;
 
@@ -35,6 +36,18 @@ public class FilteredImageCreator implements Subject {
                 case 5:
                     filterTypeInterface = new Sepia(image);
                     break;
+                case 6:
+                    filterTypeInterface = new OnlyRed(image);
+                    break;
+                case 7:
+                    filterTypeInterface = new OnlyGreen(image);
+                    break;
+                case 8:
+                    filterTypeInterface = new OnlyBlue(image);
+                    break;
+                case 9:
+                    filterTypeInterface = new BoxBlur(image);
+                    break;
                 default:
                     filterTypeInterface = new Brighten(image);
                     break;
@@ -55,6 +68,18 @@ public class FilteredImageCreator implements Subject {
                     break;
                 case 5:
                     filterTypeInterface = new Sepia(image, xInfo, yInfo, filterSize);
+                    break;
+                case 6:
+                    filterTypeInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
+                    break;
+                case 7:
+                    filterTypeInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
+                    break;
+                case 8:
+                    filterTypeInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
+                    break;
+                case 9:
+                    filterTypeInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
                     break;
                 default:
                     filterTypeInterface = new Brighten(image, xInfo, yInfo, filterSize);

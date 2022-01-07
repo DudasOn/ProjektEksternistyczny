@@ -11,6 +11,10 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
     private final JRadioButton grayScaleRadioButton; //type 3
     private final JRadioButton invertedColorsRadioButton; //type 4
     private final JRadioButton sepiaRadioButton; //type 5
+    private final JRadioButton onlyRedRadioButton; //type 6
+    private final JRadioButton onlyGreenRadioButton; //type 7
+    private final JRadioButton onlyBlueRadioButton; //type 8
+    private final JRadioButton boxBlurRadioButton; //type 9
     private final JRadioButton entireImageRadioButton;
     private final JRadioButton selectedSizeRadioButton;
 
@@ -25,6 +29,11 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         grayScaleRadioButton = new JRadioButton("Gray scale");
         invertedColorsRadioButton = new JRadioButton("Invert colors");
         sepiaRadioButton = new JRadioButton("Sepia");
+        onlyRedRadioButton = new JRadioButton("Only red");
+        onlyGreenRadioButton = new JRadioButton("Only green");
+        onlyBlueRadioButton = new JRadioButton("Only blue");
+        boxBlurRadioButton = new JRadioButton("Box blur");
+
         entireImageRadioButton = new JRadioButton("Apply to entire picture");
         selectedSizeRadioButton = new JRadioButton("Apply according to tool size");
 
@@ -62,6 +71,30 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
             chosenFilterType = 5;
         });
 
+        onlyRedRadioButton.addActionListener(e -> {
+            this.allFilteringJRadioButtonsToFalse();
+            onlyRedRadioButton.setSelected(true);
+            chosenFilterType = 6;
+        });
+
+        onlyGreenRadioButton.addActionListener(e -> {
+            this.allFilteringJRadioButtonsToFalse();
+            onlyGreenRadioButton.setSelected(true);
+            chosenFilterType = 7;
+        });
+
+        onlyBlueRadioButton.addActionListener(e -> {
+            this.allFilteringJRadioButtonsToFalse();
+            onlyBlueRadioButton.setSelected(true);
+            chosenFilterType = 8;
+        });
+
+        boxBlurRadioButton.addActionListener(e -> {
+            this.allFilteringJRadioButtonsToFalse();
+            boxBlurRadioButton.setSelected(true);
+            chosenFilterType = 9;
+        });
+
         entireImageRadioButton.addActionListener(e -> {
             entireImageRadioButton.setSelected(true);
             selectedSizeRadioButton.setSelected(false);
@@ -72,7 +105,6 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
             selectedSizeRadioButton.setSelected(true);
             entireImageRadioButton.setSelected(false);
             ifAppliedToEntireImage = false;
-
         });
 
         okButton.addActionListener(e -> {
@@ -88,6 +120,10 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         middlePanel.add(grayScaleRadioButton);
         middlePanel.add(invertedColorsRadioButton);
         middlePanel.add(sepiaRadioButton);
+        middlePanel.add(onlyRedRadioButton);
+        middlePanel.add(onlyGreenRadioButton);
+        middlePanel.add(onlyBlueRadioButton);
+        middlePanel.add(boxBlurRadioButton);
 
         bottomPanel.add(entireImageRadioButton);
         bottomPanel.add(selectedSizeRadioButton);
@@ -105,6 +141,10 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         grayScaleRadioButton.setSelected(false);
         invertedColorsRadioButton.setSelected(false);
         sepiaRadioButton.setSelected(false);
+        onlyRedRadioButton.setSelected(false);
+        onlyGreenRadioButton.setSelected(false);
+        onlyBlueRadioButton.setSelected(false);
+        boxBlurRadioButton.setSelected(false);
     }
 
     public void informOfFilterChange() {
@@ -115,7 +155,7 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         return new int[]{toolAttriuteSlider.getValue(), chosenFilterType};
     }
 
-    public boolean getIfAppliedToEntireImage(){
+    public boolean getIfAppliedToEntireImage() {
         return ifAppliedToEntireImage;
     }
 
