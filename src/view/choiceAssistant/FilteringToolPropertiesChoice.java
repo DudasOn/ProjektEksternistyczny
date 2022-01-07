@@ -6,15 +6,15 @@ import javax.swing.*;
 
 public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
 
-    private boolean ifAppliedToEntireImage;
-    private int chosenFilterType;
-    private JRadioButton brightenRadioButton;
-    private JRadioButton darkenRadioButton;
-    private JRadioButton grayScaleRadioButton;
-    private JRadioButton invertedColorsRadioButton;
-    private JRadioButton sepiaRadioButton;
-    private JRadioButton entireImageRadioButton;
-    private JRadioButton selectedSizeRadioButton;
+    private boolean ifAppliedToEntireImage = true;
+    private int chosenFilterType = 1;
+    private final JRadioButton brightenRadioButton; //type 1
+    private final JRadioButton darkenRadioButton; //type 2
+    private final JRadioButton grayScaleRadioButton; //type 3
+    private final JRadioButton invertedColorsRadioButton; //type 4
+    private final JRadioButton sepiaRadioButton; //type 5
+    private final JRadioButton entireImageRadioButton;
+    private final JRadioButton selectedSizeRadioButton;
 
 
     public FilteringToolPropertiesChoice() {
@@ -30,29 +30,38 @@ public class FilteringToolPropertiesChoice extends ToolChoiceFrame {
         entireImageRadioButton = new JRadioButton("Apply to entire picture");
         selectedSizeRadioButton = new JRadioButton("Apply according to tool size");
 
+        brightenRadioButton.setSelected(true);
+        entireImageRadioButton.setSelected(true);
+
+
         brightenRadioButton.addActionListener(e -> {
             this.allFilteringJRadioButtonsToFalse();
             brightenRadioButton.setSelected(true);
+            chosenFilterType = 1;
         });
 
         darkenRadioButton.addActionListener(e -> {
             this.allFilteringJRadioButtonsToFalse();
             darkenRadioButton.setSelected(true);
+            chosenFilterType = 2;
         });
 
         grayScaleRadioButton.addActionListener(e -> {
             this.allFilteringJRadioButtonsToFalse();
             grayScaleRadioButton.setSelected(true);
+            chosenFilterType = 3;
         });
 
         invertedColorsRadioButton.addActionListener(e -> {
             this.allFilteringJRadioButtonsToFalse();
             invertedColorsRadioButton.setSelected(true);
+            chosenFilterType = 4;
         });
 
         sepiaRadioButton.addActionListener(e -> {
             this.allFilteringJRadioButtonsToFalse();
             sepiaRadioButton.setSelected(true);
+            chosenFilterType = 5;
         });
 
         entireImageRadioButton.addActionListener(e -> {
