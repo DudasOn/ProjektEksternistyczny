@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Brighten extends Filter {
 
-    private int valueOfBrightening = 20;
+    private final int valueOfBrightening = 20;
 
     public Brighten(BufferedImage image) {
         super(image);

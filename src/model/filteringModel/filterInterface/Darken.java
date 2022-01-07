@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Darken extends Filter {
+
+    private final int valueOfDarkening = 15;
+
     public Darken(BufferedImage image) {
         super(image);
     }
@@ -14,8 +17,6 @@ public class Darken extends Filter {
 
     @Override
     public BufferedImage filterMe() {
-
-        int valueOfDarkening = 15;
 
         //darken each pixel
         for (int y = startingPointHeight; y < endingPointHeight; y++) {

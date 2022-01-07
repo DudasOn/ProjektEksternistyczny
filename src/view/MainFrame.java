@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
 
 
     public MainFrame() {
-        //tworzenie glownej ramki
+        //properties of mainframe
         this.setTitle("Painter");
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -73,7 +73,7 @@ public class MainFrame extends JFrame {
         paintingMainMenu = new JMenuBar();
 
 
-        //tworzenie elementow do malowania
+        //creation of paining related elements
         toolColorChooser = new ColorChoiceFrameRGB();
         backgroundColorChooser = new ColorChoiceFrameHEX();
         toolPropertiesChooser = new DrawingToolPropertiesChoice();
@@ -82,13 +82,13 @@ public class MainFrame extends JFrame {
         toolColorChooser.registerColorGatherer(this);
         toolPropertiesChooser.registerToolGatherer(this);
 
-        //tworzenie elementow do filtrowania
+        //creation of filtering related elements
         filteringToolPropertiesChoice = new FilteringToolPropertiesChoice();
         filteringToolPropertiesChoice.registerToolGatherer(this);
         filteringPanel = new FilteringPanel(WIDTH, HEIGHT, filteringToolPropertiesChoice.getFilter(), filteringToolPropertiesChoice.getIfAppliedToEntireImage());
 
 
-        //tworzenie paska menu do malowania
+        //making of painting related menus
         paintingToolOptionsMenu = new JMenu("Painting options");
         paintingFileOperationsMenu = new JMenu("File options");
 
@@ -141,7 +141,7 @@ public class MainFrame extends JFrame {
             this.pack();
         });
 
-        //tworzenie paska menu do filtrowania
+        //making of filtering related menus
         filteringToolOptionsMenu = new JMenu("Filtering options");
         filteringFileOperationsMenu = new JMenu("File options");
 
@@ -177,8 +177,7 @@ public class MainFrame extends JFrame {
         });
 
 
-        //dodawanie elementow do ramki glownej i odpowiednich menu
-
+        //adding elements to each other
         paintingFileOperationsMenu.add(paintingSerializeTo);
         paintingFileOperationsMenu.add(paintingDeserializeFrom);
         paintingFileOperationsMenu.add(paintingDeserializeStationary);

@@ -6,8 +6,6 @@ import java.awt.image.BufferedImage;
 public abstract class Filter implements FilterTypeInterface {
 
     protected BufferedImage image;
-    protected int width;
-    protected int height;
     protected int startingPointWidth;
     protected int startingPointHeight;
     protected int endingPointWidth;
