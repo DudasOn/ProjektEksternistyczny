@@ -155,16 +155,25 @@ public class MainFrame extends JFrame {
         filteringDeleteAll.addActionListener(e -> filteringPanel.deleteAll());
 
         filteringGetImageFromDrawing = new JMenuItem("Get current image from drawing app");
-        filteringGetImageFromDrawing.addActionListener(e -> filteringPanel.setImage(paintingPanel.getPaintingPanelAsPicture()));
+        filteringGetImageFromDrawing.addActionListener(e -> {
+            filteringPanel.setImage(paintingPanel.getPaintingPanelAsPicture());
+            this.pack();
+        });
 
         filteringSerializeTo = new JMenuItem("Save filtered image");
         filteringSerializeTo.addActionListener(e -> FileOperations.saveJPEG(filteringPanel));
 
         filteringDeserializeFrom = new JMenuItem("Load saved image");
-        filteringDeserializeFrom.addActionListener(e -> filteringPanel.setImage(FileOperations.readJPEG()));
+        filteringDeserializeFrom.addActionListener(e -> {
+            filteringPanel.setImage(FileOperations.readJPEG());
+            this.pack();
+        });
 
         filteringDeserializeStationary = new JMenuItem("Get previously filtered image");
-        filteringDeserializeStationary.addActionListener(e -> filteringPanel.setImage(Serializer.readJPEG()));
+        filteringDeserializeStationary.addActionListener(e -> {
+            filteringPanel.setImage(Serializer.readJPEG());
+            this.pack();
+        });
 
         changeFunctionalityToDrawing = new JButton("To drawing mode");
         this.makeButtonLookLikeJMenuItem(changeFunctionalityToDrawing);

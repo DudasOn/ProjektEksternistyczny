@@ -4,14 +4,11 @@ import model.filteringModel.FilteredImageCreator;
 import observerInterface.Observer;
 import utils.ImageUtils;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class FilteringPanel extends JPanel implements MouseListener, Observer {
@@ -28,13 +25,6 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addMouseListener(this);
-
-        try {
-            images.add(ImageIO.read(new File("./testingPhoto.jpg")));
-        } catch (IOException e) {
-            System.out.println(":c");
-        }
-
         this.changeFilter(filterProperties, ifAppliedToEntireImage);
         this.requestFocusInWindow();
         this.setVisible(true);

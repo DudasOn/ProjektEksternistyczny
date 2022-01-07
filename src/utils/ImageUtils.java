@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 public abstract class ImageUtils {
 
-
     public static BufferedImage closeBufferedImage(BufferedImage c) {
 
         BufferedImage bufferedImage = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
