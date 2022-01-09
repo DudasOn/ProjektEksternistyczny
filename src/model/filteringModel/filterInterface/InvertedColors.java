@@ -3,7 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class InvertedColors extends Filter {
+public class InvertedColors extends FilterAll {
 
     public InvertedColors(BufferedImage image) {
         super(image);

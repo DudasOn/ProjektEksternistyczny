@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class FilteredImageCreator implements Subject {
 
-    private FilterTypeInterface filterTypeInterface;
+    private FilterInterface filterInterface;
     private ArrayList<Observer> observers;
     private BufferedImage image;
 
@@ -22,71 +22,71 @@ public class FilteredImageCreator implements Subject {
         if (ifAppliedToEntireImage) {
             switch (filterType) {
                 case 1:
-                    filterTypeInterface = new Brighten(image);
+                    filterInterface = new Brighten(image);
                     break;
                 case 2:
-                    filterTypeInterface = new Darken(image);
+                    filterInterface = new Darken(image);
                     break;
                 case 3:
-                    filterTypeInterface = new GrayScale(image);
+                    filterInterface = new GrayScale(image);
                     break;
                 case 4:
-                    filterTypeInterface = new InvertedColors(image);
+                    filterInterface = new InvertedColors(image);
                     break;
                 case 5:
-                    filterTypeInterface = new Sepia(image);
+                    filterInterface = new Sepia(image);
                     break;
                 case 6:
-                    filterTypeInterface = new OnlyRed(image);
+                    filterInterface = new OnlyRed(image);
                     break;
                 case 7:
-                    filterTypeInterface = new OnlyGreen(image);
+                    filterInterface = new OnlyGreen(image);
                     break;
                 case 8:
-                    filterTypeInterface = new OnlyBlue(image);
+                    filterInterface = new OnlyBlue(image);
                     break;
                 case 9:
-                    filterTypeInterface = new BoxBlur(image);
+                    filterInterface = new BoxBlur(image);
                     break;
                 default:
-                    filterTypeInterface = new Brighten(image);
+                    filterInterface = new Brighten(image);
                     break;
             }
         } else
             switch (filterType) {
                 case 1:
-                    filterTypeInterface = new Brighten(image, xInfo, yInfo, filterSize);
+                    filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
                     break;
                 case 2:
-                    filterTypeInterface = new Darken(image, xInfo, yInfo, filterSize);
+                    filterInterface = new Darken(image, xInfo, yInfo, filterSize);
                     break;
                 case 3:
-                    filterTypeInterface = new GrayScale(image, xInfo, yInfo, filterSize);
+                    filterInterface = new GrayScale(image, xInfo, yInfo, filterSize);
                     break;
                 case 4:
-                    filterTypeInterface = new InvertedColors(image, xInfo, yInfo, filterSize);
+                    filterInterface = new InvertedColors(image, xInfo, yInfo, filterSize);
                     break;
                 case 5:
-                    filterTypeInterface = new Sepia(image, xInfo, yInfo, filterSize);
+                    filterInterface = new Sepia(image, xInfo, yInfo, filterSize);
                     break;
                 case 6:
-                    filterTypeInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
+                    filterInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
                     break;
                 case 7:
-                    filterTypeInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
+                    filterInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
                     break;
                 case 8:
-                    filterTypeInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
+                    filterInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
                     break;
                 case 9:
-                    filterTypeInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
+                    filterInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
                     break;
                 default:
-                    filterTypeInterface = new Brighten(image, xInfo, yInfo, filterSize);
+                    filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
                     break;
             }
 
-        this.image = filterTypeInterface.filterMe();
+        this.image = filterInterface.filterMe();
 
         notifyObservers();
     }

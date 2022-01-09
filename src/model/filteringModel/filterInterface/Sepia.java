@@ -3,7 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Sepia extends Filter {
+public class Sepia extends FilterAll {
     public Sepia(BufferedImage image) {
         super(image);
     }

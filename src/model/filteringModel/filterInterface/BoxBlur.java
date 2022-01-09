@@ -3,7 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class BoxBlur extends Filter {
+public class BoxBlur extends FilterAll {
 
     public BoxBlur(BufferedImage image) {
         super(image);

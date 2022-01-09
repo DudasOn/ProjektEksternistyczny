@@ -3,9 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Brighten extends Filter {
-
-    private final int valueOfBrightening = 20;
+public class Brighten extends FilterAll {
 
     public Brighten(BufferedImage image) {
         super(image);
@@ -17,6 +15,8 @@ public class Brighten extends Filter {
 
     @Override
     public BufferedImage filterMe() {
+
+        int valueOfBrightening = 20;
 
         //brighten each pixel
         for (int y = startingPointHeight; y < endingPointHeight; y++) {

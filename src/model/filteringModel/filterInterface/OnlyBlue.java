@@ -3,7 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class OnlyBlue extends Filter {
+public class OnlyBlue extends FilterAll {
 
     public OnlyBlue(BufferedImage image) {
         super(image);

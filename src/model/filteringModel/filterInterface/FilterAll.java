@@ -3,7 +3,7 @@ package model.filteringModel.filterInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Filter implements FilterTypeInterface {
+public abstract class FilterAll implements FilterInterface {
 
     protected BufferedImage image;
     protected int startingPointWidth;
@@ -16,7 +16,7 @@ public abstract class Filter implements FilterTypeInterface {
     protected int bValue;
     protected Color c;
 
-    public Filter() {
+    public FilterAll() {
         this.image = null;
         this.startingPointWidth = 0;
         this.startingPointHeight = 0;
@@ -24,7 +24,7 @@ public abstract class Filter implements FilterTypeInterface {
         this.endingPointHeight = 0;
     }
 
-    public Filter(BufferedImage image) {
+    public FilterAll(BufferedImage image) {
         this.image = image;
         this.endingPointWidth = image.getWidth();
         this.endingPointHeight = image.getHeight();
@@ -32,7 +32,7 @@ public abstract class Filter implements FilterTypeInterface {
         this.startingPointWidth = 0;
     }
 
-    public Filter(BufferedImage image, int xInfo, int yInfo, int filterSize) {
+    public FilterAll(BufferedImage image, int xInfo, int yInfo, int filterSize) {
         this.image = image;
         if (xInfo - filterSize / 2 < 0) startingPointWidth = 0;
         else startingPointWidth = xInfo - filterSize / 2;
