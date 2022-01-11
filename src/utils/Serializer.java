@@ -14,11 +14,11 @@ public abstract class Serializer {
     private final static String DRAWABLES_FILE_NAME = "LastDrawnDrawables.ser";
     private final static String IMAGE_FILE_NAME = "LastFilteredImage.jpeg";
 
-    public static void serialize(ArrayList<Drawable> drawables, Color color) {
-        Serializer.serialize(new File(DRAWABLES_FILE_NAME), drawables, color);
+    public static void serializeDrawables(ArrayList<Drawable> drawables, Color color) {
+        Serializer.serializeDrawables(new File(DRAWABLES_FILE_NAME), drawables, color);
     }
 
-    public static void serialize(File f, ArrayList<Drawable> drawables, Color color) {
+    public static void serializeDrawables(File f, ArrayList<Drawable> drawables, Color color) {
 
         try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f))) {
             os.writeObject(drawables);
@@ -29,11 +29,11 @@ public abstract class Serializer {
         }
     }
 
-    public static ArrayList<Object> deserialize() {
-        return Serializer.deserialize(new File(DRAWABLES_FILE_NAME));
+    public static ArrayList<Object> deserializeDrawables() {
+        return Serializer.deserializeDrawables(new File(DRAWABLES_FILE_NAME));
     }
 
-    public static ArrayList<Object> deserialize(File f) {
+    public static ArrayList<Object> deserializeDrawables(File f) {
         ArrayList<Object> info;
 
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(f))) {

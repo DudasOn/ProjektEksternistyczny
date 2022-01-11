@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
 
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600;
+    private final int WIDTH = 1024;
+    private final int HEIGHT = 768;
 
     private final JMenuBar paintingMainMenu;
     private final JMenu paintingToolOptionsMenu;
@@ -65,7 +65,7 @@ public class MainFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                Serializer.serialize(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground());
+                Serializer.serializeDrawables(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground());
                 Serializer.saveJPEG(filteringPanel);
                 System.exit(0);
             }
@@ -106,17 +106,17 @@ public class MainFrame extends JFrame {
         paintingChangeBackgroundColor.addActionListener(e -> backgroundColorChooser.setVisibility());
 
         paintingSerializeTo = new JMenuItem("Save drawn paining");
-        paintingSerializeTo.addActionListener(e -> FileOperations.saveSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
+        paintingSerializeTo.addActionListener(e -> FileOperations.saveDrawablesSerFiles(paintingPanel.getArrayOfDrawables(), paintingPanel.getBackground()));
 
         paintingDeserializeFrom = new JMenuItem("Load serialized painting");
         paintingDeserializeFrom.addActionListener(e -> {
-            paintingTemporaryHelpfulArray = FileOperations.readSerFile();
+            paintingTemporaryHelpfulArray = FileOperations.readDrawablesSerFile();
             this.setBackgroundValueWhileLoading();
         });
 
         paintingDeserializeStationary = new JMenuItem("Get previously drawn painting");
         paintingDeserializeStationary.addActionListener(e -> {
-            paintingTemporaryHelpfulArray = Serializer.deserialize();
+            paintingTemporaryHelpfulArray = Serializer.deserializeDrawables();
             this.setBackgroundValueWhileLoading();
         });
 
@@ -166,17 +166,17 @@ public class MainFrame extends JFrame {
             filteringScrollPane.validate();
         });
 
-        filteringSerializeTo = new JMenuItem("Save filtered image");
+        filteringSerializeTo = new JMenuItem("Save JPEG");
         filteringSerializeTo.addActionListener(e -> FileOperations.saveJPEG(filteringPanel));
 
-        filteringDeserializeFrom = new JMenuItem("Load saved image");
+        filteringDeserializeFrom = new JMenuItem("Load JPEG");
         filteringDeserializeFrom.addActionListener(e -> {
             filteringPanel.setImage(FileOperations.readJPEG());
             filteringScrollPane.invalidate();
             filteringScrollPane.validate();
         });
 
-        filteringDeserializeStationary = new JMenuItem("Get previously filtered image");
+        filteringDeserializeStationary = new JMenuItem("Get previous JPEG");
         filteringDeserializeStationary.addActionListener(e -> {
             filteringPanel.setImage(Serializer.readJPEG());
             filteringScrollPane.invalidate();
@@ -191,7 +191,6 @@ public class MainFrame extends JFrame {
             this.invalidate();
             this.validate();
         });
-
 
         //adding elements to each other
         paintingFileOperationsMenu.add(paintingSerializeTo);

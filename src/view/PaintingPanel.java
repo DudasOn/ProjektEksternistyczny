@@ -21,11 +21,12 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     private int yInfo = 0;
 
     private Color toolColor;
-    private ArrayList<Drawable> drawables = new ArrayList<>();
+    private ArrayList<Drawable> drawables;
     private DrawablesCreator drawablesCreator;
 
     public PaintingPanel(int width, int height, Color backgroundColor, Color foregroundColor, int[] toolProperties, boolean ifFilledIn) {
         this.ifCovering = false;
+        drawables = new ArrayList<>();
 
         this.setPreferredSize(new Dimension(width, height));
         this.addMouseListener(this);
@@ -148,6 +149,10 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
             yInfo += 10;
             sendDataToDrawablesCreator();
         }
+
+        if(key == KeyEvent.VK_ENTER){
+            sendDataToDrawablesCreator();
+        }
     }
 
     @Override
@@ -172,30 +177,23 @@ public class PaintingPanel extends JPanel implements MouseListener, MouseMotionL
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-    }
+    public void mouseMoved(MouseEvent e) {}
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) {}
 }

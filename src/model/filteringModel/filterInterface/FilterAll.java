@@ -1,5 +1,7 @@
 package model.filteringModel.filterInterface;
 
+import utils.ImageUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -34,17 +36,11 @@ public abstract class FilterAll implements FilterInterface {
 
     public FilterAll(BufferedImage image, int xInfo, int yInfo, int filterSize) {
         this.image = image;
-        if (xInfo - filterSize / 2 < 0) startingPointWidth = 0;
-        else startingPointWidth = xInfo - filterSize / 2;
 
-        if (yInfo - filterSize / 2 < 0) startingPointHeight = 0;
-        else startingPointHeight = yInfo - filterSize / 2;
-
-        if (xInfo + filterSize / 2 > image.getWidth()) endingPointWidth = image.getWidth();
-        else endingPointWidth = xInfo + filterSize / 2;
-
-        if (yInfo + filterSize / 2 > image.getHeight()) endingPointHeight = image.getHeight();
-        else endingPointHeight = yInfo + filterSize / 2;
+        startingPointWidth = Math.max(xInfo - filterSize / 2, 0);
+        startingPointHeight = Math.max(yInfo - filterSize / 2, 0);
+        endingPointWidth = Math.min(xInfo + filterSize / 2, image.getWidth());
+        endingPointHeight = Math.min(yInfo + filterSize / 2, image.getHeight());
     }
 
     protected int truncate(int t) {
@@ -55,5 +51,4 @@ public abstract class FilterAll implements FilterInterface {
         }
         return t;
     }
-
 }

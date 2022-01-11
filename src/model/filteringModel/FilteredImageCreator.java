@@ -21,9 +21,6 @@ public class FilteredImageCreator implements Subject {
 
         if (ifAppliedToEntireImage) {
             switch (filterType) {
-                case 1:
-                    filterInterface = new Brighten(image);
-                    break;
                 case 2:
                     filterInterface = new Darken(image);
                     break;
@@ -48,43 +45,64 @@ public class FilteredImageCreator implements Subject {
                 case 9:
                     filterInterface = new BoxBlur(image);
                     break;
+                case 10:
+                    filterInterface = new SobelEdgeDetection(image);
+                    break;
+                case 11:
+                    filterInterface = new RobertsCrossEdgeDetection(image);
+                    break;
+                case 12:
+                    filterInterface = new LaplacianEdgeDetection(image);
+                    break;
+                case 13:
+                    filterInterface = new ScharrEdgeDetection(image);
+                    break;
                 default:
                     filterInterface = new Brighten(image);
                     break;
             }
-        } else
-            switch (filterType) {
-                case 1:
-                    filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
-                    break;
-                case 2:
-                    filterInterface = new Darken(image, xInfo, yInfo, filterSize);
-                    break;
-                case 3:
-                    filterInterface = new GrayScale(image, xInfo, yInfo, filterSize);
-                    break;
-                case 4:
-                    filterInterface = new InvertedColors(image, xInfo, yInfo, filterSize);
-                    break;
-                case 5:
-                    filterInterface = new Sepia(image, xInfo, yInfo, filterSize);
-                    break;
-                case 6:
-                    filterInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
-                    break;
-                case 7:
-                    filterInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
-                    break;
-                case 8:
-                    filterInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
-                    break;
-                case 9:
-                    filterInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
-                    break;
-                default:
-                    filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
-                    break;
-            }
+        } else switch (filterType) {
+
+            case 2:
+                filterInterface = new Darken(image, xInfo, yInfo, filterSize);
+                break;
+            case 3:
+                filterInterface = new GrayScale(image, xInfo, yInfo, filterSize);
+                break;
+            case 4:
+                filterInterface = new InvertedColors(image, xInfo, yInfo, filterSize);
+                break;
+            case 5:
+                filterInterface = new Sepia(image, xInfo, yInfo, filterSize);
+                break;
+            case 6:
+                filterInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
+                break;
+            case 7:
+                filterInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
+                break;
+            case 8:
+                filterInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
+                break;
+            case 9:
+                filterInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
+                break;
+            case 10:
+                filterInterface = new SobelEdgeDetection(image, xInfo, yInfo, filterSize);
+                break;
+            case 11:
+                filterInterface = new RobertsCrossEdgeDetection(image, xInfo, yInfo, filterSize);
+                break;
+            case 12:
+                filterInterface = new LaplacianEdgeDetection(image, xInfo, yInfo, filterSize);
+                break;
+            case 13:
+                filterInterface = new ScharrEdgeDetection(image, xInfo, yInfo, filterSize);
+                break;
+            default:
+                filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
+                break;
+        }
 
         this.image = filterInterface.filterMe();
 

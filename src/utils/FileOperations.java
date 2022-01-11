@@ -13,7 +13,7 @@ public abstract class FileOperations {
 
     private static final FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("JAVA Serlialization files (*.ser)", "ser");
 
-    public static ArrayList<Object> readSerFile() {
+    public static ArrayList<Object> readDrawablesSerFile() {
 
         JFileChooser reader = new JFileChooser();
         reader.setCurrentDirectory(new File("./savedSerFiles"));
@@ -24,15 +24,15 @@ public abstract class FileOperations {
 
             if (reader.getSelectedFile().getAbsolutePath().endsWith(".ser")) {
                 File file = new File(reader.getSelectedFile().getAbsolutePath());
-                System.out.println(reader.getSelectedFile().getAbsolutePath());
+                System.out.println("Deserialization path: " + reader.getSelectedFile().getAbsolutePath());
 
-                return Serializer.deserialize(file);
+                return Serializer.deserializeDrawables(file);
             } else System.out.println("Incorrect file type");
         }
         return null;
     }
 
-    public static void saveSerFiles(ArrayList<Drawable> drawables, Color color) {
+    public static void saveDrawablesSerFiles(ArrayList<Drawable> drawables, Color color) {
 
         JFileChooser saver = new JFileChooser();
         saver.setCurrentDirectory(new File("./savedSerFiles"));
@@ -43,7 +43,7 @@ public abstract class FileOperations {
 
             File file = new File(saver.getSelectedFile().getAbsolutePath() + ".ser");
             System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
-            Serializer.serialize(file, drawables, color);
+            Serializer.serializeDrawables(file, drawables, color);
         }
     }
 
@@ -56,7 +56,7 @@ public abstract class FileOperations {
         if (response == JFileChooser.APPROVE_OPTION) {
 
             File file = new File(saver.getSelectedFile().getAbsolutePath() + ".jpeg");
-            System.out.println("Serialization path: " + saver.getSelectedFile().getAbsolutePath());
+            System.out.println("Saving path: " + saver.getSelectedFile().getAbsolutePath());
             Serializer.saveJPEG(file, panel);
 
         }
@@ -66,11 +66,11 @@ public abstract class FileOperations {
         JFileChooser reader = new JFileChooser();
         reader.setCurrentDirectory(new File("./savedImages"));
 
-        int response = reader.showSaveDialog(null);
+        int response = reader.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
             if (reader.getSelectedFile().getAbsolutePath().endsWith(".jpeg") || reader.getSelectedFile().getAbsolutePath().endsWith(".jpg")) {
                 File file = new File(reader.getSelectedFile().getAbsolutePath());
-                System.out.println("Serialization path: " + reader.getSelectedFile().getAbsolutePath());
+                System.out.println("Loading path: " + reader.getSelectedFile().getAbsolutePath());
                 return Serializer.readJPEG(file);
             } else System.out.println("Incorrect file type");
         }

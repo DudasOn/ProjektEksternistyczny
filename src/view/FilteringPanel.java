@@ -13,14 +13,16 @@ import java.util.ArrayList;
 
 public class FilteringPanel extends JPanel implements MouseListener, Observer {
 
-    private ArrayList<BufferedImage> images = new ArrayList<>();
     private boolean ifAppliedToEntireImage;
     private int filterSize;
     private int filterType;
+    private ArrayList<BufferedImage> images;
     private FilteredImageCreator filteredImageCreator;
 
 
     public FilteringPanel(int width, int height, int[] filterProperties, boolean ifAppliedToEntireImage) {
+        images = new ArrayList<>();
+
         this.setPreferredSize(new Dimension(width, height));
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -31,7 +33,6 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
     }
 
     public void changeFilter(int[] filterProperties, boolean ifAppliedToEntireImage) {
-
         this.filterSize = filterProperties[0];
         this.filterType = filterProperties[1];
         this.ifAppliedToEntireImage = ifAppliedToEntireImage;
@@ -62,23 +63,7 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        filteredImageCreator.createFilteredImage(ImageUtils.closeBufferedImage(images.get(images.size() - 1)), e.getX(), e.getY(), filterType, filterSize, ifAppliedToEntireImage);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
+        if(images.size()>0) filteredImageCreator.createFilteredImage(ImageUtils.cloneBufferedImage(images.get(images.size() - 1)), e.getX(), e.getY(), filterType, filterSize, ifAppliedToEntireImage);
     }
 
     @Override
@@ -91,13 +76,29 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (images.size() > 0) g.drawImage(images.get(images.size() - 1), 0, 0, this);
+        this.setPreferredSize(this.getPreferredSize());
     }
 
     @Override
     public Dimension getPreferredSize() {
-        if (images.size() > 0)
-            return new Dimension(images.get(images.size() - 1).getWidth(), images.get(images.size() - 1).getHeight());
-        else return new Dimension(this.getWidth(), this.getHeight());
+        if (images != null) {
+
+            if (images.size() > 0)
+                return new Dimension(images.get(images.size() - 1).getWidth(), images.get(images.size() - 1).getHeight());
+            else return new Dimension(this.getWidth(), this.getHeight());
+        }
+        return new Dimension(1024, 768);
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
