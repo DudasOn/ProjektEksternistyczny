@@ -9,8 +9,8 @@ public class InvertedColors extends FilterAll {
         super(image);
     }
 
-    public InvertedColors(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public InvertedColors(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
 
     @Override

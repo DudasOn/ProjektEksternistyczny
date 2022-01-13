@@ -8,10 +8,9 @@ public class Sepia extends FilterAll {
         super(image);
     }
 
-    public Sepia(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public Sepia(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
-
     @Override
     public BufferedImage filterMe() {
 

@@ -19,88 +19,46 @@ public class FilteredImageCreator implements Subject {
 
     public void createFilteredImage(BufferedImage image, int xInfo, int yInfo, int filterType, int filterSize, boolean ifAppliedToEntireImage) {
 
-        if (ifAppliedToEntireImage) {
-            switch (filterType) {
-                case 2:
-                    filterInterface = new Darken(image);
-                    break;
-                case 3:
-                    filterInterface = new GrayScale(image);
-                    break;
-                case 4:
-                    filterInterface = new InvertedColors(image);
-                    break;
-                case 5:
-                    filterInterface = new Sepia(image);
-                    break;
-                case 6:
-                    filterInterface = new OnlyRed(image);
-                    break;
-                case 7:
-                    filterInterface = new OnlyGreen(image);
-                    break;
-                case 8:
-                    filterInterface = new OnlyBlue(image);
-                    break;
-                case 9:
-                    filterInterface = new BoxBlur(image);
-                    break;
-                case 10:
-                    filterInterface = new SobelEdgeDetection(image);
-                    break;
-                case 11:
-                    filterInterface = new RobertsCrossEdgeDetection(image);
-                    break;
-                case 12:
-                    filterInterface = new LaplacianEdgeDetection(image);
-                    break;
-                case 13:
-                    filterInterface = new ScharrEdgeDetection(image);
-                    break;
-                default:
-                    filterInterface = new Brighten(image);
-                    break;
-            }
-        } else switch (filterType) {
+        switch (filterType) {
 
             case 2:
-                filterInterface = new Darken(image, xInfo, yInfo, filterSize);
+                filterInterface = new Darken(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 3:
-                filterInterface = new GrayScale(image, xInfo, yInfo, filterSize);
+                filterInterface = new GrayScale(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 4:
-                filterInterface = new InvertedColors(image, xInfo, yInfo, filterSize);
+                filterInterface = new InvertedColors(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 5:
-                filterInterface = new Sepia(image, xInfo, yInfo, filterSize);
+                filterInterface = new Sepia(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 6:
-                filterInterface = new OnlyRed(image, xInfo, yInfo, filterSize);
+                filterInterface = new OnlyRed(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 7:
-                filterInterface = new OnlyGreen(image, xInfo, yInfo, filterSize);
+                filterInterface = new OnlyGreen(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 8:
-                filterInterface = new OnlyBlue(image, xInfo, yInfo, filterSize);
+                filterInterface = new OnlyBlue(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 9:
-                filterInterface = new BoxBlur(image, xInfo, yInfo, filterSize);
+                filterInterface = new BoxBlur(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 10:
-                filterInterface = new SobelEdgeDetection(image, xInfo, yInfo, filterSize);
+                filterInterface = new SobelEdgeDetection(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 11:
-                filterInterface = new RobertsCrossEdgeDetection(image, xInfo, yInfo, filterSize);
+                filterInterface = new RobertsCrossEdgeDetection(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 12:
-                filterInterface = new LaplacianEdgeDetection(image, xInfo, yInfo, filterSize);
+                filterInterface = new LaplacianEdgeDetection(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             case 13:
-                filterInterface = new ScharrEdgeDetection(image, xInfo, yInfo, filterSize);
+                filterInterface = new ScharrEdgeDetection(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
                 break;
             default:
-                filterInterface = new Brighten(image, xInfo, yInfo, filterSize);
+                filterInterface = new Brighten(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage); // 1st case also used as the default
                 break;
         }
 

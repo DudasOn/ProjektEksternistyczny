@@ -10,15 +10,15 @@ public class ScharrEdgeDetection extends FilterAll {
         super(image);
     }
 
-    public ScharrEdgeDetection(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public ScharrEdgeDetection(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
 
     @Override
     public BufferedImage filterMe() {
         int[][] convolutingMatrixX = {{-3, 0, 3}, {-10, 0, 10}, {-3, 0, 3}};
         int[][] convolutingMatrixY = {{3, 10, 3}, {0, 0, 0}, {-3, -10, -3}};
-        return ImageUtils.convolve(image, endingPointWidth, startingPointWidth, endingPointHeight, startingPointHeight, convolutingMatrixX, convolutingMatrixY);
+        return ImageUtils.convolve(image, endingPointWidth, startingPointWidth, endingPointHeight, startingPointHeight, convolutingMatrixX, convolutingMatrixY,true);
     }
 }
 

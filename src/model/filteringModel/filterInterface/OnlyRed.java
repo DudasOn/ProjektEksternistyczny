@@ -9,8 +9,8 @@ public class OnlyRed extends FilterAll {
         super(image);
     }
 
-    public OnlyRed(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public OnlyRed(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
 
     @Override

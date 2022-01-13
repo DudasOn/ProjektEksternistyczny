@@ -9,8 +9,8 @@ public class Brighten extends FilterAll {
         super(image);
     }
 
-    public Brighten(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public Brighten(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntioreImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntioreImage);
     }
 
     @Override

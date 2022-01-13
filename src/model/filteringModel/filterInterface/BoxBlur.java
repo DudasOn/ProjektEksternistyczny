@@ -9,14 +9,14 @@ public class BoxBlur extends FilterAll {
         super(image);
     }
 
-    public BoxBlur(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public BoxBlur(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
 
     @Override
     public BufferedImage filterMe() {
 
-        // convert to boxblur
+        // convert to boxblur, not using convolve method because the convolving matrix changes every step
         for (int y = startingPointHeight + 1; y < endingPointHeight - 1; y++) {
             for (int x = startingPointWidth + 1; x < endingPointWidth - 1; x++) {
 

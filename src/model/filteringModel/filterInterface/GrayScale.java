@@ -1,5 +1,7 @@
 package model.filteringModel.filterInterface;
 
+import utils.ImageUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -8,8 +10,8 @@ public class GrayScale extends FilterAll {
         super(image);
     }
 
-    public GrayScale(BufferedImage image, int xInfo, int yInfo, int filterSize) {
-        super(image, xInfo, yInfo, filterSize);
+    public GrayScale(BufferedImage image, int xInfo, int yInfo, int filterSize, boolean ifAppliedToEntireImage) {
+        super(image, xInfo, yInfo, filterSize, ifAppliedToEntireImage);
     }
 
     @Override
@@ -18,15 +20,12 @@ public class GrayScale extends FilterAll {
         // convert to grayscale
         for (int y = startingPointHeight; y < endingPointHeight; y++) {
             for (int x = startingPointWidth; x < endingPointWidth; x++) {
-                c = new Color(image.getRGB(x, y));
 
-                // calculate new RGB values
-                rValue = (int) (c.getRed() * 0.299);
-                gValue = (int) (c.getGreen() * 0.587);
-                bValue = (int) (c.getBlue() * 0.114);
+                // using only rValue, as using gValue and bValue would be unnecessary
+                rValue = ImageUtils.getGrayScaleLuminance(image.getRGB(x, y));
 
                 // set new RGB value
-                c = new Color(rValue + gValue + bValue, rValue + gValue + bValue, rValue + gValue + bValue);
+                c = new Color(rValue, rValue, rValue);
 
                 image.setRGB(x, y, c.getRGB());
             }

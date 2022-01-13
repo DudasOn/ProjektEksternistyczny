@@ -24,76 +24,62 @@ public abstract class ImageUtils {
         return (int) (0.2126 * r + 0.7152 * g + 0.0722 * b);
     }
 
-    public static BufferedImage convolve(BufferedImage image, int endingPointWidth, int startingPointWidth, int endingPointHeight, int startingPointHeight, int[][] convolutingMatrix) {
-        int[][] edgeColors = new int[endingPointWidth - startingPointWidth][endingPointHeight - startingPointHeight];
-        int bx;
-        int by;
-        int g;
-        int divider = 0;
+    public static BufferedImage convolve(BufferedImage image, int endingPointWidth, int startingPointWidth, int endingPointHeight, int startingPointHeight, int[][] convolutingMatrix, boolean ifUsingMaxGradient) {
+        int[][] convolutingMatrixY = new int[convolutingMatrix.length][];
 
-        if (convolutingMatrix.length % 2 == 1) bx = (convolutingMatrix.length - 1) / 2;
-        else bx = (convolutingMatrix.length) / 2;
-
-        if (convolutingMatrix[0].length % 2 == 1) by = (convolutingMatrix[0].length - 1) / 2;
-        else by = (convolutingMatrix[0].length) / 2;
+        for (int i = 0; i < convolutingMatrix.length; i++) {
+            convolutingMatrixY[i] = new int[convolutingMatrix[i].length];
+        }
 
         for (int i = 0; i < convolutingMatrix.length; i++) {
             for (int j = 0; j < convolutingMatrix[i].length; j++) {
-                divider++;
+                convolutingMatrixY[i][j] = 0;
             }
         }
 
-        for (int i = startingPointWidth + bx; i < endingPointWidth - bx; i++) {
-            for (int j = startingPointHeight + by; j < endingPointHeight - by; j++) {
-
-                g = 0;
-
-                for (int k = 0; k < convolutingMatrix.length; k++) {
-                    for (int l = 0; l < convolutingMatrix[0].length; l++) {
-                        g += convolutingMatrix[k][l] * ImageUtils.getGrayScaleLuminance(image.getRGB((i - bx + k), (j - by + l)));
-                    }
-                }
-                edgeColors[i - startingPointWidth - bx][j - startingPointHeight - by] = g / divider;
-            }
-        }
-
-
-        for (int i = startingPointWidth + bx; i < endingPointWidth - bx; i++) {
-            for (int j = startingPointHeight + by; j < endingPointHeight - by; j++) {
-                int edgeColor = edgeColors[i - startingPointWidth - bx][j - startingPointHeight - by];
-                edgeColor = 0xff000000 | (edgeColor << 16) | (edgeColor << 8) | edgeColor;
-
-                image.setRGB(i, j, edgeColor);
-            }
-        }
-        return image;
+        return convolve(image, endingPointWidth, startingPointWidth, endingPointHeight, startingPointHeight, convolutingMatrix, convolutingMatrixY, ifUsingMaxGradient);
     }
 
-    public static BufferedImage convolve(BufferedImage image, int endingPointWidth, int startingPointWidth, int endingPointHeight, int startingPointHeight, int[][] convolutingMatrixX, int[][] convolutingMatrixY) {
-        int[][] edgeColors = new int[endingPointWidth - startingPointWidth][endingPointHeight - startingPointHeight];
+    public static BufferedImage convolve(BufferedImage image, int endingPointWidth, int startingPointWidth, int endingPointHeight, int startingPointHeight, int[][] convolutingMatrixX, int[][] convolutingMatrixY, boolean ifUsingMaxGradient) {
         int gx, gy;
         int bx, by;
         int g;
         int maxGradient = -1;
 
-        for (int i = 0; i < convolutingMatrixX.length; i++) {
-            if (convolutingMatrixX.length != convolutingMatrixY.length || convolutingMatrixX[i].length != convolutingMatrixX[i].length)
-                return image;
+        //checking if array is a matrix
+        for (int i = 1; i < convolutingMatrixX.length; i++) {
+            if(convolutingMatrixX[0].length!= convolutingMatrixX[i].length) return  image;
         }
 
-        if (convolutingMatrixX.length % 2 == 1) bx = (convolutingMatrixX.length - 1) / 2;
-        else bx = (convolutingMatrixX.length) / 2;
+        //checking if the 2d arrays are identically sized matrices, this also checks if the second, unchecked array, is a matrix
+        for (int i = 0; i < convolutingMatrixX.length; i++) {
+            if (convolutingMatrixX.length != convolutingMatrixY.length || convolutingMatrixX[i].length != convolutingMatrixY[i].length) return image;
+        }
 
-        if (convolutingMatrixX[0].length % 2 == 1) by = (convolutingMatrixX[0].length - 1) / 2;
-        else by = (convolutingMatrixX[0].length) / 2;
+        // divider is the amount of elements in the matrix
+        int divider = convolutingMatrixX.length*convolutingMatrixX[0].length;
 
-        for (int i = startingPointWidth + bx; i < endingPointWidth - bx; i++) {
-            for (int j = startingPointHeight + by; j < endingPointHeight - by; j++) {
+        //these are used to prevent for loops from going out of bounds
+        bx = (convolutingMatrixX.length - (convolutingMatrixX.length % 2)) / 2;
+        by = (convolutingMatrixX[0].length - (convolutingMatrixX[0].length % 2)) / 2;
+
+        int[][] edgeColors = new int[endingPointWidth - startingPointWidth][endingPointHeight - startingPointHeight];
+
+        for (int i = startingPointWidth; i < endingPointWidth; i++) {
+            for (int j = startingPointHeight; j < endingPointHeight; j++) {
 
                 gx = 0;
                 gy = 0;
 
                 for (int k = 0; k < convolutingMatrixX.length; k++) {
+
+                    if ((i - bx < startingPointWidth) || (i + bx >= endingPointWidth)) {
+                        break;
+                    }
+                    if ((j - by < startingPointHeight) || (j + by >= endingPointHeight)) {
+                        break;
+                    }
+
                     for (int l = 0; l < convolutingMatrixX[0].length; l++) {
                         gx += convolutingMatrixX[k][l] * ImageUtils.getGrayScaleLuminance(image.getRGB((i - bx + k), (j - by + l)));
                         gy += convolutingMatrixY[k][l] * ImageUtils.getGrayScaleLuminance(image.getRGB((i - bx + k), (j - by + l)));
@@ -105,16 +91,15 @@ public abstract class ImageUtils {
                     maxGradient = g;
                 }
 
-                edgeColors[i - startingPointWidth - bx][j - startingPointHeight - by] = g;
+                edgeColors[i - startingPointWidth][j - startingPointHeight] = g;
             }
         }
 
-        double scale = 255.0 / maxGradient;
-
-        for (int i = startingPointWidth + bx; i < endingPointWidth - bx; i++) {
-            for (int j = startingPointHeight + by; j < endingPointHeight - by; j++) {
-                int edgeColor = edgeColors[i - startingPointWidth - bx][j - startingPointHeight - by];
-                edgeColor = (int) (edgeColor * scale);
+        for (int i = startingPointWidth; i < endingPointWidth; i++) {
+            for (int j = startingPointHeight; j < endingPointHeight; j++) {
+                int edgeColor = edgeColors[i - startingPointWidth][j - startingPointHeight];
+                if (ifUsingMaxGradient) edgeColor = (int) (edgeColor * (255.0 / maxGradient));
+                else edgeColor = edgeColor / divider;
                 edgeColor = 0xff000000 | (edgeColor << 16) | (edgeColor << 8) | edgeColor;
 
                 image.setRGB(i, j, edgeColor);
