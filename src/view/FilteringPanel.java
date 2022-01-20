@@ -25,7 +25,6 @@ public class FilteringPanel extends JPanel implements MouseListener, Observer {
 
         this.setPreferredSize(new Dimension(width, height));
         this.setFocusable(true);
-        this.requestFocusInWindow();
         this.addMouseListener(this);
         this.changeFilter(filterProperties, ifAppliedToEntireImage);
         this.requestFocusInWindow();
