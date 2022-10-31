@@ -51,7 +51,7 @@ public abstract class ImageUtils {
             if(convolutingMatrixX[0].length!= convolutingMatrixX[i].length) return  image;
         }
 
-        //checking if the 2d arrays are identically sized matrices, this also checks if the second, unchecked array, is a matrix
+        //checking if the 2d arrays are identically sized matrices, this also determines whether the second, unchecked array is a matrix. 
         for (int i = 0; i < convolutingMatrixX.length; i++) {
             if (convolutingMatrixX.length != convolutingMatrixY.length || convolutingMatrixX[i].length != convolutingMatrixY[i].length) return image;
         }
