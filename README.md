@@ -4,7 +4,7 @@ App written in pure Java that allows the user to paint simple pictures and apply
 
 Example of applying filters.
 
-![image](https://user-images.githubusercontent.com/95589776/226976712-6c8a8d24-8980-4602-9119-6420144942ca.png)
+![LastFilteredImage](https://user-images.githubusercontent.com/95589776/226976853-02c84c0f-5104-412b-96f4-b267e13ed10a.jpeg)
 
 Availible filters are: blurring, brightening, darkening, grayscale, sepia, inverting colors
                        laplacian edge detection, Robert's Cross edge detection,
