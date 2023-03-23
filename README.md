@@ -1,6 +1,6 @@
-# ProjektEksternistyczny
+# DrawAndFilter is my first program that features a GUI
 
-App written in pure Java that allows the user to paint simple pictures and apply filters to photos.
+App written in pure Java and allows the user to paint simple pictures and apply filters to photos.
 
 Example of applying filters.
 
@@ -15,10 +15,10 @@ Example of drawing:
 
 ![drwinmg_mode](https://user-images.githubusercontent.com/95589776/226975634-7c9ec210-0c58-4906-a64c-498d69a5c169.png)
 
-User can change tool shape, size and color. It is also possible to draw things that are filled in and ones that aren't.
-Changing the background  color doesn't require to redraw everything.
+User can change tool shape, size, color and choose whether used shapes should be filled in or not.
+It is also possible to change the background color without the need to redraw everything.
 
-Examples of pop up windows used to customize the tools:
+Examples of pop up windows used to customize the drawing tool:
 
 ![Tool_changer](https://user-images.githubusercontent.com/95589776/226976013-32ba2007-f110-4498-9253-5755f234e926.png)
 ![Tool_color](https://user-images.githubusercontent.com/95589776/226976274-139392f0-e426-40e7-8518-11bdfb31a8fe.png)
